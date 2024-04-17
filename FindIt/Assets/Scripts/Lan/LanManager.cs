@@ -1,30 +1,50 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using UnityEngine.UI;
 using System.Net;
 using System.Net.Sockets;
 
 public class RandomScript : MonoBehaviour
 {
-    //private PlayerController pc;
-    //private bool pcAssigned;
-    //[SerializeField] Text ipAddressText;
-    [SerializeField]private InputField _roomName;
-    [SerializeField]public string ipAddress;
-    [SerializeField]public UnityTransport transport;
+    private bool pcAssigned;
+    [Header("Client")]
+        [SerializeField] private InputField ip;
+
+        [Header("Host")]
+        [SerializeField]private InputField _roomName;
+        [SerializeField]public string ipAddress;
+        [SerializeField]public UnityTransport transport;
+        [SerializeField]public Text codeRoom;
+    [SerializeField] Text ipAddressText;
+
 
     void Start()
     {
         ipAddress = "0.0.0.0";
         SetIpAddress(); // Set the Ip to the above address
-        InvokeRepeating("assignPlayerController", 0.1f, 0.1f);
+                        //Client
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            Debug.Log("On Android");
+        }
+        //Host
+        else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            ipAddress = "0.0.0.0";
+            SetIpAddress(); // Set the Ip to the above address
+            Debug.Log("On Windows");
+        }
     }
+
     private void CheckAllIp()
     {
-        for(int i =0; i < 100; i++)
+        for (int y = 0; y < 255; y++)
         {
-            ipAddress = "192.168.1."+i.ToString();
+            for (int i = 0; i < 255; i++)
+            {
+                ipAddress = "192.168.1." + i.ToString();
+            }
         }
     }
     // To Host a game
@@ -37,7 +57,7 @@ public class RandomScript : MonoBehaviour
     // To Join a game
     public void StartClient()
     {
-        //ipAddress = ip.text;
+        ipAddress = ip.text;
         SetIpAddress();
         NetworkManager.Singleton.StartClient();
     }
@@ -53,6 +73,7 @@ public class RandomScript : MonoBehaviour
         {
             if (ip.AddressFamily == AddressFamily.InterNetwork)
             {
+                ipAddressText.text = ip.ToString();
                 ipAddress = ip.ToString();
                 return ip.ToString();
             }
@@ -69,51 +90,5 @@ public class RandomScript : MonoBehaviour
         transport.ConnectionData.Address = ipAddress;
     }
 
-    // Assigns the player to this script when player is loaded
-    //private void assignPlayerController()
-    //{
-    //    if (pc == null)
-    //    {
-    //        pc = FindObjectOfType<PlayerController>();
-    //    }
-    //    else if (pc == FindObjectOfType<PlayerController>())
-    //    {
-    //        pcAssigned = true;
-    //        CancelInvoke();
-    //    }
-    //}
-
-    //// Controls to control character
-    //public void Right()
-    //{
-    //    if (pcAssigned)
-    //    {
-    //        pc.Movement("Right");
-    //    }
-    //}
-
-    //public void Left()
-    //{
-    //    if (pcAssigned)
-    //    {
-    //        pc.Movement("Left");
-    //    }
-    //}
-
-    //public void Forward()
-    //{
-    //    if (pcAssigned)
-    //    {
-    //        pc.Movement("Forward");
-    //    }
-    //}
-
-    //public void Back()
-    //{
-    //    if (pcAssigned)
-    //    {
-    //        pc.Movement("Back");
-    //    }
-    //}
-
 }
+
