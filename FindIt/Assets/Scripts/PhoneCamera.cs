@@ -1,3 +1,5 @@
+using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +10,12 @@ public class PhoneCamera : MonoBehaviour
     private Texture _defaultBackground;
 
     public RawImage background;
-   // public AspectRatioFitter fit;
+    public AspectRatioFitter fit;
 
     [SerializeField] Image Timer;
     public float maxTime = 30f;
     float timeLeft;
+
     private void Start()
     {
         Timer.fillAmount = 1;
@@ -31,7 +34,6 @@ public class PhoneCamera : MonoBehaviour
             if (!devices[i].isFrontFacing)
             {
                 _backCam = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
-
             }
         }
 
@@ -54,17 +56,9 @@ public class PhoneCamera : MonoBehaviour
             return;
         }
 
-        //float ratio = (float)_backCam.width / (float)_backCam.height;
-        //float targetAspectRatio = 1.0f;
+        float ratio = (float)_backCam.width / (float)_backCam.height;
+        fit.aspectRatio = ratio;
 
-        //if (ratio > targetAspectRatio)
-        //{
-        //    fit.aspectRatio = ratio / targetAspectRatio;
-        //}
-        //else
-        //{
-        //    fit.aspectRatio = 1.0f;
-        //}
 
         float scaleY = _backCam.videoVerticallyMirrored ? -1.0f : 1.0f;
         background.rectTransform.localScale = new Vector3(1, scaleY, 1);
@@ -77,5 +71,21 @@ public class PhoneCamera : MonoBehaviour
             timeLeft -= Time.deltaTime;
             Timer.fillAmount = timeLeft / maxTime;
         }
+    }
+
+    public void takePhoto()
+    {
+        _backCam.Pause();
+        StartCoroutine(TakePicture());
+    }
+
+    IEnumerator TakePicture()
+    {
+        yield return new WaitForEndOfFrame();
+
+        Texture2D photo = new Texture2D(_backCam.width, _backCam.height);
+        photo.SetPixels(_backCam.GetPixels());
+        photo.Apply();
+        background.texture = photo;
     }
 }
