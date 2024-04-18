@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UIElements;
 
 public class UIManagementSc : MonoBehaviour
 {
@@ -19,6 +23,10 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private GameObject PlayerName;
     [SerializeField] private Player_ScriptableObject PlayerScriptableObjectPrefab;
     public List<Player_ScriptableObject> PlayerList = new List<Player_ScriptableObject>();
+    [SerializeField] private GameObject GeneralSlider;
+    [SerializeField] private GameObject MusicSlider;
+    [SerializeField] private GameObject SFXSlider;
+    [SerializeField] private AudioMixer GeneralMixer;
     
     private string ipServToConnect;
 
@@ -66,5 +74,17 @@ public class UIManagementSc : MonoBehaviour
     public void Crédits() 
     {
         ParameterUI.SetActive(false);
+    }
+
+    public void UpdateGeneralAudio() {
+        GeneralMixer.SetFloat("Master", GeneralSlider.GetComponent<Slider>().value);
+    }
+    
+    public void UpdateMusicAudio() {
+        GeneralMixer.SetFloat("Music", MusicSlider.GetComponent<Slider>().value);
+    }
+    
+    public void UpdateSFXAudio() {
+        GeneralMixer.SetFloat("SFX", SFXSlider.GetComponent<Slider>().value);
     }
 }
