@@ -16,6 +16,9 @@ public class PhoneCamera : MonoBehaviour
     public float maxTime = 30f;
     float timeLeft;
 
+    [SerializeField] GameObject picturePanel;
+
+
     private void Start()
     {
         Timer.fillAmount = 1;
@@ -86,6 +89,7 @@ public class PhoneCamera : MonoBehaviour
         Texture2D photo = new Texture2D(_backCam.width, _backCam.height);
         photo.SetPixels(_backCam.GetPixels());
         photo.Apply();
+        byte[] bytes = photo.EncodeToPNG();
         background.texture = photo;
     }
 }
