@@ -791,11 +791,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307507387}
   m_CullTransparentMesh: 1
---- !u!212 &359375722 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 5588156064780827907, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
-  m_PrefabInstance: {fileID: 5031894394718040983}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &487082579
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,7 +938,7 @@ GameObject:
   - component: {fileID: 578072943}
   - component: {fileID: 578072942}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CanvasAvatar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1527,38 +1522,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148316505}
   m_CullTransparentMesh: 1
---- !u!1 &1677603587 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6508980527111792245, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
+--- !u!114 &1677603589 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7826183539503735110, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
   m_PrefabInstance: {fileID: 5031894394718040983}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1677603589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1677603587}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7a9355bf426a4a4c97761a69f3e8448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _avatarSprite: {fileID: 359375722}
-  _cameraSprite: {fileID: 1874337620}
-  _cameraSprites:
-  - {fileID: 21300000, guid: 61d0f064e36a7f64593cb56364d47d41, type: 3}
-  - {fileID: 21300000, guid: d75ad74db315ecd47a166efa6cfb58fe, type: 3}
-  - {fileID: 21300000, guid: 7684a251a51a28d4285077b7ad7420c8, type: 3}
-  _avatarSprites:
-  - {fileID: 21300000, guid: a908291e6fa39cd41bbccbe89ed64e53, type: 3}
-  - {fileID: 21300000, guid: 7ee00a7ea543e6140a03b30f410d916e, type: 3}
-  - {fileID: 21300000, guid: 59c83045390c86c43b8b359c5e679be0, type: 3}
-  - {fileID: 21300000, guid: fbfc6e012871b594389a2f04a3361398, type: 3}
-  - {fileID: 21300000, guid: 11f68c487ef1e944ea11d9d9ad35793c, type: 3}
-  - {fileID: 21300000, guid: e343ea890e8ac4d4b8010dd8ba74ba61, type: 3}
-  - {fileID: 21300000, guid: e1becbca98032e04aba60514b54ed0df, type: 3}
-  - {fileID: 21300000, guid: cca3359c2771c65429148c9293a14b34, type: 3}
 --- !u!1 &1713742304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,11 +1601,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1874337620 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6991923117093903193, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
-  m_PrefabInstance: {fileID: 5031894394718040983}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2039234259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,25 +1783,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5588156064780827907, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6508980527111792245, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
       propertyPath: m_Name
       value: Avatar
       objectReference: {fileID: 0}
-    - target: {fileID: 6991923117093903193, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6508980527111792245, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1677603589}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
