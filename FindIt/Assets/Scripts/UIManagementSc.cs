@@ -12,6 +12,7 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private GameObject EnterCodeUI;
     [SerializeField] private GameObject AvataCreateUI;
     [SerializeField] private GameObject WaitingUI;
+    [SerializeField] private GameObject CreditsUI;
     
     [SerializeField] private GameObject NameOfTheServ;
     [SerializeField] private GameObject Avatar;
@@ -60,5 +61,10 @@ public class UIManagementSc : MonoBehaviour
         PlayerList.Add(Player);
         Player.PlayerAvatar = Avatar;
         Player.PlayerName = PlayerName.GetComponent<TextMeshProUGUI>().text;
+    }
+
+    public void Crédits() 
+    {
+        ParameterUI.SetActive(false);
     }
 }
