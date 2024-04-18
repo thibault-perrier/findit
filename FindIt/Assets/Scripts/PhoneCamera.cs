@@ -8,7 +8,7 @@ public class PhoneCamera : MonoBehaviour
     private Texture _defaultBackground;
 
     public RawImage background;
-    public AspectRatioFitter fit;
+   // public AspectRatioFitter fit;
 
     [SerializeField] Image Timer;
     public float maxTime = 30f;
@@ -54,11 +54,20 @@ public class PhoneCamera : MonoBehaviour
             return;
         }
 
-        float ratio = (float)_backCam.width / (float)_backCam.height;
-        fit.aspectRatio = ratio;
+        //float ratio = (float)_backCam.width / (float)_backCam.height;
+        //float targetAspectRatio = 1.0f;
 
-        //float scaleY = _backCam.videoVerticallyMirrored ? -1.0f : 1.0f;
-        //background.rectTransform.localScale = new Vector3(1, scaleY, 1);
+        //if (ratio > targetAspectRatio)
+        //{
+        //    fit.aspectRatio = ratio / targetAspectRatio;
+        //}
+        //else
+        //{
+        //    fit.aspectRatio = 1.0f;
+        //}
+
+        float scaleY = _backCam.videoVerticallyMirrored ? -1.0f : 1.0f;
+        background.rectTransform.localScale = new Vector3(1, scaleY, 1);
 
         int orient = -_backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
