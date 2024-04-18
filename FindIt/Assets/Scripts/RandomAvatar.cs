@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RandomAvatar : MonoBehaviour
 {
     [Header("Sprite renderer")]
-    [SerializeField] SpriteRenderer _avatarSprite;
-    [SerializeField] SpriteRenderer _cameraSprite;
+    [SerializeField] Image _avatarSprite;
+    [SerializeField] Image _cameraSprite;
 
     [Header("List Sprite")]
     [SerializeField] List<Sprite> _cameraSprites = new List<Sprite>();
