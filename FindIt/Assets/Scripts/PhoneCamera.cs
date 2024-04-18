@@ -102,8 +102,6 @@ public class PhoneCamera : MonoBehaviour
         Texture2D squarePhoto = CropToSquare(photo);
         _confirmPhoto.SetActive(true);   
         picture.texture = squarePhoto;
-
-        squarePhoto = RotateTexture(squarePhoto, 90);
         byte[] bytes = squarePhoto.EncodeToPNG();
         string filename = "photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
@@ -124,21 +122,21 @@ public class PhoneCamera : MonoBehaviour
         return squareTexture;
     }
 
-    private Texture2D RotateTexture(Texture2D originalTexture, float angle)
-    {
-        int width = originalTexture.width;
-        int height = originalTexture.height;
+    //private Texture2D RotateTexture(Texture2D originalTexture, float angle)
+    //{
+    //    int width = originalTexture.width;
+    //    int height = originalTexture.height;
 
-        Texture2D rotatedTexture = new Texture2D(height, width);
+    //    Texture2D rotatedTexture = new Texture2D(height, width);
 
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                rotatedTexture.SetPixel(y, width - 1 - x, originalTexture.GetPixel(x, y));
-            }
-        }
-        rotatedTexture.Apply();
-        return rotatedTexture;
-    }
+    //    for (int y = 0; y < height; y++)
+    //    {
+    //        for (int x = 0; x < width; x++)
+    //        {
+    //            rotatedTexture.SetPixel(y, width - 1 - x, originalTexture.GetPixel(x, y));
+    //        }
+    //    }
+    //    rotatedTexture.Apply();
+    //    return rotatedTexture;
+    //}
 }
