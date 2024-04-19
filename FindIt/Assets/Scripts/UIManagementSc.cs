@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -8,6 +9,7 @@ using UnityEngine.UIElements;
 
 public class UIManagementSc : MonoBehaviour
 {
+    [Header("UI GameObject")]
     [SerializeField] private GameObject ParameterUI;
     [SerializeField] private GameObject SelectServUI;
     [SerializeField] private GameObject EnterCodeUI;
@@ -15,17 +17,20 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private GameObject WaitingUI;
     [SerializeField] private GameObject CreditsUI;
     
+    [Header("Player Info")]
     [SerializeField] private GameObject NameOfTheServ;
     [SerializeField] private GameObject Avatar;
     [SerializeField] private GameObject PlayerName;
     [SerializeField] private Player_ScriptableObject PlayerScriptableObjectPrefab;
+    
+    [HideInInspector]
     public List<Player_ScriptableObject> PlayerList = new List<Player_ScriptableObject>();
+    
+    [Header("Audio")]
     [SerializeField] private AudioMixer GeneralMixer;
     
     private string ipServToConnect;
 
-    void Awake() {
-    }
     public void Parameter() 
     {
         if (!ParameterUI.activeInHierarchy)
