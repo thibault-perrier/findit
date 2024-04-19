@@ -272,6 +272,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1255479325401437276}
   - component: {fileID: 5886104770198470324}
+  - component: {fileID: 6654042146055978650}
+  - component: {fileID: 7946812630198355254}
   m_Layer: 5
   m_Name: Avatar
   m_TagString: Untagged
@@ -288,8 +290,8 @@ RectTransform:
   m_GameObject: {fileID: 5259801270213274639}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4798671462482117756}
   - {fileID: 553837129519152241}
@@ -311,6 +313,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7a9355bf426a4a4c97761a69f3e8448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _avatarSprite: {fileID: 9004809531348604543}
+  _cameraSprite: {fileID: 4587867630461819348}
+  _cameraSprites:
+  - {fileID: 21300000, guid: 61d0f064e36a7f64593cb56364d47d41, type: 3}
+  - {fileID: 21300000, guid: d75ad74db315ecd47a166efa6cfb58fe, type: 3}
+  - {fileID: 21300000, guid: 7684a251a51a28d4285077b7ad7420c8, type: 3}
+  _avatarSprites:
+  - {fileID: 21300000, guid: a908291e6fa39cd41bbccbe89ed64e53, type: 3}
+  - {fileID: 21300000, guid: 7ee00a7ea543e6140a03b30f410d916e, type: 3}
+  - {fileID: 21300000, guid: 59c83045390c86c43b8b359c5e679be0, type: 3}
+  - {fileID: 21300000, guid: fbfc6e012871b594389a2f04a3361398, type: 3}
+  - {fileID: 21300000, guid: 11f68c487ef1e944ea11d9d9ad35793c, type: 3}
+  - {fileID: 21300000, guid: e343ea890e8ac4d4b8010dd8ba74ba61, type: 3}
+  - {fileID: 21300000, guid: e1becbca98032e04aba60514b54ed0df, type: 3}
+  - {fileID: 21300000, guid: cca3359c2771c65429148c9293a14b34, type: 3}
+--- !u!114 &6654042146055978650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5259801270213274639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7a22c912755384882154ff814df504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0, z: 0}
+--- !u!114 &7946812630198355254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5259801270213274639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d9307ae0073e7499731ef57810c884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _avatarSprite: {fileID: 7476821820542821353}
