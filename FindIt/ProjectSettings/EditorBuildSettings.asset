@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/mainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Devroom Erwan/Devroom Erwan.unity
-    guid: 876c9eb45bfd90f49b85c24377b4fe04
+    path: Assets/Scenes/Devroom Mathis/PhotoShooting.unity
+    guid: a41f6fe31e454964eb9970f9e99d7f4b
   m_configObjects: {}
