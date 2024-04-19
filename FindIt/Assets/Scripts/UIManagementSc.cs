@@ -23,7 +23,7 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private GameObject PlayerName;
     [SerializeField] private Player_ScriptableObject PlayerScriptableObjectPrefab;
     
-    [HideInInspector]
+    // [HideInInspector]
     public List<Player_ScriptableObject> PlayerList = new List<Player_ScriptableObject>();
     
     [Header("Audio")]
