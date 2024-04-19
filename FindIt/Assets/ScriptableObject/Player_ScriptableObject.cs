@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 
@@ -9,8 +8,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Player_ScriptableObject : ScriptableObject
 {
-    [SerializeField] public int ID;
-    [SerializeField] public GameObject PlayerAvatar;
-    [SerializeField] public string PlayerName;
-    [SerializeField] public Image PlayerPicture;
+    public int ID;
+    public GameObject PlayerAvatar;
+    public string PlayerName;
+    public Texture2D PlayerPicture;
 }

@@ -8,6 +8,8 @@ public class PhoneCamera : MonoBehaviour
     private bool _camAvailable;
     private WebCamTexture _backCam;
     private Texture _defaultBackground;
+    private UIManagementSc _uiManagement;
+    public Player_ScriptableObject _scriptableObject;
 
     public RawImage background;
     public AspectRatioFitter fit;
@@ -22,6 +24,10 @@ public class PhoneCamera : MonoBehaviour
 
     public bool randomFacing;
 
+    private void Awake()
+    {
+        _uiManagement = GetComponent<UIManagementSc>();
+    }
 
     private void Start()
     {
@@ -103,6 +109,9 @@ public class PhoneCamera : MonoBehaviour
         _confirmPhoto.SetActive(true);
         timeLeft = maxTime; // remet le timer a zero quand on prend une photo.
         picture.texture = squarePhoto;
+
+        _uiManagement.PlayerList[_scriptableObject.ID].PlayerPicture = squarePhoto;
+
         byte[] bytes = squarePhoto.EncodeToPNG();
         string filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);

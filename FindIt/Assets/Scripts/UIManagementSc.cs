@@ -4,6 +4,7 @@ using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 
@@ -30,6 +31,18 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private AudioMixer GeneralMixer;
     
     private string ipServToConnect;
+
+    public static UIManagementSc Instance;
+
+    public UnityEvent PlayerCreated;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     public void Parameter() 
     {
@@ -70,6 +83,8 @@ public class UIManagementSc : MonoBehaviour
         PlayerList.Add(Player);
         Player.PlayerAvatar = Avatar;
         Player.PlayerName = PlayerName.GetComponent<TextMeshProUGUI>().text;
+        PlayerCreated?.Invoke();
+
     }
 
     public void Crédits() 
