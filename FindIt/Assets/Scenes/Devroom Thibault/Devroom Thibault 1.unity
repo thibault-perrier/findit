@@ -732,17 +732,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6998077e9983bdb47a6444c0d5497884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatarGO: {fileID: 1405283580263937582, guid: 7a5150b88c22e83409a33a178f841b65, type: 3}
+  avatarGO: {fileID: 5259801270213274639, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
   spawnpoints:
   - {fileID: 300271140}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 920656673}
+  - {fileID: 1141344491}
+  - {fileID: 1099142414}
+  - {fileID: 1475191604}
+  - {fileID: 315674892}
   endpoints:
   - {fileID: 1121248055}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1805045923}
+  - {fileID: 2127124540}
+  - {fileID: 1439649335}
+  - {fileID: 469008439}
+  - {fileID: 1272528704}
 --- !u!4 &1611426953
 Transform:
   m_ObjectHideFlags: 0
