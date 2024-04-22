@@ -36,6 +36,8 @@ public class UIManagementSc : MonoBehaviour
 
     public UnityEvent PlayerCreated;
 
+    public static bool GameStarted = false;
+
     private void Awake()
     {
         if(Instance == null)
@@ -84,7 +86,7 @@ public class UIManagementSc : MonoBehaviour
         Player.PlayerAvatar = Avatar;
         Player.PlayerName = PlayerName.GetComponent<TextMeshProUGUI>().text;
         PlayerCreated?.Invoke();
-
+        GameStarted = true;
     }
 
     public void Crédits() 

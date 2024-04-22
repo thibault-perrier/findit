@@ -16,6 +16,7 @@ public class PhoneCamera : MonoBehaviour
 
     [SerializeField] private GameObject _confirmPhoto;
     [SerializeField] RawImage picture;
+    [SerializeField] TextMeshProUGUI debugText;
 
 
     [SerializeField] Image Timer;
@@ -83,14 +84,16 @@ public class PhoneCamera : MonoBehaviour
         int orient = -_backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
         picture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-
-        if (timeLeft > 0)
+        if (UIManagementSc.GameStarted)
         {
-            timeLeft -= Time.deltaTime;
-            Timer.fillAmount = timeLeft / maxTime;
+            if (timeLeft > 0)
+            {
+                timeLeft -= Time.deltaTime;
+                Timer.fillAmount = timeLeft / maxTime;
+            }
+            else
+                TakePhoto();
         }
-        else
-            TakePhoto();
     }
 
     public void TakePhoto()
@@ -111,6 +114,8 @@ public class PhoneCamera : MonoBehaviour
         picture.texture = squarePhoto;
 
         _uiManagement.PlayerList[_scriptableObject.ID].PlayerPicture = squarePhoto;
+
+
 
         byte[] bytes = squarePhoto.EncodeToPNG();
         string filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
