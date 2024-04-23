@@ -148,7 +148,7 @@ public class LanManager : MonoBehaviour
     // To Host a game
     public void StartHost()
     {
-        NetworkManager.Singleton.StartHost();
+        NetworkManager.Singleton.StartServer();
         GetLocalIPAddress();
     }
 
