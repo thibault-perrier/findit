@@ -7,10 +7,12 @@ public class RandomAvatar : MonoBehaviour
     [Header("Sprite renderer")]
     [SerializeField] GameObject _avatarSprite;
     [SerializeField] GameObject _cameraSprite;
+    [SerializeField] GameObject _hatSprite;
 
     [Header("List Sprite")]
     [SerializeField] List<Sprite> _cameraSprites = new List<Sprite>();
     [SerializeField] List<Sprite> _avatarSprites = new List<Sprite>();
+    [SerializeField] List<Sprite> _hatSprites = new List<Sprite>();
     [SerializeField] Slider Slider;
      
     private void Start()
@@ -29,6 +31,11 @@ public class RandomAvatar : MonoBehaviour
             cameraSpriteRenderer.sprite = _cameraSprites[Random.Range(0, _cameraSprites.Count)];
         else if (_cameraSprite.TryGetComponent<Image>(out Image cameraImage))
             cameraImage.sprite = _cameraSprites[Random.Range(0, _cameraSprites.Count)];
+
+        if (_hatSprite.TryGetComponent<SpriteRenderer>(out SpriteRenderer hatSpriteRenderer))
+            hatSpriteRenderer.sprite = _hatSprites[Random.Range(0, _hatSprites.Count)];
+        else if (_hatSprite.TryGetComponent<Image>(out Image hatImage))
+            hatImage.sprite = _hatSprites[Random.Range(0, _hatSprites.Count)];
     }
 
     

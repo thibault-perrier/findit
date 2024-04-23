@@ -9,13 +9,7 @@ public class Background : MonoBehaviour
     [SerializeField] private List<Transform> endpoints = new List<Transform>();
 
     private float timer = 0.0f;
-    private float spawnTime = 2.0f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float spawnTime = 5.0f;
 
     // Update is called once per frame
     void Update()
@@ -27,7 +21,7 @@ public class Background : MonoBehaviour
             for (int index = 0; index < spawnpoints.Count; index++)
             {
                 GameObject newAvatar = Instantiate(avatarGO, spawnpoints[index].position, Quaternion.identity);
-                newAvatar.GetComponent<AvatarMovement>().SetDirection(endpoints[index].position);
+                newAvatar.GetComponent<AvatarMovement>().SetDirection(endpoints[index].position - spawnpoints[index].position);
             }
         }
     }
