@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using System.Text;
+using UnityEngine.SceneManagement;
 
 public class LanManager : MonoBehaviour
 {
@@ -157,6 +158,7 @@ public class LanManager : MonoBehaviour
         ipAddress = ip.text;
         SetIpAddress();
         NetworkManager.Singleton.StartClient();
+       // SceneManager.LoadScene("DevroomPhoneUpdated");
     }
 
     /* Gets the Ip Address of your connected network and

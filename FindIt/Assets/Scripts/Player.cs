@@ -1,15 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-
-
-
-[CreateAssetMenu]
-public class Player_ScriptableObject : ScriptableObject
+public class Player : MonoBehaviour
 {
-    public int ID;
     public GameObject PlayerAvatar;
     public string PlayerName;
     public List<Texture2D> PlayerPicture;
+    private void Start()
+    {
+        this.name = "player" + this.GetComponent<NetworkObject>().OwnerClientId;
+    }
 }
