@@ -9,7 +9,7 @@ public class Background : MonoBehaviour
     [SerializeField] private List<Transform> endpoints = new List<Transform>();
 
     private float timer = 0.0f;
-    private float spawnTime = 5.0f;
+    private float spawnTime = 10.0f;
 
     // Update is called once per frame
     void Update()
