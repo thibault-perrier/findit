@@ -1489,7 +1489,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &141047032
@@ -1757,7 +1757,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &156062845
@@ -1801,7 +1801,7 @@ RectTransform:
   m_Father: {fileID: 722169909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 35, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3034,7 +3034,7 @@ RectTransform:
   m_Father: {fileID: 582199482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4635,7 +4635,7 @@ RectTransform:
   m_Father: {fileID: 1415507196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 35, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4964,13 +4964,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 540964941}
+  - component: {fileID: 540964942}
+  - component: {fileID: 540964943}
   m_Layer: 5
   m_Name: UITransitionPc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &540964941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4991,6 +4993,41 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &540964942
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540964940}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 18f52849895537e45adc3d42bb4e620b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &540964943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540964940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc26be6730297449a3ff83a2710fb99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 540964940}
+  roomCreation: {fileID: 1411564346}
 --- !u!1 &550581038
 GameObject:
   m_ObjectHideFlags: 0
@@ -9638,7 +9675,7 @@ RectTransform:
   m_Father: {fileID: 816186281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 35, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12039,7 +12076,7 @@ RectTransform:
   m_Father: {fileID: 327258730}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12701,6 +12738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1411564347}
+  - component: {fileID: 1411564348}
   m_Layer: 5
   m_Name: UICreateRoomPc
   m_TagString: Untagged
@@ -12729,9 +12767,30 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 5000}
   m_SizeDelta: {x: 530, y: 357.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1411564348
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411564346}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f52ea293acb178942b19e8de4af83a9d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1415507195
 GameObject:
   m_ObjectHideFlags: 0
@@ -12903,7 +12962,7 @@ RectTransform:
   m_Father: {fileID: 1443214696}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14196,7 +14255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1660819428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14212,13 +14271,16 @@ MonoBehaviour:
   ParameterUI: {fileID: 1817051163}
   SelectServUI: {fileID: 0}
   EnterCodeUI: {fileID: 1605422547}
-  AvataCreateUI: {fileID: 0}
-  WaitingUI: {fileID: 0}
-  CreditsUI: {fileID: 0}
+  AvatarCreateUI: {fileID: 0}
+  WaitingUI: {fileID: 1502316557}
+  CreditsUI: {fileID: 15018690}
+  CreateRoomUI: {fileID: 1411564346}
+  TransitionPCUI: {fileID: 540964940}
   NameOfTheServ: {fileID: 0}
   Avatar: {fileID: 0}
   PlayerName: {fileID: 0}
   PlayerScriptableObjectPrefab: {fileID: 0}
+  transitionSpeed: 0.1
   PlayerList: []
   GeneralMixer: {fileID: 0}
   PlayerCreated:
@@ -14517,7 +14579,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1670901797
@@ -18181,7 +18243,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2091563403
@@ -18954,7 +19016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2127963865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18982,13 +19044,16 @@ MonoBehaviour:
   ParameterUI: {fileID: 2089389366}
   SelectServUI: {fileID: 1604397733}
   EnterCodeUI: {fileID: 1110564967}
-  AvataCreateUI: {fileID: 672605646}
+  AvatarCreateUI: {fileID: 0}
   WaitingUI: {fileID: 550581038}
   CreditsUI: {fileID: 0}
+  CreateRoomUI: {fileID: 0}
+  TransitionPCUI: {fileID: 0}
   NameOfTheServ: {fileID: 1961538521}
   Avatar: {fileID: 1272637091}
   PlayerName: {fileID: 1362788533}
   PlayerScriptableObjectPrefab: {fileID: 11400000, guid: fd768e3d10bd5074ca0cb4c88781664b, type: 2}
+  transitionSpeed: 0
   PlayerList: []
   GeneralMixer: {fileID: 24100000, guid: 77ea0fa9a6ddc3a43a9404e05ca3c3ab, type: 2}
   PlayerCreated:

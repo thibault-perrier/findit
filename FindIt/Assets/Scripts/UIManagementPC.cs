@@ -59,11 +59,7 @@ public class UIManagementPC : MonoBehaviour
         }
     }
 
-    public void Crédits() 
-    {
-        ParameterUI.SetActive(false);
-        CreditsUI.SetActive(true);
-    }
+    
 
     public void UpdateGeneralAudio(float volume) {
         GeneralMixer.SetFloat("Master", volume);

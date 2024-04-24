@@ -11,15 +11,19 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private GameObject ParameterUI;
     [SerializeField] private GameObject SelectServUI;
     [SerializeField] private GameObject EnterCodeUI;
-    [SerializeField] private GameObject AvataCreateUI;
+    [SerializeField] private GameObject AvatarCreateUI;
     [SerializeField] private GameObject WaitingUI;
     [SerializeField] private GameObject CreditsUI;
+    [SerializeField] private GameObject CreateRoomUI;
+    [SerializeField] private GameObject TransitionPCUI;
     
     [Header("Player Info")]
     [SerializeField] private GameObject NameOfTheServ;
     [SerializeField] private GameObject Avatar;
     [SerializeField] private GameObject PlayerName;
     [SerializeField] private Player_ScriptableObject PlayerScriptableObjectPrefab;
+    [SerializeField] float transitionSpeed;
+    
     
     // [HideInInspector]
     public List<Player_ScriptableObject> PlayerList = new List<Player_ScriptableObject>();
@@ -34,6 +38,8 @@ public class UIManagementSc : MonoBehaviour
     public UnityEvent PlayerCreated;
 
     public static bool GameStarted = false;
+    private bool _hasToStartTransition = false;
+    private bool _hasTransitionned = false;
 
     private void Awake()
     {
@@ -69,14 +75,14 @@ public class UIManagementSc : MonoBehaviour
     {
         //Check if the code of the Server is the good with ipServToConnect and CodeServ
         //if good
-        AvataCreateUI.SetActive(true);
+        AvatarCreateUI.SetActive(true);
         EnterCodeUI.SetActive(false);
     }
 
     public void CreateAvatar() 
     {
         WaitingUI.SetActive(true);
-        AvataCreateUI.SetActive(false);
+        AvatarCreateUI.SetActive(false);
         Player_ScriptableObject Player = Instantiate(PlayerScriptableObjectPrefab);
         Player.ID = PlayerList.Count;
         PlayerList.Add(Player);
@@ -88,6 +94,7 @@ public class UIManagementSc : MonoBehaviour
 
     public void Crédits() 
     {
+        ParameterUI.SetActive(false);
         ParameterUI.SetActive(false);
     }
 
@@ -101,5 +108,18 @@ public class UIManagementSc : MonoBehaviour
     
     public void UpdateSFXAudio(float volume) {
         GeneralMixer.SetFloat("SFX", volume);
+    }
+
+    public void TransitionTitleToCreteServ()
+    {
+        if (Input.anyKeyDown)
+        {
+            TransitionPCUI.GetComponent<Animator>().SetBool("titleOut", true);
+        }
+    }
+
+    private void Update()
+    {
+        TransitionTitleToCreteServ();
     }
 }
