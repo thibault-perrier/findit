@@ -8,12 +8,15 @@ public class PhoneCamera : MonoBehaviour
     private bool _camAvailable;
     private WebCamTexture _backCam;
     private Texture _defaultBackground;
+    private UIManagementSc _uiManagement;
+    public Player_ScriptableObject _scriptableObject;
 
     public RawImage background;
     public AspectRatioFitter fit;
 
     [SerializeField] private GameObject _confirmPhoto;
     [SerializeField] RawImage picture;
+    [SerializeField] TextMeshProUGUI debugText;
 
 
     [SerializeField] Image Timer;
@@ -22,9 +25,14 @@ public class PhoneCamera : MonoBehaviour
 
     public bool randomFacing;
 
+    private void Awake()
+    {
+        _uiManagement = GetComponent<UIManagementSc>();
+    }
 
     private void Start()
     {
+        _confirmPhoto.SetActive(false);
         Timer.fillAmount = 1;
         timeLeft = maxTime;
         _defaultBackground = background.texture;
@@ -33,7 +41,7 @@ public class PhoneCamera : MonoBehaviour
         bool frontFacing = true;
         if (randomFacing)
         {
-            frontFacing = (Random.Range(0, 10) < 5) ? true : false;
+            frontFacing = (Random.Range(0, 2) == 0) ? true : false;
         }
         if (devices.Length == 0)
         {
@@ -76,19 +84,20 @@ public class PhoneCamera : MonoBehaviour
         int orient = -_backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
         picture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-
-        if (timeLeft > 0)
+        if (UIManagementSc.GameStarted)
         {
-            timeLeft -= Time.deltaTime;
-            Timer.fillAmount = timeLeft / maxTime;
+            if (timeLeft > 0)
+            {
+                timeLeft -= Time.deltaTime;
+                Timer.fillAmount = timeLeft / maxTime;
+            }
+            else
+                TakePhoto();
         }
-        else
-            TakePhoto();
     }
 
     public void TakePhoto()
     {
-        _backCam.Pause();
         StartCoroutine(TakePicture());
     }
 
@@ -100,10 +109,16 @@ public class PhoneCamera : MonoBehaviour
         photo.SetPixels(_backCam.GetPixels());
         photo.Apply();
         Texture2D squarePhoto = CropToSquare(photo);
-        _confirmPhoto.SetActive(true);   
+        _confirmPhoto.SetActive(true);
+        timeLeft = maxTime; // remet le timer a zero quand on prend une photo.
         picture.texture = squarePhoto;
+
+        _uiManagement.PlayerList[_scriptableObject.ID].PlayerPicture = squarePhoto;
+
+
+
         byte[] bytes = squarePhoto.EncodeToPNG();
-        string filename = "photo.png";
+        string filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
     }
