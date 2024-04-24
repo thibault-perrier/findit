@@ -34,6 +34,8 @@ public class LanManager : MonoBehaviour
     [SerializeField] private int[] _mask = new int[32];
     [SerializeField] private string _broacastIP ="";
 
+    public bool isHost = false;
+
     void Start()
     {
         //Client
@@ -57,13 +59,13 @@ public class LanManager : MonoBehaviour
 
         foreach (NetworkInterface netInterface in interfaces)
         {
-            // Ne récupère que les interfaces réseau connectées
+            // Ne rï¿½cupï¿½re que les interfaces rï¿½seau connectï¿½es
             if (netInterface.OperationalStatus == OperationalStatus.Up)
             {
                 IPInterfaceProperties ipProps = netInterface.GetIPProperties();
                 foreach (UnicastIPAddressInformation unicastAddr in ipProps.UnicastAddresses)
                 {
-                    // Vérifie si l'adresse IP est IPv4
+                    // Vï¿½rifie si l'adresse IP est IPv4
                     if (unicastAddr.Address.AddressFamily == AddressFamily.InterNetwork)
                     {
                         uint subnetMaskInt = BitConverter.ToUInt32(unicastAddr.IPv4Mask.GetAddressBytes(), 0);
@@ -91,7 +93,7 @@ public class LanManager : MonoBehaviour
 
             foreach (char c in binaryByte)
             {
-                _pIP[index++] = c - '0'; // Convertit le caractère '0' ou '1' en entier
+                _pIP[index++] = c - '0'; // Convertit le caractï¿½re '0' ou '1' en entier
             }
         }
     }
@@ -116,7 +118,7 @@ public class LanManager : MonoBehaviour
             {
                 octet += _broadcast[i + y].ToString();
             }//extrait un octet binaire
-            int decimalValue = Convert.ToInt32(octet, 2); // Convertir l'octet binaire en décimal
+            int decimalValue = Convert.ToInt32(octet, 2); // Convertir l'octet binaire en dï¿½cimal
             _broacastIP += decimalValue;
             if (i != 24) // Si ce n'est pas le dernier octet, ajouter un point
             {
@@ -149,6 +151,7 @@ public class LanManager : MonoBehaviour
     {
         NetworkManager.Singleton.StartHost();
         GetLocalIPAddress();
+        isHost = true;
     }
 
     // To Join a game
