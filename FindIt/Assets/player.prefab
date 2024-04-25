@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 282021707051927676}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,3 +69,4 @@ MonoBehaviour:
   PlayerAvatar: {fileID: 0}
   PlayerName: 
   PlayerPicture: []
+  isInGame: 0

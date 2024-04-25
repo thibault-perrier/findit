@@ -14,7 +14,7 @@ public class LanManager : MonoBehaviour
 {
     [Header("Client")]
     [SerializeField] private GameObject JoinRoom;
-    [SerializeField]private List<string> _server = new List<string>();
+    [SerializeField]private List<string> _server = new();
     //Network
     [SerializeField] private InputField ip;
 
@@ -23,12 +23,13 @@ public class LanManager : MonoBehaviour
     [SerializeField] private GameObject CreateRoom;
     //Network
     [SerializeField]private InputField _roomName;
-    [SerializeField]public string ipAddress;
-    [SerializeField]public UnityTransport transport;
-    [SerializeField]public Text codeRoom;
+    public string ipAddress;
+    public UnityTransport transport;
+    public Text codeRoom;
     [SerializeField]Text ipAddressText;
-
-
+    //OtherScript
+    [SerializeField] SceneManagement sceneManagement;
+    [SerializeField] DataTransfer dataTransfer;
     //IP
     [SerializeField] private int[] _broadcast = new int[32];
     [SerializeField] private int[] _pIP = new int[32];
@@ -131,36 +132,18 @@ public class LanManager : MonoBehaviour
         GetIPBinaries();
         GetBroadcast();
     }
-
-    
     private void TryConnection()
     {
         CheckIp();
-        
-        
     }
-
-
     public void GetAllPlayerInRoom()
     {
         Debug.Log(NetworkManager.Singleton.ConnectedClients.Count);
     }
-    // To Host a game
-    public void StartHost()
+    public void StartPlay()
     {
-        NetworkManager.Singleton.StartServer();
-        GetLocalIPAddress();
+        dataTransfer.haveStart.Value = true;
     }
-
-    // To Join a game
-    public void StartClient()
-    {
-        ipAddress = ip.text;
-        SetIpAddress();
-        NetworkManager.Singleton.StartClient();
-       // SceneManager.LoadScene("DevroomPhoneUpdated");
-    }
-
     /* Gets the Ip Address of your connected network and
 	shows on the screen in order to let other players join
 	by inputing that Ip in the input field */
@@ -179,6 +162,12 @@ public class LanManager : MonoBehaviour
         }
         throw new Exception("No network adapters with an IPv4 address in the system!");
     }
+    // To Host a game
+    public void StartHost()
+    {
+        NetworkManager.Singleton.StartServer();
+        GetLocalIPAddress();
+    }
 
     /* Sets the Ip Address of the Connection Data in Unity Transport
 	to the Ip Address which was input in the Input Field */
@@ -187,6 +176,13 @@ public class LanManager : MonoBehaviour
     {
         transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         transport.ConnectionData.Address = ipAddress;
+    }
+    // To Join a game
+    public void StartClient()
+    {
+        ipAddress = ip.text;
+        SetIpAddress();
+        NetworkManager.Singleton.StartClient();
     }
 }
 

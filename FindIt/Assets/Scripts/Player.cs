@@ -8,9 +8,16 @@ public class Player : MonoBehaviour
 {
     public GameObject PlayerAvatar;
     public string PlayerName;
-    public List<Texture2D> PlayerPicture;
+    public Texture2D PlayerPicture;
+    public bool isInGame;
+    public GameManager gameManager;
     private void Start()
     {
-        this.name = "player" + this.GetComponent<NetworkObject>().OwnerClientId;
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        name = "player" + GetComponent<NetworkObject>().OwnerClientId;
+    }
+    public void SendPicture()
+    {
+        
     }
 }
