@@ -27,7 +27,7 @@ public class UIManagementSc : MonoBehaviour
     
     
     // [HideInInspector]
-    public List<Player_ScriptableObject> PlayerList = new List<Player_ScriptableObject>();
+    public List<GameObject> PlayerList = new List<GameObject>();
     
     [Header("Audio")]
     [SerializeField] private AudioMixer GeneralMixer;
@@ -87,8 +87,8 @@ public class UIManagementSc : MonoBehaviour
         Player_ScriptableObject Player = Instantiate(PlayerScriptableObjectPrefab);
         Player.ID = PlayerList.Count;
         PlayerList.Add(Player);
-        Player.PlayerAvatar = Avatar;
-        Player.PlayerName = PlayerName.GetComponent<TextMeshProUGUI>().text;
+        Player.GetComponent<Player>().PlayerAvatar = Avatar;
+        Player.GetComponent<Player>().PlayerName = PlayerName.GetComponent<InputField>().text;
         PlayerCreated?.Invoke();
         GameStarted = true;
     }
