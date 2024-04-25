@@ -16,6 +16,7 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private GameObject CreditsUI;
     [SerializeField] private GameObject CreateRoomUI;
     [SerializeField] private GameObject TransitionPCUI;
+    [SerializeField] private GameObject ParametreButton;
     
     [Header("Player Info")]
     [SerializeField] private GameObject NameOfTheServ;
@@ -94,8 +95,9 @@ public class UIManagementSc : MonoBehaviour
 
     public void Crédits() 
     {
-        ParameterUI.SetActive(false);
-        ParameterUI.SetActive(false);
+        ParameterUI.SetActive(!ParameterUI.activeSelf);
+        ParametreButton.SetActive(!ParametreButton.activeSelf);
+        CreditsUI.SetActive(!CreditsUI.activeSelf);
     }
 
     public void UpdateGeneralAudio(float volume) {

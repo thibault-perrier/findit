@@ -13,7 +13,6 @@ public class RandomAvatar : MonoBehaviour
     [SerializeField] List<Sprite> _cameraSprites = new List<Sprite>();
     [SerializeField] List<Sprite> _avatarSprites = new List<Sprite>();
     [SerializeField] List<Sprite> _hatSprites = new List<Sprite>();
-    [SerializeField] Slider Slider;
      
     private void Start()
     {
