@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class PhoneCamera : MonoBehaviour
 {
+
     private bool _camAvailable;
     private WebCamTexture _backCam;
     private Texture _defaultBackground;
-    private UIManagementSc _uiManagement;
-    public Player_ScriptableObject _scriptableObject;
 
     public RawImage background;
     public AspectRatioFitter fit;
@@ -24,20 +23,22 @@ public class PhoneCamera : MonoBehaviour
     float timeLeft;
 
     public bool randomFacing;
-
-    private void Awake()
-    {
-        _uiManagement = GetComponent<UIManagementSc>();
-    }
-
+    public Texture2D finalPicture;
+    public GameObject panelPicture;
     private void Start()
     {
         _confirmPhoto.SetActive(false);
         Timer.fillAmount = 1;
         timeLeft = maxTime;
         _defaultBackground = background.texture;
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            GetCam();
+        }
+    }
+    private void GetCam()
+    {
         WebCamDevice[] devices = WebCamTexture.devices;
-
         bool frontFacing = true;
         if (randomFacing)
         {
@@ -66,7 +67,6 @@ public class PhoneCamera : MonoBehaviour
 
         _camAvailable = true;
     }
-
     private void Update()
     {
         if (!_camAvailable)
@@ -78,13 +78,13 @@ public class PhoneCamera : MonoBehaviour
         fit.aspectRatio = ratio;
 
         float scaleY = _backCam.videoVerticallyMirrored ? -1.0f : 1.0f;
-        background.rectTransform.localScale = new Vector3(1, scaleY, 1);
+        background.rectTransform.localScale = new Vector3(.75f, 1.5f, 0);
         picture.rectTransform.localScale = new Vector3(1, scaleY, 1);
 
         int orient = -_backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
         picture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-        if (UIManagementSc.GameStarted)
+        if (panelPicture.activeSelf)
         {
             if (timeLeft > 0)
             {
@@ -95,12 +95,10 @@ public class PhoneCamera : MonoBehaviour
                 TakePhoto();
         }
     }
-
     public void TakePhoto()
     {
         StartCoroutine(TakePicture());
     }
-
     IEnumerator TakePicture()
     {
         yield return new WaitForEndOfFrame();
@@ -113,16 +111,16 @@ public class PhoneCamera : MonoBehaviour
         timeLeft = maxTime; // remet le timer a zero quand on prend une photo.
         picture.texture = squarePhoto;
 
-        _uiManagement.PlayerList[_scriptableObject.ID].PlayerPicture = squarePhoto;
-
+        GameManager.AllPicture.Add(squarePhoto);
 
 
         byte[] bytes = squarePhoto.EncodeToPNG();
         string filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
-    }
 
+        showImage.Instance.ShowImage();
+    }
     private Texture2D CropToSquare(Texture2D source)
     {
         int size = Mathf.Min(source.width, source.height);
@@ -133,6 +131,7 @@ public class PhoneCamera : MonoBehaviour
         Texture2D squareTexture = new Texture2D(size, size);
         squareTexture.SetPixels(pixels);
         squareTexture.Apply();
+        finalPicture = squareTexture;
 
         return squareTexture;
     }

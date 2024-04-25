@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 
@@ -22,10 +23,10 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private GameObject NameOfTheServ;
     [SerializeField] private GameObject Avatar;
     [SerializeField] private GameObject PlayerName;
-    [SerializeField] private Player_ScriptableObject PlayerScriptableObjectPrefab;
+    [SerializeField] private GameObject PlayerScriptableObjectPrefab;
     
     // [HideInInspector]
-    public List<Player_ScriptableObject> PlayerList = new List<Player_ScriptableObject>();
+    public List<GameObject> PlayerList = new List<GameObject>();
     
     [Header("Audio")]
     [SerializeField] private AudioMixer GeneralMixer;
@@ -80,11 +81,11 @@ public class UIManagementSc : MonoBehaviour
     {
         WaitingUI.SetActive(true);
         AvataCreateUI.SetActive(false);
-        Player_ScriptableObject Player = Instantiate(PlayerScriptableObjectPrefab);
-        Player.ID = PlayerList.Count;
+        GameObject Player = Instantiate(PlayerScriptableObjectPrefab);
+        //Player.ID = PlayerList.Count;
         PlayerList.Add(Player);
-        Player.PlayerAvatar = Avatar;
-        Player.PlayerName = PlayerName.GetComponent<TextMeshProUGUI>().text;
+        Player.GetComponent<Player>().PlayerAvatar = Avatar;
+        Player.GetComponent<Player>().PlayerName = PlayerName.GetComponent<InputField>().text;
         PlayerCreated?.Invoke();
         GameStarted = true;
     }
