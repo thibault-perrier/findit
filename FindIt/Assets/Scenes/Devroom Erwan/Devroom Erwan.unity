@@ -1734,7 +1734,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 978972404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd6121b0bc50f274cbcaaffdb6b3e68a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bf54c698fefbfe4fa05fdd1c651dcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   JoinRoom: {fileID: 50350856}
@@ -1744,7 +1744,7 @@ MonoBehaviour:
   _roomName: {fileID: 1676042299}
   ipAddress: 
   transport: {fileID: 1479210322}
-  codeRoom: {fileID: 0}
+  codeRoom: {fileID: 1750962727}
   ipAddressText: {fileID: 114848250}
   sceneManagement: {fileID: 978972410}
   dataTransfer: {fileID: 978972411}

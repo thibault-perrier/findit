@@ -8,10 +8,12 @@ public class ChoseAvatar : MonoBehaviour
     [Header("Sprite renderer")]
     [SerializeField] Image _avatarSprite;
     [SerializeField] Image _cameraSprite;
+    [SerializeField] Image _hatSprite;
 
     [Header("List Sprite")]
     [SerializeField] List<Sprite> _cameraSprites = new List<Sprite>();
     [SerializeField] List<Sprite> _avatarSprites = new List<Sprite>();
+    [SerializeField] List<Sprite> _hatSprites = new List<Sprite>();
     public void PreviousAvatar()
     {
         if (_avatarSprites.IndexOf(_avatarSprite.sprite) > 0)
@@ -43,4 +45,22 @@ public class ChoseAvatar : MonoBehaviour
         else
             _cameraSprite.sprite = _cameraSprites[0];
     }
+
+    public void PreviousHat()
+    {
+        if (_hatSprites.IndexOf(_hatSprite.sprite) > 0)
+            _hatSprite.sprite = _hatSprites[_hatSprites.IndexOf(_hatSprite.sprite) - 1];
+        else
+            _hatSprite.sprite = _hatSprites[_hatSprites.Count - 1];
+    }
+
+    public void NextHat()
+    {
+        if (_hatSprites.IndexOf(_hatSprite.sprite) < _hatSprites.Count - 1)
+            _hatSprite.sprite = _hatSprites[_hatSprites.IndexOf(_hatSprite.sprite) + 1];
+        else
+            _hatSprite.sprite = _hatSprites[0];
+    }
+
+
 }
