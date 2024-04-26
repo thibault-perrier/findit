@@ -8,12 +8,12 @@ public class DataTransfer : NetworkBehaviour
     public GameObject[] players;
     public SceneManagement sceneManagement;
     public NetworkVariable<bool> haveStart;
+    public GameManager gameManager;
     void Update()
     {
         if(haveStart.Value)
         {
             players = GameObject.FindGameObjectsWithTag("Player");
-            Debug.Log(players.Length);
 
             if(Application.platform == RuntimePlatform.Android)
             {
@@ -21,4 +21,6 @@ public class DataTransfer : NetworkBehaviour
             }
         }
     }
+    
+    
 }

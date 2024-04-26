@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.UI;
 
 public class PhoneCamera : MonoBehaviour
@@ -23,8 +24,9 @@ public class PhoneCamera : MonoBehaviour
     float timeLeft;
 
     public bool randomFacing;
-    public Texture2D finalPicture;
+    public Texture2D pictureForDisplay;
     public GameObject panelPicture;
+    public GameManager gameManager;
     private void Start()
     {
         _confirmPhoto.SetActive(false);
@@ -78,7 +80,7 @@ public class PhoneCamera : MonoBehaviour
         fit.aspectRatio = ratio;
 
         float scaleY = _backCam.videoVerticallyMirrored ? -1.0f : 1.0f;
-        background.rectTransform.localScale = new Vector3(.75f, 1.5f, 0);
+        background.rectTransform.localScale = new Vector3(1.25f, 1.25f, 0);
         picture.rectTransform.localScale = new Vector3(1, scaleY, 1);
 
         int orient = -_backCam.videoRotationAngle;
@@ -111,7 +113,6 @@ public class PhoneCamera : MonoBehaviour
         timeLeft = maxTime; // remet le timer a zero quand on prend une photo.
         picture.texture = squarePhoto;
 
-        GameManager.AllPicture.Add(squarePhoto);
 
 
         byte[] bytes = squarePhoto.EncodeToPNG();
@@ -119,7 +120,7 @@ public class PhoneCamera : MonoBehaviour
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
 
-        showImage.Instance.ShowImage();
+        //showImage.Instance.ShowImage();
     }
     private Texture2D CropToSquare(Texture2D source)
     {
@@ -131,11 +132,9 @@ public class PhoneCamera : MonoBehaviour
         Texture2D squareTexture = new Texture2D(size, size);
         squareTexture.SetPixels(pixels);
         squareTexture.Apply();
-        finalPicture = squareTexture;
-
         return squareTexture;
     }
-
+    
     //private Texture2D RotateTexture(Texture2D originalTexture, float angle)
     //{
     //    int width = originalTexture.width;

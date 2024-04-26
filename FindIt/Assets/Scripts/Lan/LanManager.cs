@@ -7,8 +7,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
-using System.Text;
-using UnityEngine.SceneManagement;
 
 public class LanManager : MonoBehaviour
 {
@@ -138,9 +136,9 @@ public class LanManager : MonoBehaviour
     {
         CheckIp();
     }
-    public void GetAllPlayerInRoom()
+    public int GetAllPlayerInRoom()
     {
-        Debug.Log(NetworkManager.Singleton.ConnectedClients.Count);
+        return NetworkManager.Singleton.ConnectedClients.Count;
     }
     public void StartPlay()
     {
