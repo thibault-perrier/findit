@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public string PlayerName;
     public Texture2D PlayerPicture;
     public bool isInGame;
+    public int totalPoint;
     public GameManager gameManager;
     private void Start()
     {
