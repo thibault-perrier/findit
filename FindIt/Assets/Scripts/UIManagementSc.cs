@@ -24,11 +24,11 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private GameObject PlayerName;
     [SerializeField] private Player_ScriptableObject PlayerScriptableObjectPrefab;
     [SerializeField] float transitionSpeed;
-    
-    
+
+
     // [HideInInspector]
-    public List<GameObject> PlayerList = new List<GameObject>();
-    
+    public List<Player_ScriptableObject> PlayerList = new List<Player_ScriptableObject>();
+
     [Header("Audio")]
     [SerializeField] private AudioMixer GeneralMixer;
     
@@ -87,8 +87,8 @@ public class UIManagementSc : MonoBehaviour
         Player_ScriptableObject Player = Instantiate(PlayerScriptableObjectPrefab);
         Player.ID = PlayerList.Count;
         PlayerList.Add(Player);
-        Player.GetComponent<Player>().PlayerAvatar = Avatar;
-        Player.GetComponent<Player>().PlayerName = PlayerName.GetComponent<InputField>().text;
+        Player.PlayerAvatar = Avatar;
+        Player.PlayerName = PlayerName.GetComponent<TextMeshProUGUI>().text;
         PlayerCreated?.Invoke();
         GameStarted = true;
     }
