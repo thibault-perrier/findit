@@ -16,8 +16,4 @@ public class Player : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         name = "player" + GetComponent<NetworkObject>().OwnerClientId;
     }
-    public void SendPicture()
-    {
-        
-    }
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using Unity.Netcode;
+using UnityGoogleDrive;
 using UnityEngine.UI;
 
 public class PhoneCamera : MonoBehaviour
@@ -27,6 +27,12 @@ public class PhoneCamera : MonoBehaviour
     public Texture2D pictureForDisplay;
     public GameObject panelPicture;
     public GameManager gameManager;
+
+    [Header("GoogleDrivePicture")]
+    string filename = "";
+    private Texture2D image;
+    private byte[] Download;
+    
     private void Start()
     {
         _confirmPhoto.SetActive(false);
@@ -116,7 +122,7 @@ public class PhoneCamera : MonoBehaviour
 
 
         byte[] bytes = squarePhoto.EncodeToPNG();
-        string filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
+        filename = System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
 
@@ -132,9 +138,19 @@ public class PhoneCamera : MonoBehaviour
         Texture2D squareTexture = new Texture2D(size, size);
         squareTexture.SetPixels(pixels);
         squareTexture.Apply();
+        image = squareTexture;
         return squareTexture;
     }
     
+    public IEnumerator SendToDrive()
+    {
+        var content = image.EncodeToPNG();
+        var file = new UnityGoogleDrive.Data.File() { Name = filename, Content = content};
+        var request = GoogleDriveFiles.Create(file);
+        
+        yield return request.Send();
+        gameManager.imageKey = request.ResponseData.Id;
+    }
     //private Texture2D RotateTexture(Texture2D originalTexture, float angle)
     //{
     //    int width = originalTexture.width;
