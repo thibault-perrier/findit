@@ -9360,9 +9360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663de427914bcb64b85375c4cf1e569a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParameterUI: {fileID: 0}
+  ParameterUI: {fileID: 1235926314}
   SelectServUI: {fileID: 0}
-  EnterCodeUI: {fileID: 0}
+  EnterCodeUI: {fileID: 650778008}
   AvataCreateUI: {fileID: 0}
   WaitingUI: {fileID: 0}
   CreditsUI: {fileID: 0}
@@ -9371,6 +9371,10 @@ MonoBehaviour:
   PlayerName: {fileID: 0}
   PlayerScriptableObjectPrefab: {fileID: 0}
   PlayerList: []
+  GeneralMixer: {fileID: 0}
+  PlayerCreated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1933774279
 MonoBehaviour:
   m_ObjectHideFlags: 0
