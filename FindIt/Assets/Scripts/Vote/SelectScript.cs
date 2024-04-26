@@ -3,8 +3,11 @@ using UnityEngine.UI;
 
 public class SelectScript : MonoBehaviour
 {
-    public int PlayerNumber;
+    public Texture2D currentImage;
+    public int totalVote;
     [HideInInspector] public bool Selected = false;
+
+    public int PlayerNumber;
     Image votedImage;
 
     private void Awake()
