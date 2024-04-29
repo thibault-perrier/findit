@@ -100,7 +100,7 @@ public class PhoneCamera : MonoBehaviour
                 timeLeft -= Time.deltaTime;
                 Timer.fillAmount = timeLeft / maxTime;
             }
-            else if (!_takePict)
+            else
             {
                 TakePhoto();
             }
@@ -130,7 +130,7 @@ public class PhoneCamera : MonoBehaviour
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
         _takePict = true;
-        swapPhoto.StartChange();
+        Time.timeScale = 0;
         //showImage.Instance.ShowImage();
     }
     private Texture2D CropToSquare(Texture2D source)
