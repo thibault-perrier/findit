@@ -6,11 +6,11 @@ public class ActiveSelf : MonoBehaviour
 
     [SerializeField] private GameObject hostGame;
     [SerializeField] private GameObject clientGame;
-    private SwapPhoto _swapPhoto;
+    [SerializeField] private SwapPhoto _swapPhoto;
 
     private void Awake()
     {
-        _swapPhoto = GetComponent<SwapPhoto>();
+        //_swapPhoto = GetComponent<SwapPhoto>();
     }
     private void Start()
     {

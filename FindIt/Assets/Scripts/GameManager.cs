@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public class GameManager : NetworkBehaviour
 {
-    NetworkObject networkObject;
+   /* NetworkObject networkObject;
     int Id = -1;
     public NetworkVariable<List<byte[]>> AllPicture = new NetworkVariable<List<byte[]>>();
     public List<Texture2D> FinalPictureList = new List<Texture2D>();
@@ -24,6 +24,6 @@ public class GameManager : NetworkBehaviour
             Id = (int)networkObject.OwnerClientId;
             print(Id);
         }
-    }
+    }*/
 
 }
