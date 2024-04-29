@@ -7,6 +7,7 @@ public class SwapPhoto : MonoBehaviour
     [SerializeField] GameObject takePhoto;
     [SerializeField] GameObject vote;
     public Picture picture;
+    public bool pickPicture;
     public void StartChange()
     { 
         StartCoroutine(ChangeScene());
@@ -15,7 +16,8 @@ public class SwapPhoto : MonoBehaviour
     {
         yield return new WaitForSeconds(timeSwap);
         takePhoto.SetActive(false);
-        vote.SetActive(true);
+        pickPicture = true;
+        //vote.SetActive(true);
         picture.InstantiateButtonVote();
     }
 }

@@ -22,8 +22,8 @@ public class ClientVote : MonoBehaviour
     }
     private void CreateVoteButton()
     {
-        print(GameManager.AllPicture.Count);
-        for (int i = 0; i < GameManager.AllPicture.Count; i++)
+        //print(GameManager.AllPicture.Count);
+        for (int i = 0; i < 5 /*GameManager.AllPicture.Count*/; i++)
         {
             GameObject newVoteImage = Instantiate(originalVotePrefab);
             newVoteImage.GetComponent<SelectScript>().PlayerNumber = i;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ActiveSelf : MonoBehaviour
@@ -8,16 +6,24 @@ public class ActiveSelf : MonoBehaviour
 
     [SerializeField] private GameObject hostGame;
     [SerializeField] private GameObject clientGame;
+    private SwapPhoto _swapPhoto;
 
+    private void Awake()
+    {
+        _swapPhoto = GetComponent<SwapPhoto>();
+    }
     private void Start()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (_swapPhoto.pickPicture)
         {
-            ActiveClientScene();
-        }
-        else if(Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
-        {
-            ActiveHostScene();
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                ActiveClientScene();
+            }
+            else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+            {
+                ActiveHostScene();
+            }
         }
     }
     public void ActiveClientScene()
