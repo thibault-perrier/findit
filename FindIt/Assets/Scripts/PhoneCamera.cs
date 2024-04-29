@@ -31,7 +31,7 @@ public class PhoneCamera : MonoBehaviour
     public SwapPhoto swapPhoto;
     private void Awake()
     {
-        swapPhoto.GetComponent<SwapPhoto>();
+        //swapPhoto.GetComponent<SwapPhoto>();
     }
 
     private void Start()
