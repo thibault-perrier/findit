@@ -21,7 +21,6 @@ public class SelectScript : MonoBehaviour
     public void SelectSelf()
     {
         Picture.Instance.Vote(PlayerNumber);
-        print(Selected);
         Selected = !Selected;
         if (Selected)
         {
