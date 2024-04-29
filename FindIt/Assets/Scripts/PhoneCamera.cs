@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -114,8 +115,9 @@ public class PhoneCamera : MonoBehaviour
         GameManager.AllPicture.Add(squarePhoto);
 
 
-        byte[] bytes = squarePhoto.EncodeToPNG();
-        string filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
+        byte[] bytes = squarePhoto.EncodeToJPG();
+        debugText.text = bytes.Count().ToString();
+        string filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.jpg";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
 
