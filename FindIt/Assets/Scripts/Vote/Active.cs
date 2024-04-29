@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ActiveSelf : MonoBehaviour
+public class Active : MonoBehaviour
 {
-    public static ActiveSelf Instance;
+    public static Active Instance;
 
     [SerializeField] private GameObject hostGame;
     [SerializeField] private GameObject clientGame;
@@ -12,7 +12,7 @@ public class ActiveSelf : MonoBehaviour
     {
         //_swapPhoto = GetComponent<SwapPhoto>();
     }
-    private void Start()
+    private void Update()
     {
         if (_swapPhoto.pickPicture)
         {
