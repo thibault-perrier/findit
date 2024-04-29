@@ -93,7 +93,8 @@ public class PhoneCamera : MonoBehaviour
         int orient = -_backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
         picture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-        if (panelPicture.activeSelf)
+
+        if (panelPicture.activeSelf && !_takePict)
         {
             if (timeLeft > 0)
             {
@@ -130,8 +131,6 @@ public class PhoneCamera : MonoBehaviour
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
         _takePict = true;
-        Time.timeScale = 0;
-        //showImage.Instance.ShowImage();
     }
     private Texture2D CropToSquare(Texture2D source)
     {

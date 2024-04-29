@@ -12,7 +12,7 @@ public class LanManager : MonoBehaviour
 {
     [Header("Client")]
     [SerializeField] private GameObject JoinRoom;
-    [SerializeField]private List<string> _server = new();
+    [SerializeField] private List<string> _server = new();
     //Network
     [SerializeField] private InputField ip;
 
@@ -20,11 +20,11 @@ public class LanManager : MonoBehaviour
     [Header("Host")]
     [SerializeField] private GameObject CreateRoom;
     //Network
-    [SerializeField]private InputField _roomName;
+    [SerializeField] private InputField _roomName;
     public string ipAddress;
     public UnityTransport transport;
     public Text codeRoom;
-    [SerializeField]Text ipAddressText;
+    [SerializeField] Text ipAddressText;
     //OtherScript
     [SerializeField] SceneManagement sceneManagement;
     [SerializeField] DataTransfer dataTransfer;
@@ -32,7 +32,7 @@ public class LanManager : MonoBehaviour
     [SerializeField] private int[] _broadcast = new int[32];
     [SerializeField] private int[] _pIP = new int[32];
     [SerializeField] private int[] _mask = new int[32];
-    [SerializeField] private string _broacastIP ="";
+    [SerializeField] private string _broacastIP = "";
 
     public bool isHost = false;
 
@@ -99,7 +99,7 @@ public class LanManager : MonoBehaviour
     }
     private void GetBroadcast()
     {
-        for (int i = 0 ; i < _broadcast.Length ; i++)
+        for (int i = 0; i < _broadcast.Length; i++)
         {
             if (_mask[i] == 0)
             {
@@ -110,7 +110,7 @@ public class LanManager : MonoBehaviour
                 _broadcast[i] = _pIP[i];
             }
         }
-        
+
         for (int i = 0; i < _broadcast.Length; i += 8)
         {
             string octet = "";

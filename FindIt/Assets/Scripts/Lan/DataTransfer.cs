@@ -9,14 +9,17 @@ public class DataTransfer : NetworkBehaviour
     public SceneManagement sceneManagement;
     public NetworkVariable<bool> haveStart;
     public GameManager gameManager;
+
+    private bool hasTakePhoto = false;
     void Update()
     {
-        if(haveStart.Value)
+        if(haveStart.Value && !hasTakePhoto)
         {
             players = GameObject.FindGameObjectsWithTag("Player");
 
             if(Application.platform == RuntimePlatform.Android)
             {
+                hasTakePhoto = true;
                 sceneManagement.TakePhoto();
             }
         }

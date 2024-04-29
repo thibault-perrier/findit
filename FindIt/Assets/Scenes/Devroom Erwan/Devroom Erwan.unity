@@ -2812,13 +2812,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a630d73ee725b141b712bb74e34312b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeSwap: 5
-  takePhoto: {fileID: 1260489573545508781}
-  vote: {fileID: 7119706042686214696}
-  picture: {fileID: 978972414}
+  takePhoto: {fileID: 0}
+  picture: {fileID: 0}
   pickPicture: 0
-  hostGame: {fileID: 0}
-  clientGame: {fileID: 0}
+  hostGame: {fileID: 564639077}
+  clientGame: {fileID: 401552722}
 --- !u!114 &978972414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5237,7 +5235,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -1494.4331}
+  m_SizeDelta: {x: 0, y: -1927.5001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8432531637893089411
 MonoBehaviour:
@@ -5336,6 +5334,42 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1260489573545508781}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 564639077}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 401552722}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!222 &8856568033082126660
 CanvasRenderer:
