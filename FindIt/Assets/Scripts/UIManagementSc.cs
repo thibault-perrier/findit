@@ -114,7 +114,7 @@ public class UIManagementSc : MonoBehaviour
 
     public void TransitionTitleToCreteServ()
     {
-        if (Input.anyKeyDown)
+        if (TransitionPCUI && Input.anyKeyDown)
         {
             TransitionPCUI.GetComponent<Animator>().SetBool("titleOut", true);
         }
