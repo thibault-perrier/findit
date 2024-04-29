@@ -2,7 +2,6 @@ using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using Unity.Netcode;
 using UnityEngine.UI;
 
 public class PhoneCamera : MonoBehaviour
@@ -29,6 +28,12 @@ public class PhoneCamera : MonoBehaviour
     public Texture2D pictureForDisplay;
     public GameObject panelPicture;
     public GameManager gameManager;
+    public SwapPhoto swapPhoto;
+    private void Awake()
+    {
+        swapPhoto.GetComponent<SwapPhoto>();
+    }
+
     private void Start()
     {
         _confirmPhoto.SetActive(false);
@@ -88,15 +93,17 @@ public class PhoneCamera : MonoBehaviour
         int orient = -_backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
         picture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-        if (panelPicture.activeSelf && !_takePict)
+        if (panelPicture.activeSelf)
         {
             if (timeLeft > 0)
             {
                 timeLeft -= Time.deltaTime;
                 Timer.fillAmount = timeLeft / maxTime;
             }
-            else
+            else if (!_takePict)
+            {
                 TakePhoto();
+            }
         }
     }
     public void TakePhoto()
@@ -123,6 +130,7 @@ public class PhoneCamera : MonoBehaviour
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
         _takePict = true;
+        swapPhoto.StartChange();
         //showImage.Instance.ShowImage();
     }
     private Texture2D CropToSquare(Texture2D source)

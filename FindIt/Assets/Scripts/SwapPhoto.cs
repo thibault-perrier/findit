@@ -8,6 +8,9 @@ public class SwapPhoto : MonoBehaviour
     [SerializeField] GameObject vote;
     public Picture picture;
     public bool pickPicture;
+
+    [SerializeField] private GameObject hostGame;
+    [SerializeField] private GameObject clientGame;
     public void StartChange()
     { 
         StartCoroutine(ChangeScene());
@@ -16,8 +19,16 @@ public class SwapPhoto : MonoBehaviour
     {
         yield return new WaitForSeconds(timeSwap);
         takePhoto.SetActive(false);
-        pickPicture = true;
-        //vote.SetActive(true);
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            clientGame.SetActive(true);
+        }
+        else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            hostGame.SetActive(true);
+        }
+
         picture.InstantiateButtonVote();
     }
 }
