@@ -3,7 +3,7 @@ using UnityEngine;
 public class Picture : MonoBehaviour
 {
     public static Picture Instance;
-    public LanManager lanManager;
+    //public LanManager lanManager;
     private int nbPlayer;
     [SerializeField] private GameObject _prefabsVotes;
     [SerializeField] private Transform _transformParent;
@@ -16,7 +16,7 @@ public class Picture : MonoBehaviour
 
     public void InstantiateButtonVote()
     {
-        nbPlayer = lanManager.GetAllPlayerInRoom();
+        //nbPlayer = lanManager.GetAllPlayerInRoom();
         for (int i = 0; i <= nbPlayer; i++)
         {
             Instantiate(_prefabsVotes, Vector3.zero,Quaternion.identity,_transformParent);
