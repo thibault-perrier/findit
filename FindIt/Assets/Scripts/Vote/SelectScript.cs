@@ -8,7 +8,7 @@ public class SelectScript : MonoBehaviour
     public int totalVote;
     [HideInInspector] public bool Selected = false;
 
-    public NetworkVariable<int> voteForHost;
+    //public NetworkVariable<int> voteForHost;
 
     public int PlayerNumber;
     Image votedImage;

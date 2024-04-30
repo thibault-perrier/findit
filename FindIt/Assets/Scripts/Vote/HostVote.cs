@@ -32,7 +32,7 @@ public class HostVote : MonoBehaviour
         }
         foreach (GameObject voteImage in votes)
         {
-            voteImage.GetComponent<SelectScript>().totalVote = voteImage.GetComponent<SelectScript>().voteForHost.Value;
+            //voteImage.GetComponent<SelectScript>().totalVote = voteImage.GetComponent<SelectScript>().voteForHost.Value;
             voteImage.GetComponentInChildren<TextMeshProUGUI>().text = voteImage.GetComponent<SelectScript>().totalVote.ToString();
             
         }

@@ -40,7 +40,7 @@ public class ClientVote : MonoBehaviour
                 if (vote.GetComponent<SelectScript>().Selected)
                 {
                     vote.GetComponent<SelectScript>().totalVote++;
-                    vote.GetComponent<SelectScript>().voteForHost.Value = vote.GetComponent<SelectScript>().totalVote++;
+                   //vote.GetComponent<SelectScript>().voteForHost.Value = vote.GetComponent<SelectScript>().totalVote++;
                     isVoted = true;
                     break;
                 }
