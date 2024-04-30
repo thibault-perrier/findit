@@ -36,6 +36,9 @@ public class PhoneCamera : MonoBehaviour
 
     public PhotonView phview;
     public RawImage pictureDeFou;
+
+    public GameManager gameManager;
+    public bool photoNotTake = false;
     private void Start()
     {
         _confirmPhoto.SetActive(false);
@@ -102,8 +105,11 @@ public class PhoneCamera : MonoBehaviour
                 timeLeft -= Time.deltaTime;
                 Timer.fillAmount = timeLeft / maxTime;
             }
-            else
+            else if (photoNotTake)
+            {
                 TakePhoto();
+                photoNotTake = true;
+            }
         }
     }
     public void TakePhoto()
@@ -128,6 +134,7 @@ public class PhoneCamera : MonoBehaviour
         filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
+        photoNotTake = true;
         //showImage.Instance.ShowImage();
     }
     private Texture2D CropToSquare(Texture2D source)
@@ -148,6 +155,7 @@ public class PhoneCamera : MonoBehaviour
     private void RPC_SharePhoto(byte[] photoByte)
     {
         texture.LoadImage(photoByte);
+        gameManager.AllPicture.Add(texture);
         pictureDeFou.texture = texture;
     }
 

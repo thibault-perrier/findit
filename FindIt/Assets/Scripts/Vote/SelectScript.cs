@@ -1,4 +1,4 @@
-using Unity.Netcode;
+//using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +7,6 @@ public class SelectScript : MonoBehaviour
     public Texture2D currentImage;
     public int totalVote;
     [HideInInspector] public bool Selected = false;
-
-    //public NetworkVariable<int> voteForHost;
 
     public int PlayerNumber;
     Image votedImage;
