@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityGoogleDrive;
 using UnityEngine.UI;
+
 
 public class PhoneCamera : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class PhoneCamera : MonoBehaviour
     [SerializeField] RawImage picture;
     [SerializeField] TextMeshProUGUI debugText;
 
-
+    //Timer
     [SerializeField] Image Timer;
     public float maxTime = 30f;
     float timeLeft;
@@ -26,13 +27,15 @@ public class PhoneCamera : MonoBehaviour
     public bool randomFacing;
     public Texture2D pictureForDisplay;
     public GameObject panelPicture;
-    public GameManager gameManager;
+    public DataTransfer dataTransfer;
+    public GameObject player;
+    public Texture2D texture;
 
-    [Header("GoogleDrivePicture")]
     string filename = "";
-    private Texture2D image;
-    private byte[] Download;
-    
+    public byte[] Download;
+
+    public PhotonView phview;
+    public RawImage pictureDeFou;
     private void Start()
     {
         _confirmPhoto.SetActive(false);
@@ -119,13 +122,12 @@ public class PhoneCamera : MonoBehaviour
         timeLeft = maxTime; // remet le timer a zero quand on prend une photo.
         picture.texture = squarePhoto;
 
-
-
-        byte[] bytes = squarePhoto.EncodeToPNG();
-        filename = System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + "_photo.png";
+        byte[] bytes = squarePhoto.EncodeToJPG();
+        Download = bytes;
+        phview.RpcSecure("RPC_SharePhoto",RpcTarget.Others,true,Download);
+        filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
-
         //showImage.Instance.ShowImage();
     }
     private Texture2D CropToSquare(Texture2D source)
@@ -138,34 +140,15 @@ public class PhoneCamera : MonoBehaviour
         Texture2D squareTexture = new Texture2D(size, size);
         squareTexture.SetPixels(pixels);
         squareTexture.Apply();
-        image = squareTexture;
+        texture = squareTexture;
         return squareTexture;
     }
-    
-    public IEnumerator SendToDrive()
+
+    [PunRPC]
+    private void RPC_SharePhoto(byte[] photoByte)
     {
-        var content = image.EncodeToPNG();
-        var file = new UnityGoogleDrive.Data.File() { Name = filename, Content = content};
-        var request = GoogleDriveFiles.Create(file);
-        
-        yield return request.Send();
-        gameManager.imageKey = request.ResponseData.Id;
+        texture.LoadImage(photoByte);
+        pictureDeFou.texture = texture;
     }
-    //private Texture2D RotateTexture(Texture2D originalTexture, float angle)
-    //{
-    //    int width = originalTexture.width;
-    //    int height = originalTexture.height;
 
-    //    Texture2D rotatedTexture = new Texture2D(height, width);
-
-    //    for (int y = 0; y < height; y++)
-    //    {
-    //        for (int x = 0; x < width; x++)
-    //        {
-    //            rotatedTexture.SetPixel(y, width - 1 - x, originalTexture.GetPixel(x, y));
-    //        }
-    //    }
-    //    rotatedTexture.Apply();
-    //    return rotatedTexture;
-    //}
 }

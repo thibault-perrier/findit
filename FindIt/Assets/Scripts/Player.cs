@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -14,6 +13,5 @@ public class Player : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        name = "player" + GetComponent<NetworkObject>().OwnerClientId;
     }
 }
