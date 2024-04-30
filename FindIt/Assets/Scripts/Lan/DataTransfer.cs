@@ -1,27 +1,30 @@
-using Unity.Netcode;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class DataTransfer : NetworkBehaviour
+public class DataTransfer : MonoBehaviour
 {
     public GameObject[] players;
-    public SceneManagement sceneManagement;
-    public NetworkVariable<bool> haveStart;
     public GameManager gameManager;
-
-    private bool hasTakePhoto = false;
+    public SceneManagement sceneManagement;
+    public bool haveStart;
+    public List<byte> image = new List<byte>();
+    GameObject[] playersList;
     void Update()
     {
-        if(haveStart.Value && !hasTakePhoto)
+        if(haveStart)
         {
             players = GameObject.FindGameObjectsWithTag("Player");
-
-            if(Application.platform == RuntimePlatform.Android)
+            getAllPlayer();
+            if (Application.platform == RuntimePlatform.Android)
             {
-                hasTakePhoto = true;
                 sceneManagement.TakePhoto();
             }
+
         }
     }
-    
-    
+    void getAllPlayer()
+    {
+        playersList = GameObject.FindGameObjectsWithTag("Player");
+    }
 }

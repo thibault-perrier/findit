@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class PhoneCamera : MonoBehaviour
 {
@@ -18,22 +19,23 @@ public class PhoneCamera : MonoBehaviour
     [SerializeField] RawImage picture;
     [SerializeField] TextMeshProUGUI debugText;
 
-
+    //Timer
     [SerializeField] Image Timer;
     public float maxTime = 30f;
     float timeLeft;
-    public bool _takePict;
 
     public bool randomFacing;
     public Texture2D pictureForDisplay;
     public GameObject panelPicture;
-    public GameManager gameManager;
-    public SwapPhoto swapPhoto;
-    private void Awake()
-    {
-        //swapPhoto.GetComponent<SwapPhoto>();
-    }
+    public DataTransfer dataTransfer;
+    public GameObject player;
+    public Texture2D texture;
 
+    string filename = "";
+    public byte[] Download;
+
+    public PhotonView phview;
+    public RawImage pictureDeFou;
     private void Start()
     {
         _confirmPhoto.SetActive(false);
@@ -93,8 +95,7 @@ public class PhoneCamera : MonoBehaviour
         int orient = -_backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
         picture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-
-        if (panelPicture.activeSelf && !_takePict)
+        if (panelPicture.activeSelf)
         {
             if (timeLeft > 0)
             {
@@ -102,9 +103,7 @@ public class PhoneCamera : MonoBehaviour
                 Timer.fillAmount = timeLeft / maxTime;
             }
             else
-            {
                 TakePhoto();
-            }
         }
     }
     public void TakePhoto()
@@ -123,14 +122,13 @@ public class PhoneCamera : MonoBehaviour
         timeLeft = maxTime; // remet le timer a zero quand on prend une photo.
         picture.texture = squarePhoto;
 
-
-
         byte[] bytes = squarePhoto.EncodeToJPG();
-        debugText.text = bytes.Count().ToString();
-        string filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.jpg";
+        Download = bytes;
+        phview.RpcSecure("RPC_SharePhoto",RpcTarget.Others,true,Download);
+        filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
-        _takePict = true;
+        //showImage.Instance.ShowImage();
     }
     private Texture2D CropToSquare(Texture2D source)
     {
@@ -142,24 +140,15 @@ public class PhoneCamera : MonoBehaviour
         Texture2D squareTexture = new Texture2D(size, size);
         squareTexture.SetPixels(pixels);
         squareTexture.Apply();
+        texture = squareTexture;
         return squareTexture;
     }
-    
-    //private Texture2D RotateTexture(Texture2D originalTexture, float angle)
-    //{
-    //    int width = originalTexture.width;
-    //    int height = originalTexture.height;
 
-    //    Texture2D rotatedTexture = new Texture2D(height, width);
+    [PunRPC]
+    private void RPC_SharePhoto(byte[] photoByte)
+    {
+        texture.LoadImage(photoByte);
+        pictureDeFou.texture = texture;
+    }
 
-    //    for (int y = 0; y < height; y++)
-    //    {
-    //        for (int x = 0; x < width; x++)
-    //        {
-    //            rotatedTexture.SetPixel(y, width - 1 - x, originalTexture.GetPixel(x, y));
-    //        }
-    //    }
-    //    rotatedTexture.Apply();
-    //    return rotatedTexture;
-    //}
 }
