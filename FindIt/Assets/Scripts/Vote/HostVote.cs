@@ -14,15 +14,16 @@ public class HostVote : MonoBehaviour
     private int _limite;
     private void Start()
     {
+        print(gameManager.AllPicture.Count);
         _limite = 5 /*gameManager.AllPicture.Count*/;
         for (int i = 0; i < 2; i++)
         {
             for (int j = 0; j < _limite / 2 ; j++)
             {
-                GameObject newVoteImage = Instantiate(originalVotePrefab, voteParent.transform.position + new Vector3(j * 850, -i * 900, 0), Quaternion.identity);
-                newVoteImage.transform.parent = voteParent.transform;
+                GameObject newVoteImage = Instantiate(originalVotePrefab, voteParent.transform.position + new Vector3(j * 550, -i * 550, 0), Quaternion.identity);
+                newVoteImage.transform.SetParent(voteParent.transform);
                 votes.Add(newVoteImage);
-                newVoteImage.GetComponentInChildren<RawImage>().texture = gameManager.AllPicture[_index];       
+                newVoteImage.GetComponentInChildren<RawImage>().texture = gameManager.AllPicture[0];       
                 _index++;
             }
         }

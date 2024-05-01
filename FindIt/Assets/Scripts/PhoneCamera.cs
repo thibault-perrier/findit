@@ -15,8 +15,6 @@ public class PhoneCamera : MonoBehaviour
     public RawImage background;
     public AspectRatioFitter fit;
 
-    [SerializeField] private GameObject _confirmPhoto;
-    [SerializeField] RawImage picture;
     [SerializeField] TextMeshProUGUI debugText;
 
     //Timer
@@ -41,7 +39,6 @@ public class PhoneCamera : MonoBehaviour
     public bool photoNotTake = false;
     private void Start()
     {
-        _confirmPhoto.SetActive(false);
         Timer.fillAmount = 1;
         timeLeft = maxTime;
         _defaultBackground = background.texture;
@@ -93,11 +90,9 @@ public class PhoneCamera : MonoBehaviour
 
         float scaleY = _backCam.videoVerticallyMirrored ? -1.0f : 1.0f;
         background.rectTransform.localScale = new Vector3(1.25f, 1.25f, 0);
-        picture.rectTransform.localScale = new Vector3(1, scaleY, 1);
 
         int orient = -_backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-        picture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
         if (panelPicture.activeSelf)
         {
             if (timeLeft > 0)
@@ -115,6 +110,7 @@ public class PhoneCamera : MonoBehaviour
     public void TakePhoto()
     {
         StartCoroutine(TakePicture());
+        _backCam.Pause();
     }
     IEnumerator TakePicture()
     {
@@ -124,18 +120,16 @@ public class PhoneCamera : MonoBehaviour
         photo.SetPixels(_backCam.GetPixels());
         photo.Apply();
         Texture2D squarePhoto = CropToSquare(photo);
-        _confirmPhoto.SetActive(true);
-        timeLeft = maxTime; // remet le timer a zero quand on prend une photo.
-        picture.texture = squarePhoto;
 
         byte[] bytes = squarePhoto.EncodeToJPG();
         Download = bytes;
+
         phview.RpcSecure("RPC_SharePhoto",RpcTarget.Others,true,Download);
+
         filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
         photoNotTake = true;
-        //showImage.Instance.ShowImage();
     }
     private Texture2D CropToSquare(Texture2D source)
     {

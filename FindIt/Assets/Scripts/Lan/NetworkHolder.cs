@@ -80,12 +80,20 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
 
     public void StartGame()
     {
-        phview.RPC("changeSceneRpc", RpcTarget.Others);
+        //Change Scene Take photo
+        phview.RPC("changeSceneTakePhotoRpc", RpcTarget.Others);
+        //Change Scene Vote
+        phview.RPC("changeSceneSwapPhotoRpc", RpcTarget.Others);
     }
 
     [PunRPC]
-    public void changeSceneRpc()
+    public void changeSceneTakePhotoRpc()
     {
         takephoto.SetActive(true);
+    }
+    [PunRPC]
+    public void changeSceneSwapPhotoRpc()
+    {
+        SwapPhoto.Instance.StartChangeRightScene();
     }
 }
