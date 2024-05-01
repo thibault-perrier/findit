@@ -39,8 +39,6 @@ public class UIManagementSc : MonoBehaviour
     public UnityEvent PlayerCreated;
 
     public static bool GameStarted = false;
-    private bool _hasToStartTransition = false;
-    private bool _hasTransitionned = false;
 
     private void Awake()
     {
@@ -114,7 +112,7 @@ public class UIManagementSc : MonoBehaviour
 
     public void TransitionTitleToCreteServ()
     {
-        if (Input.anyKeyDown)
+        if (TransitionPCUI && Input.anyKeyDown)
         {
             TransitionPCUI.GetComponent<Animator>().SetBool("titleOut", true);
         }
