@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Collections;
 
 public class PhotoManager : MonoBehaviour
 {
@@ -11,4 +10,6 @@ public class PhotoManager : MonoBehaviour
     public TextMeshProUGUI debugdefou;
     Texture2D image;
     public string imageKey;
+    public Dictionary<int, int> ScoreById = new Dictionary<int, int>();
+    
 }

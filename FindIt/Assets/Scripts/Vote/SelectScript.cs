@@ -9,7 +9,7 @@ public class SelectScript : MonoBehaviour
 
     public int PlayerNumber;
     Image votedImage;
-
+    public int IDVote;
     private void Awake()
     {
         votedImage = GetComponentInChildren<Image>();

@@ -15,8 +15,7 @@ public class HostVote : MonoBehaviour
     [SerializeField]private int _limite;
     private void Start()
     {
-        print(gameManager.AllPicture.Count);
-        _limite = gameManager.AllPicture.Count;
+            _limite = gameManager.AllPicture.Count;
             for (int j = 0; j < _limite; j++)
             {
                 
