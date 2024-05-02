@@ -14,50 +14,60 @@ public class ChoseAvatar : MonoBehaviour
     [SerializeField] List<Sprite> _cameraSprites = new List<Sprite>();
     [SerializeField] List<Sprite> _avatarSprites = new List<Sprite>();
     [SerializeField] List<Sprite> _hatSprites = new List<Sprite>();
+    public int currentIndexHat;
+    public int currentIndexCamera;
+    public int currentIndexAvatar;
+
+    public static ChoseAvatar Instance;
+
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+    }
 
     public enum CharacterToChose
     {
-        Hat, Camera, Avatar
+        Hat, 
+        Camera, 
+        Avatar
     }
 
     public enum Direction
     {
-        Next, Previous
+        Next, 
+        Previous
     }
 
     private void ChooseCharacter(CharacterToChose character, Direction direction)
     {
         List<Sprite> sprites;
-        Image sprite;
+        Image img;
+        int currentIndex;
 
         switch (character)
         {
             case CharacterToChose.Avatar:
                 sprites = _avatarSprites;
-                sprite = _avatarSprite;
+                img = _avatarSprite;
+                currentIndexAvatar = (currentIndexAvatar + ((direction == Direction.Previous) ? -1 : 1) + _avatarSprites.Count) % _avatarSprites.Count;
+                img.sprite = sprites[currentIndexAvatar];
                 break;
             case CharacterToChose.Camera:
                 sprites = _cameraSprites;
-                sprite = _cameraSprite;
+                img = _cameraSprite;
+                currentIndexCamera = (currentIndexCamera + ((direction == Direction.Previous) ? -1 : 1) + _cameraSprites.Count) % _cameraSprites.Count;
+                img.sprite = sprites[currentIndexCamera];
                 break;
             case CharacterToChose.Hat:
                 sprites = _hatSprites;
-                sprite = _hatSprite;
+                img = _hatSprite;
+                currentIndexHat = (currentIndexHat + ((direction == Direction.Previous) ? -1 : 1) + _hatSprites.Count) % _hatSprites.Count;
+                img.sprite = sprites[currentIndexHat];
                 break;
             default:
                 return;
         }
-
-        int currentIndex = sprites.IndexOf(sprite.sprite);
-        int count = sprites.Count;
-
-        int nextIndex;
-        if (direction == Direction.Next)
-            nextIndex = (currentIndex + 1) % count;
-        else
-            nextIndex = (currentIndex - 1 + count) % count;
-
-        sprite.sprite = sprites[nextIndex];
     }
 
     public void NextCharacter(int characterIndex)
