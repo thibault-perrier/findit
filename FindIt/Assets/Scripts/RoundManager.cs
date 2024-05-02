@@ -1,12 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
-    public int roundIndex;
+    [HideInInspector] public int roundIndex;
+    [SerializeField] float promptTime = 10;
+
+    private void Start()
+    {
+        PanelManager.Instance.DisplayPanel(PanelManager.panelsNames.Transition);
+    }
 
     public void StartRound()
     {
         roundIndex = 0;
+        PanelManager.Instance.DisplayPanel(PanelManager.panelsNames.RevealPrompt);
     }
 
     public void NextRound()
