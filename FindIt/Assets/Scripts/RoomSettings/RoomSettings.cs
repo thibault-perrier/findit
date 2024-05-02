@@ -12,7 +12,7 @@ public class RoomSettings : MonoBehaviour
     //MaxScore
     [SerializeField] private Slider _maxScoreInput;
     [SerializeField] private TextMeshProUGUI _maxScoreText;
-    [SerializeField] private int _maxScore;
+    public int maxScore;
     //Time by Round
     [SerializeField] private TextMeshProUGUI _timeByRoundText;
     [SerializeField] private float _timeByRound;
@@ -22,6 +22,14 @@ public class RoomSettings : MonoBehaviour
     [SerializeField] private Toggle _image;
     [SerializeField] private Toggle _text;
     [SerializeField] private bool _useImage,_useText;
+
+    public static RoomSettings Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
 
     private void Start()
     {
@@ -33,7 +41,7 @@ public class RoomSettings : MonoBehaviour
         _index = 0;
         _timeByRoundText.text = _timeByRoundPossibilities[_index].ToString();
         _maxScoreInput.value = 3;
-        _maxScore = (int)_maxScoreInput.value;
+        maxScore = (int)_maxScoreInput.value;
         _maxPlayerSlider.value = 3;
         _maxPlayer = (int)_maxPlayerSlider.value;
     }
@@ -49,7 +57,7 @@ public class RoomSettings : MonoBehaviour
     public void ChangeMaxScore()
     {
         _maxScoreText.text = _maxScoreInput.value.ToString();
-        _maxScore = (int)_maxScoreInput.value;
+        maxScore = (int)_maxScoreInput.value;
     }
     public void AddTime()
     {

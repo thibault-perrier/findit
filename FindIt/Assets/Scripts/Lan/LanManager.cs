@@ -157,7 +157,7 @@
 //    public void SetIpAddress()
 //    {
 //        transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-//        transport.ConnectionData.Address = ipAddress;
+//        transport.ConnectionData.Advdress = ipAddress;
 //    }
 //    // To Join a game
 //    public void StartClient()

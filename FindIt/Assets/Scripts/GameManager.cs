@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-//using UnityGoogleDrive;
 using System.Collections;
 
 public class GameManager : MonoBehaviour
