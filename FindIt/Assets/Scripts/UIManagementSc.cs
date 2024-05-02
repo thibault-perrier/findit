@@ -1,12 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 
 public class UIManagementSc : MonoBehaviour
@@ -15,19 +11,24 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private GameObject ParameterUI;
     [SerializeField] private GameObject SelectServUI;
     [SerializeField] private GameObject EnterCodeUI;
-    [SerializeField] private GameObject AvataCreateUI;
+    [SerializeField] private GameObject AvatarCreateUI;
     [SerializeField] private GameObject WaitingUI;
     [SerializeField] private GameObject CreditsUI;
+    [SerializeField] private GameObject CreateRoomUI;
+    [SerializeField] private GameObject TransitionPCUI;
+    [SerializeField] private GameObject ParametreButton;
     
     [Header("Player Info")]
     [SerializeField] private GameObject NameOfTheServ;
     [SerializeField] private GameObject Avatar;
     [SerializeField] private GameObject PlayerName;
-    [SerializeField] private GameObject PlayerScriptableObjectPrefab;
-    
+    [SerializeField] private Player_ScriptableObject PlayerScriptableObjectPrefab;
+    [SerializeField] float transitionSpeed;
+
+
     // [HideInInspector]
-    public List<GameObject> PlayerList = new List<GameObject>();
-    
+    public List<Player_ScriptableObject> PlayerList = new List<Player_ScriptableObject>();
+
     [Header("Audio")]
     [SerializeField] private AudioMixer GeneralMixer;
     
@@ -73,26 +74,28 @@ public class UIManagementSc : MonoBehaviour
     {
         //Check if the code of the Server is the good with ipServToConnect and CodeServ
         //if good
-        AvataCreateUI.SetActive(true);
+        AvatarCreateUI.SetActive(true);
         EnterCodeUI.SetActive(false);
     }
 
     public void CreateAvatar() 
     {
         WaitingUI.SetActive(true);
-        AvataCreateUI.SetActive(false);
-        GameObject Player = Instantiate(PlayerScriptableObjectPrefab);
-        //Player.ID = PlayerList.Count;
+        AvatarCreateUI.SetActive(false);
+        Player_ScriptableObject Player = Instantiate(PlayerScriptableObjectPrefab);
+        Player.ID = PlayerList.Count;
         PlayerList.Add(Player);
-        Player.GetComponent<Player>().PlayerAvatar = Avatar;
-        Player.GetComponent<Player>().PlayerName = PlayerName.GetComponent<InputField>().text;
+        Player.PlayerAvatar = Avatar;
+        Player.PlayerName = PlayerName.GetComponent<TextMeshProUGUI>().text;
         PlayerCreated?.Invoke();
         GameStarted = true;
     }
 
     public void Crédits() 
     {
-        ParameterUI.SetActive(false);
+        ParameterUI.SetActive(!ParameterUI.activeSelf);
+        ParametreButton.SetActive(!ParametreButton.activeSelf);
+        CreditsUI.SetActive(!CreditsUI.activeSelf);
     }
 
     public void UpdateGeneralAudio(float volume) {
@@ -105,5 +108,18 @@ public class UIManagementSc : MonoBehaviour
     
     public void UpdateSFXAudio(float volume) {
         GeneralMixer.SetFloat("SFX", volume);
+    }
+
+    public void TransitionTitleToCreteServ()
+    {
+        if (TransitionPCUI && Input.anyKeyDown)
+        {
+            TransitionPCUI.GetComponent<Animator>().SetBool("titleOut", true);
+        }
+    }
+
+    private void Update()
+    {
+        TransitionTitleToCreteServ();
     }
 }
