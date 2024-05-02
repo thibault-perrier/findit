@@ -5,7 +5,7 @@ using UnityEngine;
 public class DataTransfer : MonoBehaviour
 {
     public GameObject[] players;
-    public GameManager gameManager;
+    public PhotoManager gameManager;
     public SceneManagement sceneManagement;
     public bool haveStart;
     public List<byte> image = new List<byte>();

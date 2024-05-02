@@ -3,19 +3,43 @@ using UnityEngine;
 
 public class SwapPhoto : MonoBehaviour
 {
-    [SerializeField]float timeSwap;
     [SerializeField] GameObject takePhoto;
-    [SerializeField] GameObject vote;
+    [SerializeField] GameObject createRoom;
     public Picture picture;
-    public void StartChange()
-    { 
-        StartCoroutine(ChangeScene());
-    }
-    IEnumerator ChangeScene()
+    public bool pickPicture;
+
+    public PhoneCamera phoneCamera;
+
+    [SerializeField] private GameObject hostGame;
+    [SerializeField] private GameObject clientGame;
+
+    public static SwapPhoto Instance;
+
+    private void Awake()
     {
-        yield return new WaitForSeconds(timeSwap);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
+    public void StartChangeRightScene()
+    {
+        StartCoroutine(ChangeRightScene());
+    }
+
+    private IEnumerator ChangeRightScene()
+    {
+        yield return new WaitForSeconds(phoneCamera.maxTime + 1);
+
         takePhoto.SetActive(false);
-        vote.SetActive(true);
-        picture.InstantiateButtonVote();
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            clientGame.SetActive(true);
+        }
+        else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            hostGame.SetActive(true);
+        }
     }
 }
