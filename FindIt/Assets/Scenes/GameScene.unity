@@ -1505,7 +1505,7 @@ RectTransform:
   m_Father: {fileID: 535248350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1982,7 +1982,7 @@ RectTransform:
   m_Father: {fileID: 1437972307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4678,8 +4678,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 85818621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 35, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7262,7 +7262,7 @@ RectTransform:
   m_Father: {fileID: 220916205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8231,8 +8231,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1298046353}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 35, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12514,12 +12514,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1272637090}
         m_TargetAssemblyTypeName: ChoseAvatar, Assembly-CSharp
-        m_MethodName: NextCamera
-        m_Mode: 1
+        m_MethodName: NextCharacter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -15378,8 +15378,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1272637090}
         m_TargetAssemblyTypeName: ChoseAvatar, Assembly-CSharp
-        m_MethodName: NextHat
-        m_Mode: 1
+        m_MethodName: NextCharacter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18705,8 +18705,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1599922724}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 35, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -18871,8 +18871,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1272637090}
         m_TargetAssemblyTypeName: ChoseAvatar, Assembly-CSharp
-        m_MethodName: PreviousHat
-        m_Mode: 1
+        m_MethodName: PreviousCharacter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -20047,12 +20047,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1272637090}
         m_TargetAssemblyTypeName: ChoseAvatar, Assembly-CSharp
-        m_MethodName: PreviousCamera
-        m_Mode: 1
+        m_MethodName: NextCharacter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -28022,7 +28022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1660819428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30292,7 +30292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1817051164
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33979,12 +33979,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1272637090}
         m_TargetAssemblyTypeName: ChoseAvatar, Assembly-CSharp
-        m_MethodName: NextAvatar
-        m_Mode: 1
+        m_MethodName: NextCharacter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -35572,12 +35572,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1272637090}
         m_TargetAssemblyTypeName: ChoseAvatar, Assembly-CSharp
-        m_MethodName: PreviousAvatar
-        m_Mode: 1
+        m_MethodName: PreviousCharacter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -35733,7 +35733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2127963866
 MonoBehaviour:
   m_ObjectHideFlags: 0

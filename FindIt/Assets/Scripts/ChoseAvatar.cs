@@ -14,53 +14,61 @@ public class ChoseAvatar : MonoBehaviour
     [SerializeField] List<Sprite> _cameraSprites = new List<Sprite>();
     [SerializeField] List<Sprite> _avatarSprites = new List<Sprite>();
     [SerializeField] List<Sprite> _hatSprites = new List<Sprite>();
-    public void PreviousAvatar()
+
+    public enum CharacterToChose
     {
-        if (_avatarSprites.IndexOf(_avatarSprite.sprite) > 0)
-            _avatarSprite.sprite = _avatarSprites[_avatarSprites.IndexOf(_avatarSprite.sprite) - 1];
-        else
-            _avatarSprite.sprite = _avatarSprites[_avatarSprites.Count - 1];
+        Hat, Camera, Avatar
     }
 
-    public void NextAvatar()
+    public enum Direction
     {
-        if (_avatarSprites.IndexOf(_avatarSprite.sprite) < _avatarSprites.Count - 1)
-            _avatarSprite.sprite = _avatarSprites[_avatarSprites.IndexOf(_avatarSprite.sprite) + 1];
-        else
-            _avatarSprite.sprite = _avatarSprites[0];
+        Next, Previous
     }
 
-    public void PreviousCamera()
+    private void ChooseCharacter(CharacterToChose character, Direction direction)
     {
-        if (_cameraSprites.IndexOf(_cameraSprite.sprite) > 0)
-            _cameraSprite.sprite = _cameraSprites[_cameraSprites.IndexOf(_cameraSprite.sprite) - 1];
+        List<Sprite> sprites;
+        Image sprite;
+
+        switch (character)
+        {
+            case CharacterToChose.Avatar:
+                sprites = _avatarSprites;
+                sprite = _avatarSprite;
+                break;
+            case CharacterToChose.Camera:
+                sprites = _cameraSprites;
+                sprite = _cameraSprite;
+                break;
+            case CharacterToChose.Hat:
+                sprites = _hatSprites;
+                sprite = _hatSprite;
+                break;
+            default:
+                return;
+        }
+
+        int currentIndex = sprites.IndexOf(sprite.sprite);
+        int count = sprites.Count;
+
+        int nextIndex;
+        if (direction == Direction.Next)
+            nextIndex = (currentIndex + 1) % count;
         else
-            _cameraSprite.sprite = _cameraSprites[_cameraSprites.Count - 1];
+            nextIndex = (currentIndex - 1 + count) % count;
+
+        sprite.sprite = sprites[nextIndex];
     }
 
-    public void NextCamera()
+    public void NextCharacter(int characterIndex)
     {
-        if (_cameraSprites.IndexOf(_cameraSprite.sprite) < _cameraSprites.Count - 1)
-            _cameraSprite.sprite = _cameraSprites[_cameraSprites.IndexOf(_cameraSprite.sprite) + 1];
-        else
-            _cameraSprite.sprite = _cameraSprites[0];
+        CharacterToChose character = (CharacterToChose)characterIndex;
+        ChooseCharacter(character, Direction.Next);
     }
 
-    public void PreviousHat()
+    public void PreviousCharacter(int characterIndex)
     {
-        if (_hatSprites.IndexOf(_hatSprite.sprite) > 0)
-            _hatSprite.sprite = _hatSprites[_hatSprites.IndexOf(_hatSprite.sprite) - 1];
-        else
-            _hatSprite.sprite = _hatSprites[_hatSprites.Count - 1];
+        CharacterToChose character = (CharacterToChose)characterIndex;
+        ChooseCharacter(character, Direction.Previous);
     }
-
-    public void NextHat()
-    {
-        if (_hatSprites.IndexOf(_hatSprite.sprite) < _hatSprites.Count - 1)
-            _hatSprite.sprite = _hatSprites[_hatSprites.IndexOf(_hatSprite.sprite) + 1];
-        else
-            _hatSprite.sprite = _hatSprites[0];
-    }
-
-
 }
