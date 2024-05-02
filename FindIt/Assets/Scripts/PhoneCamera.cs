@@ -1,7 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class PhoneCamera : MonoBehaviour
 {
@@ -17,14 +19,23 @@ public class PhoneCamera : MonoBehaviour
     [SerializeField] RawImage picture;
     [SerializeField] TextMeshProUGUI debugText;
 
-
+    //Timer
     [SerializeField] Image Timer;
     public float maxTime = 30f;
     float timeLeft;
 
     public bool randomFacing;
-    public Texture2D finalPicture;
+    public Texture2D pictureForDisplay;
     public GameObject panelPicture;
+    public DataTransfer dataTransfer;
+    public GameObject player;
+    public Texture2D texture;
+
+    string filename = "";
+    public byte[] Download;
+
+    public PhotonView phview;
+    public RawImage pictureDeFou;
     private void Start()
     {
         _confirmPhoto.SetActive(false);
@@ -78,7 +89,7 @@ public class PhoneCamera : MonoBehaviour
         fit.aspectRatio = ratio;
 
         float scaleY = _backCam.videoVerticallyMirrored ? -1.0f : 1.0f;
-        background.rectTransform.localScale = new Vector3(.75f, 1.5f, 0);
+        background.rectTransform.localScale = new Vector3(1.25f, 1.25f, 0);
         picture.rectTransform.localScale = new Vector3(1, scaleY, 1);
 
         int orient = -_backCam.videoRotationAngle;
@@ -111,15 +122,13 @@ public class PhoneCamera : MonoBehaviour
         timeLeft = maxTime; // remet le timer a zero quand on prend une photo.
         picture.texture = squarePhoto;
 
-        GameManager.AllPicture.Add(squarePhoto);
-
-
-        byte[] bytes = squarePhoto.EncodeToPNG();
-        string filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
+        byte[] bytes = squarePhoto.EncodeToJPG();
+        Download = bytes;
+        phview.RpcSecure("RPC_SharePhoto",RpcTarget.Others,true,Download);
+        filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
-
-        showImage.Instance.ShowImage();
+        //showImage.Instance.ShowImage();
     }
     private Texture2D CropToSquare(Texture2D source)
     {
@@ -131,26 +140,15 @@ public class PhoneCamera : MonoBehaviour
         Texture2D squareTexture = new Texture2D(size, size);
         squareTexture.SetPixels(pixels);
         squareTexture.Apply();
-        finalPicture = squareTexture;
-
+        texture = squareTexture;
         return squareTexture;
     }
 
-    //private Texture2D RotateTexture(Texture2D originalTexture, float angle)
-    //{
-    //    int width = originalTexture.width;
-    //    int height = originalTexture.height;
+    [PunRPC]
+    private void RPC_SharePhoto(byte[] photoByte)
+    {
+        texture.LoadImage(photoByte);
+        pictureDeFou.texture = texture;
+    }
 
-    //    Texture2D rotatedTexture = new Texture2D(height, width);
-
-    //    for (int y = 0; y < height; y++)
-    //    {
-    //        for (int x = 0; x < width; x++)
-    //        {
-    //            rotatedTexture.SetPixel(y, width - 1 - x, originalTexture.GetPixel(x, y));
-    //        }
-    //    }
-    //    rotatedTexture.Apply();
-    //    return rotatedTexture;
-    //}
 }
