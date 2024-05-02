@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,7 @@ public class HostVote : MonoBehaviour
                 GameObject newVoteImage = Instantiate(originalVotePrefab, voteParent.transform.position, Quaternion.identity, voteParent.transform);
                 votes.Add(newVoteImage);
                 newVoteImage.GetComponentInChildren<RawImage>().texture = gameManager.AllPicture[_index];
+                newVoteImage.GetComponentInChildren<TextMeshProUGUI>().text = (j+1).ToString();
                 _index++;
             }
     }

@@ -5,7 +5,6 @@ public class SwapPhoto : MonoBehaviour
 {
     [SerializeField] GameObject takePhoto;
     [SerializeField] GameObject createRoom;
-    public Picture picture;
     public bool pickPicture;
 
     public PhoneCamera phoneCamera;

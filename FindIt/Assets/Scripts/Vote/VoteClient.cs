@@ -12,7 +12,6 @@ public class VoteClient : MonoBehaviour
     [SerializeField] private Image confirButton;
     public PhotoManager gameManager;
     public bool isVoted = false;
-
     private void Start()
     {
         CreateVoteButton();
@@ -22,9 +21,9 @@ public class VoteClient : MonoBehaviour
         for (int i = 0; i < gameManager.AllPicture.Count; i++)
         {
             GameObject newVoteImage = Instantiate(originalVotePrefab);
-            newVoteImage.GetComponent<SelectScript>().PlayerNumber = i;
-            votes.Add(newVoteImage);
+            newVoteImage.transform.SetParent(voteParent.transform);
         }
+
     }
     public void Confirm()
     {
