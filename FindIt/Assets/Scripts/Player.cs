@@ -9,9 +9,9 @@ public class Player : MonoBehaviour
     public string PlayerName;
     public Texture2D PlayerPicture;
     public bool isInGame;
-    public GameManager gameManager;
+    public PhotoManager gameManager;
     private void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PhotoManager>();
     }
 }
