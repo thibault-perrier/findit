@@ -11869,7 +11869,7 @@ MonoBehaviour:
   musicsVolumeSlider: {fileID: 839324932}
   SFXVolumeSlider: {fileID: 960662349}
   generalMixer: {fileID: 24100000, guid: 77ea0fa9a6ddc3a43a9404e05ca3c3ab, type: 2}
-  masterMixerGroup: {fileID: 0}
+  masterMixerGroup: {fileID: 24300002, guid: 77ea0fa9a6ddc3a43a9404e05ca3c3ab, type: 2}
   effectsMixerGroup: {fileID: -6970831934669772906, guid: 77ea0fa9a6ddc3a43a9404e05ca3c3ab, type: 2}
   musicMixerGroup: {fileID: 5523119488841482010, guid: 77ea0fa9a6ddc3a43a9404e05ca3c3ab, type: 2}
 --- !u!4 &705552391

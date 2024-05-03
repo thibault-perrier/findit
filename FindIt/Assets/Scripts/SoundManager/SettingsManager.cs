@@ -50,7 +50,7 @@ public class SettingsManager : MonoBehaviour
     private void Start()
     {
         // Set sound's value to be equal to our variables
-        generalMixer.SetFloat("master", mainSoundVolumeSlider.value);
+        generalMixer.SetFloat("Master", mainSoundVolumeSlider.value);
         generalMixer.SetFloat("Music", musicsVolumeSlider.value);
         generalMixer.SetFloat("SFX", SFXVolumeSlider.value);
         /*
