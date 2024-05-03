@@ -115,18 +115,19 @@ public class UIManagementSc : MonoBehaviour
         
         if (TransitionPCUI && Input.anyKeyDown)
         {
-            //if(Application.platform == RuntimePlatform.Android)
+            if(Application.platform == RuntimePlatform.Android)
             {
-                print("android");
+                print("android"); 
+                NetworkHolder.Instance.JoinRandomRoom();
                 TransitionPCUI.GetComponent<Animator>().SetBool("titleOut", true);
                 TransitionPCUI.GetComponent<Animator>().SetBool("FailedToJoinServer", false);
-                NetworkHolder.Instance.JoinRandomRoom();
+                
             }
-            /*else
+            else
             {
-                print("transition");
+                NetworkHolder.Instance.JoinRandomRoom();
                 TransitionPCUI.GetComponent<Animator>().SetBool("titleOut", true);
-            }*/
+            }
         }
     }
 

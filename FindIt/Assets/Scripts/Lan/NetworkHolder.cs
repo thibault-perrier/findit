@@ -1,19 +1,17 @@
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UI;
 using Photon.Realtime;
 using UnityEngine.Events;
+using TMPro;
 
 public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
 {
     #region hosting
     [Header("Client")]
     [SerializeField] private GameObject JoinRoomUi;
-    public InputField roomNameForJoin;
 
     [Header("Host")]
     [SerializeField] private GameObject CreateRoomUi;
-    public InputField roomNameForCreate;
     #endregion
     #region UI management
     [SerializeField] public GameObject takephoto;
@@ -21,6 +19,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     bool haveStart = false;
     public PhotonView phview;
     #region create and join room
+    bool joined = false;
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -37,7 +36,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     }
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(roomNameForCreate.text);
+        PhotonNetwork.CreateRoom(null);
         print("create");
     }
     public override void OnConnectedToMaster()
@@ -46,10 +45,12 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     }
     public void JoinRandomRoom()
     {
-        PhotonNetwork.JoinRandomRoom();
+        if(!joined)
+            PhotonNetwork.JoinRandomRoom();
     }
     public override void OnJoinedRoom()
     {
+        joined = true;
         base.OnJoinedRoom();
         print(PhotonNetwork.CurrentRoom.PlayerCount);
     }

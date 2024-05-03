@@ -19,7 +19,7 @@ public class PhoneCamera : MonoBehaviour
 
     //Timer
     [SerializeField] Image Timer;
-    public float maxTime = 30f;
+    public float maxTime = 10f;
     float timeLeft;
 
     public bool randomFacing;
@@ -33,7 +33,6 @@ public class PhoneCamera : MonoBehaviour
     public byte[] Download;
 
     public PhotonView phview;
-    public RawImage pictureDeFou;
 
     public PhotoManager photoManager;
     public bool photoNotTake = true;

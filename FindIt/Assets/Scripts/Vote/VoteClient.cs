@@ -11,7 +11,6 @@ public class VoteClient : MonoBehaviour
     [SerializeField] private GameObject voteParent;
     public List<GameObject> votes = new List<GameObject>();
     [SerializeField] private SelectScript select;
-    [SerializeField] private Image confirButton;
     public bool isVoted = false;
     public int AllPictureCount;
     public PhotonView phViewClient;

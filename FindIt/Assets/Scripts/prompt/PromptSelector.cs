@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PromptSelector : MonoBehaviour
@@ -8,9 +7,16 @@ public class PromptSelector : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     private List<string> promptList = new List<string>();
-    void Start()
+    [SerializeField] TextMeshProUGUI promptText;
+
+    private void Awake()
     {
         promptList=PromptReader.ReadListFromJSON<string>("prompt.json");
+    }
+
+    private void OnEnable()
+    {
+        RandomPrompt();
     }
 
     // Update is called once per frame
@@ -19,6 +25,7 @@ public class PromptSelector : MonoBehaviour
         int selectorIndex = UnityEngine.Random.Range(0, promptList.Count);
         string prompt = promptList[selectorIndex];
         promptList.RemoveAt(selectorIndex);
+        promptText.text = prompt;
         return prompt;
     }
 }

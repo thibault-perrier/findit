@@ -19,19 +19,26 @@ public class TitleTransitionOut : MonoBehaviour
     public void IsFailedJoinServer()
     {
         print("failure 2");
-        
+        failed = true;
     }
 
     public void FailJoinServer()
     {
         if (!failed)
         {
-            GetComponent<Animator>().SetBool("FailedToJoinServer", true);
-            GetComponent<Animator>().SetBool("titleOut", false);
+            PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.AvatarCreation);
         }
         else
         {
-            PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.AvatarCreation);
+            GetComponent<Animator>().SetBool("FailedToJoinServer", true);
+            GetComponent<Animator>().SetBool("titleOut", false);
         }
+    }
+
+    public void ResetJoinServer()
+    {
+        GetComponent<Animator>().SetBool("FailedToJoinServer", false);
+        GetComponent<Animator>().SetBool("titleOut", false);
+        failed = false;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataTransfer : MonoBehaviour
 {
-    public GameObject[] players;
+    /*public GameObject[] players;
     public PhotoManager gameManager;
     public SceneManagement sceneManagement;
     public bool haveStart;
@@ -26,5 +26,5 @@ public class DataTransfer : MonoBehaviour
     void getAllPlayer()
     {
         playersList = GameObject.FindGameObjectsWithTag("Player");
-    }
+    }*/
 }
