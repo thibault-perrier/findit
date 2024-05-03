@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using Photon.Pun;
 using System.Collections.Generic;
 using TMPro;
@@ -13,7 +12,6 @@ public class VoteClient : MonoBehaviour
     public List<GameObject> votes = new List<GameObject>();
     [SerializeField] private SelectScript select;
     [SerializeField] private Image confirButton;
-    public PhotoManager gameManager;
     public bool isVoted = false;
     public int AllPictureCount;
     public PhotonView phViewClient;
@@ -21,19 +19,22 @@ public class VoteClient : MonoBehaviour
     public List<int> score = new List<int>();
     public PhotoManager photoManager;
 
-    private void Start()
-    {
-        CreateVoteButton();
-    }
+    
     public void CreateVoteButton()
     {
-        for (int i = 0; i < gameManager.AllPicture.Count+1; i++)
+        print(photoManager.AllPicture.Count);
+        if (voteParent.GetComponentInChildren<Transform>().childCount < PhotonNetwork.CurrentRoom.PlayerCount )
         {
-            GameObject newVoteImage = Instantiate(originalVotePrefab);
-            newVoteImage.name = i.ToString();
-            newVoteImage.transform.SetParent(voteParent.transform);
-            newVoteImage.GetComponentInChildren<TextMeshProUGUI>().text = (i+1).ToString();
-            votes.Add(newVoteImage);
+            for (int i = 0; i < photoManager.AllPicture.Count + 1; i++)
+            {
+
+                GameObject newVoteImage = Instantiate(originalVotePrefab);
+                newVoteImage.name = i.ToString();
+                newVoteImage.transform.SetParent(voteParent.transform);
+                newVoteImage.GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
+                votes.Add(newVoteImage);
+
+            }
         }
 
     }
@@ -48,9 +49,8 @@ public class VoteClient : MonoBehaviour
 
                 if (vote.GetComponent<SelectScript>().Selected)
                 {
-                    vote.GetComponent<SelectScript>().IDVote++;
-                    idVote = vote.GetComponent<SelectScript>().IDVote;
-                    phViewClient.RPC("AddVoteRpc", RpcTarget.Others);
+                    idVote = int.Parse(vote.name);
+                    phViewClient.RPC("AddVoteRpc", RpcTarget.All,idVote);
                     isVoted = true;
                     break;
                 }
@@ -60,11 +60,8 @@ public class VoteClient : MonoBehaviour
     }
 
     [PunRPC]
-    public void AddVoteRpc()
+    public void AddVoteRpc(int nbVote)
     {
-        foreach (GameObject vote in votes)
-        {
-            print(vote.name +"    :    "+ vote.GetComponent<SelectScript>().IDVote);
-        }
+        photoManager.listeScore.Add(nbVote);
     }
 }

@@ -803,6 +803,7 @@ MonoBehaviour:
   Picture: 
   debugdefou: {fileID: 0}
   imageKey: 
+  listeScore: 
 --- !u!4 &465350627
 Transform:
   m_ObjectHideFlags: 0
@@ -1761,6 +1762,7 @@ GameObject:
   - component: {fileID: 978972413}
   - component: {fileID: 978972415}
   - component: {fileID: 978972416}
+  - component: {fileID: 978972417}
   m_Layer: 5
   m_Name: Menus
   m_TagString: Untagged
@@ -1906,6 +1908,7 @@ MonoBehaviour:
   phoneCamera: {fileID: 1143003132}
   hostGame: {fileID: 3738380120521125451}
   clientGame: {fileID: 7237122045265989692}
+  VoteClient: {fileID: 978972417}
 --- !u!114 &978972415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1947,6 +1950,29 @@ MonoBehaviour:
   roomNameForCreate: {fileID: 1676042299}
   takephoto: {fileID: 1260489573545508781}
   phview: {fileID: 978972415}
+--- !u!114 &978972417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978972404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435acdd4898409744aa6d79d441ceb1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalVotePrefab: {fileID: 3658912686370184285, guid: e9e129a9287df8a49bdfb5c33b51b47e, type: 3}
+  voteParent: {fileID: 695749399106314363}
+  votes: []
+  select: {fileID: 1234414254217036404, guid: e9e129a9287df8a49bdfb5c33b51b47e, type: 3}
+  confirButton: {fileID: 1982067934810845722}
+  isVoted: 0
+  AllPictureCount: 0
+  phViewClient: {fileID: 978972415}
+  idVote: 0
+  score: 
+  photoManager: {fileID: 465350626}
 --- !u!1 &1050324683
 GameObject:
   m_ObjectHideFlags: 0
@@ -3348,7 +3374,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &725635543958906527
 MonoBehaviour:
@@ -3535,7 +3561,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695749399106314363}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3544,8 +3570,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 583.95935}
+  m_SizeDelta: {x: 0, y: -1167.9187}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1641216246253034784
 GameObject:
@@ -3684,7 +3710,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5397161988404070461}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -3693,7 +3719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 950, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3509668673207147082
@@ -3839,7 +3865,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7547940193490708119}
+      - m_Target: {fileID: 978972417}
         m_TargetAssemblyTypeName: VoteClient, Assembly-CSharp
         m_MethodName: Confirm
         m_Mode: 1
@@ -4156,7 +4182,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &5397161988404070461
 GameObject:
@@ -4174,7 +4200,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &5519020088027099748
 GameObject:
@@ -4227,7 +4253,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5519020088027099748}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4237,7 +4263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1599}
+  m_AnchoredPosition: {x: 0, y: -1500}
   m_SizeDelta: {x: 1200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &6416750328751867182
@@ -4381,14 +4407,12 @@ GameObject:
   - component: {fileID: 4013953505205179185}
   - component: {fileID: 687797867103515788}
   - component: {fileID: 2846183162802829757}
-  - component: {fileID: 7547940193490708119}
-  - component: {fileID: 7547940193490708120}
   m_Layer: 5
   m_Name: VotesClient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &7265342632270714065
 GameObject:
@@ -4431,51 +4455,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7547940193490708119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7237122045265989692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 435acdd4898409744aa6d79d441ceb1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalVotePrefab: {fileID: 3658912686370184285, guid: e9e129a9287df8a49bdfb5c33b51b47e, type: 3}
-  voteParent: {fileID: 695749399106314363}
-  votes: []
-  select: {fileID: 1234414254217036404, guid: e9e129a9287df8a49bdfb5c33b51b47e, type: 3}
-  confirButton: {fileID: 1982067934810845722}
-  gameManager: {fileID: 465350626}
-  isVoted: 0
-  AllPictureCount: 0
-  phViewClient: {fileID: 7547940193490708120}
-  idVote: 0
-  score: 
---- !u!114 &7547940193490708120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7237122045265989692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 3
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &7549802872323545915
 GameObject:
   m_ObjectHideFlags: 0
@@ -4568,7 +4547,7 @@ RectTransform:
   m_GameObject: {fileID: 5373470815520464507}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999688, y: 0.9999688, z: 0.9999688}
+  m_LocalScale: {x: 0.9999689, y: 0.9999689, z: 0.9999689}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7547940193490708118}
