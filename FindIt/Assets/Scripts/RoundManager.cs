@@ -8,13 +8,13 @@ public class RoundManager : MonoBehaviour
 
     private void Start()
     {
-        PanelManager.Instance.DisplayPanel(PanelManager.panelsNames.Transition);
+        PanelManager.Instance.DisplayPanelPC(PanelManager.panelsNames.Transition);
     }
 
     public void StartRound()
     {
         roundIndex = 0;
-        PanelManager.Instance.DisplayPanel(PanelManager.panelsNames.RevealPrompt);
+        PanelManager.Instance.DisplayPanelPC(PanelManager.panelsNames.RevealPrompt);
     }
 
     public void NextRound()
@@ -28,6 +28,6 @@ public class RoundManager : MonoBehaviour
 
     public void EndRound()
     {
-        PanelManager.Instance.DisplayPanel(PanelManager.panelsNames.Classement);
+        PanelManager.Instance.DisplayPanelPC(PanelManager.panelsNames.Classement);
     }
 }

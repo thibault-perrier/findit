@@ -11,7 +11,7 @@ public class PanelManager : MonoBehaviour
 
     public enum panelsNames
     {
-        CreateRoom, RevealPicture, WaitingScreen, AttribPoints, RevealPrompt, Transition, Classement, Credits, Parameter
+        CreateRoom, RevealPicture, WaitingScreen, AttribPoints, RevealPrompt, Transition, Classement, Credits, Parameter, AvatarCreation, EnterCode, SelectServ, TakePicture, WritingText, Vote
     }
     [Serializable]
     public struct panelStruct
@@ -20,25 +20,40 @@ public class PanelManager : MonoBehaviour
         public GameObject panel;
     }
 
-    public panelStruct[] panels;
-    public Dictionary<panelsNames, GameObject> panelsDict = new Dictionary<panelsNames, GameObject>();
+    public panelStruct[] panelsPC;
+    public panelStruct[] panelsTel;
+    public Dictionary<panelsNames, GameObject> panelsPCDict = new Dictionary<panelsNames, GameObject>();
+    public Dictionary<panelsNames, GameObject> panelsTelDict = new Dictionary<panelsNames, GameObject>();
 
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
-        foreach (panelStruct panelObject in panels)
+        foreach (panelStruct panelObject in panelsPC)
         {
-            panelsDict[panelObject.name] = panelObject.panel;
+            panelsPCDict[panelObject.name] = panelObject.panel;
+        }
+        foreach (panelStruct panelObject in panelsTel)
+        {
+            panelsTelDict[panelObject.name] = panelObject.panel;
         }
     }
 
-    public void DisplayPanel(panelsNames name)
+    public void DisplayPanelPC(panelsNames name)
     {
-        foreach(var panelObject in panelsDict)
+        foreach(var panelObject in panelsPCDict)
         {
             panelObject.Value.SetActive(false);
         }
-        panelsDict[name].SetActive(true);
+        panelsPCDict[name].SetActive(true);
+    }
+    
+    public void DisplayPanelTel(panelsNames name)
+    {
+        foreach(var panelObject in panelsTelDict)
+        {
+            panelObject.Value.SetActive(false);
+        }
+        panelsTelDict[name].SetActive(true);
     }
 }

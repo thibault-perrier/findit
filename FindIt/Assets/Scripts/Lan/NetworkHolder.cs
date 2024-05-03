@@ -2,6 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
+using UnityEngine.Events;
 
 public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
 {
@@ -54,9 +55,19 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     }
     #endregion
     #region Error and Disconnect
+
+    public static NetworkHolder Instance;
+    public UnityEvent FailedToJoinRoom;
+
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+    }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         base.OnJoinRandomFailed(returnCode, message);
+        FailedToJoinRoom?.Invoke();
         print("failure");
     }
     public override void OnDisconnected(DisconnectCause cause)
