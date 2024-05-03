@@ -11,6 +11,7 @@ public class SwapPhoto : MonoBehaviour
 
     [SerializeField] private GameObject hostGame;
     [SerializeField] private GameObject clientGame;
+    [SerializeField] private GameObject RevealPrompt;
 
     public static SwapPhoto Instance;
     public VoteClient VoteClient;
@@ -37,7 +38,7 @@ public class SwapPhoto : MonoBehaviour
         if (Application.platform == RuntimePlatform.Android)
         {
             clientGame.SetActive(true);
-            if(!hasPassedAndroidCreation)
+            if (!hasPassedAndroidCreation)
             {
                 VoteClient.CreateVoteButton();
                 hasPassedAndroidCreation=true;
@@ -47,6 +48,7 @@ public class SwapPhoto : MonoBehaviour
         else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
             hostGame.SetActive(true);
+            RevealPrompt.SetActive(false);
         }
         yield break;
     }

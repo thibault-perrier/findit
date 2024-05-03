@@ -9,6 +9,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     #region hosting
     [Header("Client")]
     [SerializeField] private GameObject JoinRoomUi;
+    [SerializeField] private GameObject WaitingRoomUI;
 
     [Header("Host")]
     [SerializeField] private GameObject CreateRoomUi;
@@ -46,10 +47,14 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     public void JoinRandomRoom()
     {
         if(!joined)
+        {
             PhotonNetwork.JoinRandomRoom();
+        }
     }
     public override void OnJoinedRoom()
     {
+        JoinRoomUi.SetActive(false);
+        WaitingRoomUI.SetActive(true);
         joined = true;
         base.OnJoinedRoom();
         print(PhotonNetwork.CurrentRoom.PlayerCount);
@@ -105,5 +110,10 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     public void changeSceneSwapPhotoRpc()
     {
         SwapPhoto.Instance.StartChangeRightScene();
+    }
+
+    private void Update()
+    {
+        
     }
 }

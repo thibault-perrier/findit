@@ -80,13 +80,14 @@ public class UIManagementSc : MonoBehaviour
 
     public void CreateAvatar() 
     {
-        WaitingUI.SetActive(true);
+        print("create avatar");
         AvatarCreateUI.SetActive(false);
-        Player_ScriptableObject Player = Instantiate(PlayerScriptableObjectPrefab);
+        PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.WaitingScreen);
+        /*Player_ScriptableObject Player = Instantiate(PlayerScriptableObjectPrefab);
         Player.ID = PlayerList.Count;
         PlayerList.Add(Player);
         Player.PlayerAvatar = Avatar;
-        Player.PlayerName = PlayerName.GetComponent<TextMeshProUGUI>().text;
+        Player.PlayerName = PlayerName.GetComponent<TextMeshProUGUI>().text;*/
         PlayerCreated?.Invoke();
         GameStarted = true;
     }
