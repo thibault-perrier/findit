@@ -36,9 +36,10 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     }
     public void CreateRoom()
     {
+        S_SoundsManager.Instance.PlaySFX(S_SoundsManager.TypesOfSFX.CREATEROOM);
         PhotonNetwork.CreateRoom(roomNameForCreate.text);
         print("create");
-        S_SoundsManager.Instance.PlaySFX(S_SoundsManager.TypesOfSFX.CREATEROOM);
+        
     }
     public override void OnConnectedToMaster()
     {

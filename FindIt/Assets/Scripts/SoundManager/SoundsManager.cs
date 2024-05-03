@@ -165,8 +165,6 @@ public class S_SoundsManager : MonoBehaviour
 
                 _musicsPlayerAudioSource.Play();
 
-                _musicsPlayerAudioSource.volume = settingsManager.MainVolume * settingsManager.MusicVolume;
-
                 yield return new WaitForSecondsRealtime(musicList[i].length);
             }
         }
@@ -239,7 +237,7 @@ public class S_SoundsManager : MonoBehaviour
         AudioClip test = ReturnSFX((TypesOfSFX)_typesOfSFX);
         _sfxPlayerAudioSource.gameObject.active=true;
         Debug.Log(_sfxPlayerAudioSource.gameObject.active);
-        _sfxPlayerAudioSource.PlayOneShot(test,1);//, settingsManager.MainVolume * settingsManager.SFXVolume);
+        _sfxPlayerAudioSource.PlayOneShot(test,_sfxPlayerAudioSource.volume);
         Debug.Log(_sfxPlayerAudioSource.isActiveAndEnabled);
         Debug.Log(_sfxPlayerAudioSource.enabled);
         Debug.Log(_sfxPlayerAudioSource.gameObject.active);
@@ -249,6 +247,6 @@ public class S_SoundsManager : MonoBehaviour
     /// <summary> Play a random SFX of the type of SFX you wanted /// </summary>
     public void PlaySFX(TypesOfSFX _typesOfSFX)
     {
-        _sfxPlayerAudioSource.PlayOneShot(ReturnSFX(_typesOfSFX));//, settingsManager.MainVolume * settingsManager.SFXVolume);
+        _sfxPlayerAudioSource.PlayOneShot(ReturnSFX(_typesOfSFX), _sfxPlayerAudioSource.volume);
     }
 }

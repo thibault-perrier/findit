@@ -21,7 +21,6 @@ public class AvatarMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        S_SoundsManager.Instance.PlaySFX(S_SoundsManager.TypesOfSFX.WOOSH2);
         transform.Translate(direction.normalized * Time.deltaTime * avatarSpeed);
         if (IsOutOfCameraView())
             Destroy(gameObject, 1.0f);

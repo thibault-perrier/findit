@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
@@ -10,6 +11,10 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] Slider mainSoundVolumeSlider;
     [SerializeField] Slider musicsVolumeSlider;
     [SerializeField] Slider SFXVolumeSlider;
+    public AudioMixer generalMixer;
+    public AudioMixerGroup masterMixerGroup;
+    public AudioMixerGroup effectsMixerGroup;
+    public AudioMixerGroup musicMixerGroup;
     /*
     [Header("Graphism references :")]
     [SerializeField] Toggle m_fullScreenToggle;
@@ -20,18 +25,6 @@ public class SettingsManager : MonoBehaviour
     public GameObject m_BackButton;
     public GameObject m_BackToMainMenuButton;
     */
-    // Sound variables
-    float mainVolume = 0.5f;
-    float musicVolume = 0.5f;
-    float sfxVolume = 0.5f;
-    /*
-    // Graphic variables
-    bool m_isOnFullScreen = false;
-    int m_resolutionValue = 1;
-    */
-    public float MainVolume { get { return mainVolume; } }
-    public float MusicVolume { get { return musicVolume; } }
-    public float SFXVolume { get { return sfxVolume; } }
 
     void Awake()
     {
@@ -51,14 +44,15 @@ public class SettingsManager : MonoBehaviour
         m_fullScreenToggle.onValueChanged.AddListener(delegate { OnFullScreenChanged(); });
         m_resolutionDropDown.onValueChanged.AddListener(delegate { OnResolutionChanged(m_resolutionDropDown.value); });
         */
+        
     }
 
     private void Start()
     {
         // Set sound's value to be equal to our variables
-        mainSoundVolumeSlider.value = mainVolume;
-        musicsVolumeSlider.value = musicVolume;
-        SFXVolumeSlider.value = sfxVolume;
+        generalMixer.SetFloat("Master", mainSoundVolumeSlider.value);
+        generalMixer.SetFloat("Music", musicsVolumeSlider.value);
+        generalMixer.SetFloat("SFX", SFXVolumeSlider.value);
         /*
         // Set graphic's value to be equal to our variables
         if (Screen.fullScreen)
@@ -80,17 +74,17 @@ public class SettingsManager : MonoBehaviour
 
     void OnMainSoundVolumeChanged()
     {
-        mainVolume = mainSoundVolumeSlider.value;
+        generalMixer.SetFloat("Master", mainSoundVolumeSlider.value);
     }
 
     void OnMusicSoundVolumeChanged()
     {
-        musicVolume = musicsVolumeSlider.value;
+        generalMixer.SetFloat("Music", musicsVolumeSlider.value);
     }
 
     void OnSFXSoundVolumeChanged()
     {
-        sfxVolume = SFXVolumeSlider.value;
+        generalMixer.SetFloat("SFX", SFXVolumeSlider.value);
     }
     /*
     // -- Graphic part -- //

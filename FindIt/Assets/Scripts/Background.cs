@@ -22,6 +22,7 @@ public class Background : MonoBehaviour
             {
                 GameObject newAvatar = Instantiate(avatarGO, spawnpoints[index].position, Quaternion.identity);
                 newAvatar.GetComponent<AvatarMovement>().SetDirection(endpoints[index].position - spawnpoints[index].position);
+                S_SoundsManager.Instance.PlaySFX(S_SoundsManager.TypesOfSFX.WOOSH2);
             }
         }
     }
