@@ -44,6 +44,7 @@ MonoBehaviour:
   - RPC_SharePhoto
   - changeSceneSwapPhotoRpc
   - changeSceneTakePhotoRpc
+  - AddVoteRpc
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

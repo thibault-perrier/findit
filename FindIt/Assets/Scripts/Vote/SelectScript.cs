@@ -9,6 +9,7 @@ public class SelectScript : MonoBehaviour
 
     public int PlayerNumber;
     Image votedImage;
+    public int IDVote;
 
     private void Awake()
     {
@@ -17,7 +18,7 @@ public class SelectScript : MonoBehaviour
 
     public void SelectSelf()
     {
-        Picture.Instance.Vote(PlayerNumber);
+        UnselectAll();
         Selected = !Selected;
         if (Selected)
         {
@@ -33,5 +34,12 @@ public class SelectScript : MonoBehaviour
     {
         Selected = false;
         votedImage.color = Color.white;
+    }
+    public void UnselectAll()
+    {
+        foreach(GameObject btn in GameObject.FindGameObjectsWithTag("VoteButton"))
+        {
+            btn.GetComponent<SelectScript>().Deselect();
+        }
     }
 }

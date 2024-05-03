@@ -127,11 +127,8 @@ public class PhoneCamera : MonoBehaviour
 
         byte[] bytes = squarePhoto.EncodeToJPG();
         Download = bytes;
-        texture = new Texture2D(500, 500);
-        texture.name = PhotonNetwork.LocalPlayer.ActorNumber.ToString();
-        print("bz le chef");
-        phview.RpcSecure("RPC_SharePhoto", RpcTarget.Others, false, Download);
-
+        object[] parameters = new object[] {Download, PhotonNetwork.LocalPlayer.ActorNumber};
+        phview.RpcSecure("RPC_SharePhoto", RpcTarget.Others, false, parameters);
         filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
@@ -152,8 +149,10 @@ public class PhoneCamera : MonoBehaviour
     }
 
     [PunRPC]
-    private void RPC_SharePhoto(byte[] photoByte)
+    private void RPC_SharePhoto(byte[] photoByte,int Id)
     {
+        texture = new Texture2D(500, 500);
+        texture.name = Id.ToString();
         texture.LoadImage(photoByte);
         texture.Apply();
         photoManager.AllPicture.Add(texture);
