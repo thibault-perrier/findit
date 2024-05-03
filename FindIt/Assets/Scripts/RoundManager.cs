@@ -28,6 +28,6 @@ public class RoundManager : MonoBehaviour
 
     public void EndRound()
     {
-        //Lancer le classement
+        PanelManager.Instance.DisplayPanel(PanelManager.panelsNames.Classement);
     }
 }
