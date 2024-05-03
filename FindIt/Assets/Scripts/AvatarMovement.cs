@@ -5,7 +5,7 @@ using UnityEngine;
 public class AvatarMovement : MonoBehaviour
 {
     public Vector3 direction = new Vector3(0, 0, 0);
-    private float avatarSpeed = 1.0f;
+    [SerializeField] private float avatarSpeed = 0.5f;
     private Camera mainCamera;
     private bool canBeDeleted = false;
 
