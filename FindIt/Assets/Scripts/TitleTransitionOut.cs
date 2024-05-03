@@ -9,5 +9,6 @@ public class TitleTransitionOut : MonoBehaviour
     {
         roomCreation.SetActive(true);
         title.SetActive(false);
+        S_SoundsManager.Instance.PlaySFX(S_SoundsManager.TypesOfSFX.WOOSH1);
     }
 }

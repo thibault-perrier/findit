@@ -38,6 +38,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     {
         PhotonNetwork.CreateRoom(roomNameForCreate.text);
         print("create");
+        S_SoundsManager.Instance.PlaySFX(S_SoundsManager.TypesOfSFX.CREATEROOM);
     }
     public override void OnConnectedToMaster()
     {
@@ -51,6 +52,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     {
         base.OnJoinedRoom();
         print(PhotonNetwork.CurrentRoom.PlayerCount);
+        S_SoundsManager.Instance.PlaySFX(S_SoundsManager.TypesOfSFX.JOIN);
     }
     #endregion
     #region Error and Disconnect
@@ -62,6 +64,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarningFormat("disconnect with reason {0}", cause);
+        S_SoundsManager.Instance.PlaySFX(S_SoundsManager.TypesOfSFX.LEAVE);
     }
     #endregion
 

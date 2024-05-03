@@ -35,6 +35,7 @@ public class PanelManager : MonoBehaviour
 
     public void DisplayPanel(panelsNames name)
     {
+        S_SoundsManager.Instance.PlaySFX(S_SoundsManager.TypesOfSFX.WOOSH1);
         foreach(var panelObject in panelsDict)
         {
             panelObject.Value.SetActive(false);

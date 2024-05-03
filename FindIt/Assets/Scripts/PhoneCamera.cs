@@ -121,6 +121,7 @@ public class PhoneCamera : MonoBehaviour
         _confirmPhoto.SetActive(true);
         timeLeft = maxTime; // remet le timer a zero quand on prend une photo.
         picture.texture = squarePhoto;
+        S_SoundsManager.Instance.PlaySFX(S_SoundsManager.TypesOfSFX.PICTURETAKEN);
 
         byte[] bytes = squarePhoto.EncodeToJPG();
         Download = bytes;
