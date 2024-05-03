@@ -15,8 +15,6 @@ public class PhoneCamera : MonoBehaviour
     public RawImage background;
     public AspectRatioFitter fit;
 
-    [SerializeField] private GameObject _confirmPhoto;
-    [SerializeField] RawImage picture;
     [SerializeField] TextMeshProUGUI debugText;
 
     //Timer
@@ -36,16 +34,19 @@ public class PhoneCamera : MonoBehaviour
 
     public PhotonView phview;
     public RawImage pictureDeFou;
+
+    public PhotoManager photoManager;
+    public bool photoNotTake = true;
     private void Start()
     {
-        _confirmPhoto.SetActive(false);
         Timer.fillAmount = 1;
         timeLeft = maxTime;
         _defaultBackground = background.texture;
-        if(Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android)
         {
             GetCam();
         }
+        
     }
     private void GetCam()
     {
@@ -90,11 +91,9 @@ public class PhoneCamera : MonoBehaviour
 
         float scaleY = _backCam.videoVerticallyMirrored ? -1.0f : 1.0f;
         background.rectTransform.localScale = new Vector3(1.25f, 1.25f, 0);
-        picture.rectTransform.localScale = new Vector3(1, scaleY, 1);
 
         int orient = -_backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-        picture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
         if (panelPicture.activeSelf)
         {
             if (timeLeft > 0)
@@ -102,13 +101,20 @@ public class PhoneCamera : MonoBehaviour
                 timeLeft -= Time.deltaTime;
                 Timer.fillAmount = timeLeft / maxTime;
             }
-            else
+            else if (photoNotTake && timeLeft <= 0)
+            {
                 TakePhoto();
+                photoNotTake = true;
+            }
         }
     }
     public void TakePhoto()
     {
-        StartCoroutine(TakePicture());
+        if(!photoNotTake)
+        {
+            StartCoroutine(TakePicture());
+        }
+        _backCam.Pause();
     }
     IEnumerator TakePicture()
     {
@@ -118,17 +124,18 @@ public class PhoneCamera : MonoBehaviour
         photo.SetPixels(_backCam.GetPixels());
         photo.Apply();
         Texture2D squarePhoto = CropToSquare(photo);
-        _confirmPhoto.SetActive(true);
-        timeLeft = maxTime; // remet le timer a zero quand on prend une photo.
-        picture.texture = squarePhoto;
 
         byte[] bytes = squarePhoto.EncodeToJPG();
         Download = bytes;
-        phview.RpcSecure("RPC_SharePhoto",RpcTarget.Others,true,Download);
+        texture = new Texture2D(500, 500);
+        texture.name = PhotonNetwork.LocalPlayer.ActorNumber.ToString();
+        print("bz le chef");
+        phview.RpcSecure("RPC_SharePhoto", RpcTarget.Others, false, Download);
+
         filename = /*System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + */ "_photo.png";
         string filePath = System.IO.Path.Combine(Application.persistentDataPath, filename);
         System.IO.File.WriteAllBytes(filePath, bytes);
-        //showImage.Instance.ShowImage();
+        photoNotTake = true;
     }
     private Texture2D CropToSquare(Texture2D source)
     {
@@ -148,7 +155,8 @@ public class PhoneCamera : MonoBehaviour
     private void RPC_SharePhoto(byte[] photoByte)
     {
         texture.LoadImage(photoByte);
-        pictureDeFou.texture = texture;
+        texture.Apply();
+        photoManager.AllPicture.Add(texture);
     }
 
 }

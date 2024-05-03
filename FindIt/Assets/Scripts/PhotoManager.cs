@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-public class GameManager : MonoBehaviour
+public class PhotoManager : MonoBehaviour
 {
     int Id = -1;
     public List<Texture2D> AllPicture = new List<Texture2D>();
@@ -11,7 +11,4 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI debugdefou;
     Texture2D image;
     public string imageKey;
-
-
-
 }

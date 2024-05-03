@@ -3,8 +3,11 @@ using UnityEngine.UI;
 
 public class SelectScript : MonoBehaviour
 {
-    public int PlayerNumber;
+    public Texture2D currentImage;
+    public int totalVote;
     [HideInInspector] public bool Selected = false;
+
+    public int PlayerNumber;
     Image votedImage;
 
     private void Awake()
@@ -14,14 +17,16 @@ public class SelectScript : MonoBehaviour
 
     public void SelectSelf()
     {
-        
         Picture.Instance.Vote(PlayerNumber);
         Selected = !Selected;
         if (Selected)
+        {
             votedImage.color = Color.gray;
+        }
         else
+        {
             votedImage.color = Color.white;
-        
+        }
     }
 
     public void Deselect()
