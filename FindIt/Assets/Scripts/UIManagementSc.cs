@@ -112,9 +112,21 @@ public class UIManagementSc : MonoBehaviour
 
     public void TransitionTitleToCreteServ()
     {
+        
         if (TransitionPCUI && Input.anyKeyDown)
         {
-            TransitionPCUI.GetComponent<Animator>().SetBool("titleOut", true);
+            //if(Application.platform == RuntimePlatform.Android)
+            {
+                print("android");
+                TransitionPCUI.GetComponent<Animator>().SetBool("titleOut", true);
+                TransitionPCUI.GetComponent<Animator>().SetBool("FailedToJoinServer", false);
+                NetworkHolder.Instance.JoinRandomRoom();
+            }
+            /*else
+            {
+                print("transition");
+                TransitionPCUI.GetComponent<Animator>().SetBool("titleOut", true);
+            }*/
         }
     }
 
