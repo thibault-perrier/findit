@@ -1,8 +1,7 @@
 using Photon.Pun;
-using UnityEngine;
 using Photon.Realtime;
+using UnityEngine;
 using UnityEngine.Events;
-using TMPro;
 
 public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
 {
@@ -53,8 +52,11 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     }
     public override void OnJoinedRoom()
     {
-        JoinRoomUi.SetActive(false);
-        WaitingRoomUI.SetActive(true);
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            JoinRoomUi.SetActive(false);
+            WaitingRoomUI.SetActive(true);
+        }
         joined = true;
         base.OnJoinedRoom();
         print(PhotonNetwork.CurrentRoom.PlayerCount);

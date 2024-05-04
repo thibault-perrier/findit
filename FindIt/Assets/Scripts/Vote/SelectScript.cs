@@ -16,6 +16,11 @@ public class SelectScript : MonoBehaviour
         votedImage = GetComponentInChildren<Image>();
     }
 
+    private void OnEnable()
+    {
+        UnselectAll();
+    }
+
     public void SelectSelf()
     {
         UnselectAll();

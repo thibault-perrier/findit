@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
@@ -12,10 +13,13 @@ public class SwapPhoto : MonoBehaviour
     [SerializeField] private GameObject hostGame;
     [SerializeField] private GameObject clientGame;
     [SerializeField] private GameObject RevealPrompt;
+    [SerializeField] private GameObject sendButton;
 
     public static SwapPhoto Instance;
     public VoteClient VoteClient;
     bool hasPassedAndroidCreation = false;
+
+    Coroutine ChangeRightSceneCoroutine;
 
     private void Awake()
     {
@@ -25,9 +29,18 @@ public class SwapPhoto : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (PhotonNetwork.CurrentRoom != null && PhotoManager.Instance.listeScore.Count >= 1 && PhotoManager.Instance.listeScore.Count+1 >= PhotonNetwork.CurrentRoom.PlayerCount)
+        {
+            hasPassedAndroidCreation = false;
+        }
+    }
+
     public void StartChangeRightScene()
     {
-        StartCoroutine(ChangeRightScene());
+        if(ChangeRightSceneCoroutine == null)
+            ChangeRightSceneCoroutine = StartCoroutine(ChangeRightScene());
     }
 
     private IEnumerator ChangeRightScene()
@@ -40,16 +53,20 @@ public class SwapPhoto : MonoBehaviour
             clientGame.SetActive(true);
             if (!hasPassedAndroidCreation)
             {
+                print("sendbutton active");
+                sendButton.SetActive(true);
                 VoteClient.CreateVoteButton();
                 hasPassedAndroidCreation=true;
             }
-            
+
         }
         else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
+            RoundManager.Instance.isVoting = true;
             hostGame.SetActive(true);
             RevealPrompt.SetActive(false);
         }
+        ChangeRightSceneCoroutine = null;
         yield break;
     }
 }

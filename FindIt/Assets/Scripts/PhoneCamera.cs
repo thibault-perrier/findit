@@ -16,6 +16,7 @@ public class PhoneCamera : MonoBehaviour
     public AspectRatioFitter fit;
 
     [SerializeField] TextMeshProUGUI debugText;
+    [SerializeField] GameObject photoButton;
 
     //Timer
     [SerializeField] Image Timer;
@@ -36,8 +37,18 @@ public class PhoneCamera : MonoBehaviour
 
     public PhotoManager photoManager;
     public bool photoNotTake = true;
-    private void Start()
+
+    public static PhoneCamera Instance;
+
+    private void Awake()
     {
+        if(Instance == null)
+            Instance = this;
+    }
+
+    public void StartCam()
+    {
+        photoButton.SetActive(true);
         Timer.fillAmount = 1;
         timeLeft = maxTime;
         _defaultBackground = background.texture;
@@ -45,9 +56,12 @@ public class PhoneCamera : MonoBehaviour
         {
             GetCam();
         }
-        
     }
-    private void GetCam()
+    private void Start()
+    {
+        StartCam();
+    }
+    public void GetCam()
     {
         WebCamDevice[] devices = WebCamTexture.devices;
         bool frontFacing = true;
@@ -109,7 +123,7 @@ public class PhoneCamera : MonoBehaviour
     }
     public void TakePhoto()
     {
-        if(!photoNotTake)
+        if (!photoNotTake)
         {
             StartCoroutine(TakePicture());
         }

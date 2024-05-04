@@ -80,9 +80,12 @@ public class UIManagementSc : MonoBehaviour
 
     public void CreateAvatar() 
     {
-        print("create avatar");
-        AvatarCreateUI.SetActive(false);
-        PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.WaitingScreen);
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            print("create avatar");
+            AvatarCreateUI.SetActive(false);
+            PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.WaitingScreen);
+        }
         /*Player_ScriptableObject Player = Instantiate(PlayerScriptableObjectPrefab);
         Player.ID = PlayerList.Count;
         PlayerList.Add(Player);

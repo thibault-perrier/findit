@@ -13,12 +13,19 @@ public class HostVote : MonoBehaviour
     public PhotoManager gameManager;
 
     [SerializeField]private int _limite;
-    private void Start()
+    private void OnEnable()
     {
         _limite = gameManager.AllPicture.Count;
+
+        foreach(Transform voteButtonTransform in voteParent.transform)
+        {
+            Destroy(voteButtonTransform.gameObject);
+            
+        }
+        _index = 0;
+
         for (int j = 0; j < _limite; j++)
         {
-
             GameObject newVoteImage = Instantiate(originalVotePrefab, voteParent.transform.position, Quaternion.identity, voteParent.transform);
             votes.Add(newVoteImage);
             newVoteImage.GetComponentInChildren<RawImage>().texture = gameManager.AllPicture[_index];

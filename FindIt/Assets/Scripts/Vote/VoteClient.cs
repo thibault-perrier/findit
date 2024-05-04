@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,21 +19,33 @@ public class VoteClient : MonoBehaviour
     public List<int> score = new List<int>();
     public PhotoManager photoManager;
 
-    
+    public static VoteClient Instance;
+
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+    }
+
+
     public void CreateVoteButton()
     {
         print(photoManager.AllPicture.Count);
-        if (voteParent.GetComponentInChildren<Transform>().childCount < PhotonNetwork.CurrentRoom.PlayerCount )
+        foreach(GameObject voteImage in votes.ToList())
+        {
+            Destroy(voteImage);
+        }
+        votes.Clear();
+        if (voteParent.GetComponentInChildren<Transform>().childCount < PhotonNetwork.CurrentRoom.PlayerCount)
         {
             for (int i = 0; i < photoManager.AllPicture.Count + 1; i++)
             {
-
+                print("vote image created");
                 GameObject newVoteImage = Instantiate(originalVotePrefab);
                 newVoteImage.name = i.ToString();
                 newVoteImage.transform.SetParent(voteParent.transform);
                 newVoteImage.GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
                 votes.Add(newVoteImage);
-
             }
         }
 
@@ -40,8 +53,8 @@ public class VoteClient : MonoBehaviour
     public void Confirm()
     {
         if (!isVoted)
-        { 
-
+        {
+            print("voted");
             foreach (GameObject vote in votes)
             {
                 vote.GetComponentInChildren<Image>().color = Color.gray;

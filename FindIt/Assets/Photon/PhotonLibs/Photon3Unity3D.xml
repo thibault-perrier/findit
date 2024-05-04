@@ -476,7 +476,12 @@
         </member>
         <member name="F:ExitGames.Client.Photon.IPhotonSocket.ConnectAddress">
             <summary>Address, as defined via a Connect() call. Including protocol, port and or path.</summary>
-            <remarks>This is set in the constructor and in Connect() again. Typically the address does not change after the IPhotonSocket is instantiated.</remarks>
+            <remarks>This is set in the constructor and in Connect() again. Typically the address does not change after the IPhotonSocket is 
+			
+
+
+
+d.</remarks>
         </member>
         <member name="P:ExitGames.Client.Photon.IPhotonSocket.ServerAddress">
             <summary>Contains only the server's hostname (stripped protocol, port and or path). Set in IPhotonSocket.Connect().</summary>

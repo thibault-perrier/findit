@@ -839,7 +839,8 @@ Chat API
     Changed: De/Serialization of some types.
     Note: The drawback is now, that there are more places with: lock(). This is far from optimal but the alternative would be to make Protocol instances per thread. As most is static at the moment, this would not be an easy task.
     Added: position check for DeserializeStreamFunction() call. Stream position must be "previous + customtype length". It gets corrected but at the moment no error is thrown.
-    Changed: DispatchIncomingCommands() no longer instantiates the commandsToRemove each call. This is reused and thus saves memory.
+    Changed: DispatchIncomingCommands() no longer 
+    s the commandsToRemove each call. This is reused and thus saves memory.
     Changed: net_fx build will now check IsConstructedGenericType to detect if something is a dictionary
 LoadBalancing
     Added: LoadBalancingClient.OpJoinOrCreateRoom overload which has lobby as parameter. If a room gets created, this defines in which lobby it belongs.

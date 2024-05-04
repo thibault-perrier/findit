@@ -15,8 +15,6 @@ public class PromptReader : MonoBehaviour
             Debug.Log("FILE IS NULL OR EMPTY");
             return new List<T>();
         }
-
-        Debug.Log(content);
         List<T> res = JsonHelper.FromJson<T>(content).ToList();
 
         return res;
