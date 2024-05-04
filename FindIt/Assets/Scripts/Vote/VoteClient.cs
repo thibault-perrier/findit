@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class VoteClient : MonoBehaviour
     public bool isVoted = false;
     public int AllPictureCount;
     public PhotonView phViewClient;
-    public int idVote= 0;
+    public int idVote = 0;
     public List<int> score = new List<int>();
     public PhotoManager photoManager;
 
@@ -55,7 +56,7 @@ public class VoteClient : MonoBehaviour
                 if (vote.GetComponent<SelectScript>().Selected)
                 {
                     idVote = int.Parse(vote.name);
-                    phViewClient.RPC("AddVoteRpc", RpcTarget.All,idVote);
+                    phViewClient.RPC("AddVoteRpc", RpcTarget.MasterClient,idVote);
                     isVoted = true;
                     break;
                 }
@@ -65,8 +66,8 @@ public class VoteClient : MonoBehaviour
     }
 
     [PunRPC]
-    public void AddVoteRpc(int nbVote)
+    public void AddVoteRpc(int voteIndex)
     {
-        photoManager.listeScore.Add(nbVote);
+        photoManager.listeScore[voteIndex]++;
     }
 }
