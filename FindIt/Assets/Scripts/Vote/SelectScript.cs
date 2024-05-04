@@ -11,9 +11,13 @@ public class SelectScript : MonoBehaviour
     Image votedImage;
     public int IDVote;
 
+    private Color defaultColor;
+    [SerializeField] Color selectedColor = new Color();
+
     private void Awake()
     {
         votedImage = GetComponentInChildren<Image>();
+        defaultColor = votedImage.color;
     }
 
     private void OnEnable()
@@ -24,21 +28,21 @@ public class SelectScript : MonoBehaviour
     public void SelectSelf()
     {
         UnselectAll();
-        Selected = !Selected;
+        Selected = true;
         if (Selected)
         {
-            votedImage.color = Color.gray;
+            votedImage.color = selectedColor;
         }
         else
         {
-            votedImage.color = Color.white;
+            votedImage.color = defaultColor;
         }
     }
 
     public void Deselect()
     {
         Selected = false;
-        votedImage.color = Color.white;
+        votedImage.color = defaultColor;
     }
     public void UnselectAll()
     {

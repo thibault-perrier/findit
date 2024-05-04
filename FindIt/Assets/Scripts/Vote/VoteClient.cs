@@ -52,8 +52,6 @@ public class VoteClient : MonoBehaviour
         {
             foreach (GameObject vote in votes)
             {
-                vote.GetComponentInChildren<Image>().color = Color.gray;
-
                 if (vote.GetComponent<SelectScript>().Selected)
                 {
                     idVote = int.Parse(vote.name);
