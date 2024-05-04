@@ -31,14 +31,10 @@ public class VoteClient : MonoBehaviour
     public void CreateVoteButton()
     {
         print(photoManager.AllPicture.Count);
-        foreach(GameObject voteImage in votes.ToList())
-        {
-            Destroy(voteImage);
-        }
-        votes.Clear();
+        
         if (voteParent.GetComponentInChildren<Transform>().childCount < PhotonNetwork.CurrentRoom.PlayerCount)
         {
-            for (int i = 0; i < photoManager.AllPicture.Count + 1; i++)
+            for (int i = 0; i < PhotonNetwork.CurrentRoom.PlayerCount - 1; i++)
             {
                 print("vote image created");
                 GameObject newVoteImage = Instantiate(originalVotePrefab);
@@ -54,7 +50,6 @@ public class VoteClient : MonoBehaviour
     {
         if (!isVoted)
         {
-            print("voted");
             foreach (GameObject vote in votes)
             {
                 vote.GetComponentInChildren<Image>().color = Color.gray;

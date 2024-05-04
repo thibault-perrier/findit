@@ -27,7 +27,8 @@ public class RoundManager : MonoBehaviour
 
     public void StartRound()
     {
-        roundIndex = 0;
+        roundIndex = 1;
+        print(roundIndex);
         PanelManager.Instance.DisplayPanelPC(PanelManager.panelsNames.RevealPrompt);
     }
 
@@ -35,8 +36,8 @@ public class RoundManager : MonoBehaviour
     {
         print("Entering next round");
         roundIndex++;
-        print(roundIndex);
-        if (roundIndex >= RoomSettings.Instance.maxRound)
+        print(roundIndex + " / " + RoomSettings.Instance.maxRound);
+        if (roundIndex > RoomSettings.Instance.maxRound)
         {
             EndRound();
             return;
@@ -67,6 +68,7 @@ public class RoundManager : MonoBehaviour
     {
         if (isVoting && (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer) &&  PhotoManager.Instance.listeScore.Count >= 1 && PhotoManager.Instance.listeScore.Count+1 >= PhotonNetwork.CurrentRoom.PlayerCount)
         {
+            //Calcul score
             PhotoManager.Instance.listeScore.Clear();
             PanelManager.Instance.DisplayPanelPC(PanelManager.panelsNames.AttribPoints);
             isVoting = false;
@@ -76,6 +78,7 @@ public class RoundManager : MonoBehaviour
     [PunRPC]
     private void RPC_Reset()
     {
+        
         SwapPhoto.Instance.StartChangeRightScene();
         if (Application.platform == RuntimePlatform.Android)
         {
@@ -84,6 +87,11 @@ public class RoundManager : MonoBehaviour
             PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.TakePicture);
 
         }
+        foreach (GameObject voteImage in VoteClient.Instance.votes.ToList())
+        {
+            Destroy(voteImage);
+        }
+        VoteClient.Instance.votes.Clear();
         VoteClient.Instance.isVoted = false;
     }
 }

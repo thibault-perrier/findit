@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -23,8 +24,8 @@ public class HostVote : MonoBehaviour
             
         }
         _index = 0;
-
-        for (int j = 0; j < _limite; j++)
+        print(_limite);
+        for (int j = 0; j < PhotonNetwork.CurrentRoom.PlayerCount-1; j++)
         {
             GameObject newVoteImage = Instantiate(originalVotePrefab, voteParent.transform.position, Quaternion.identity, voteParent.transform);
             votes.Add(newVoteImage);
