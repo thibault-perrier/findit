@@ -83,7 +83,6 @@ public class UIManagementSc : MonoBehaviour
         if(Application.platform == RuntimePlatform.Android)
         {
             print("create avatar");
-            AvatarCreateUI.SetActive(false);
             PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.WaitingScreen);
         }
         /*Player_ScriptableObject Player = Instantiate(PlayerScriptableObjectPrefab);
