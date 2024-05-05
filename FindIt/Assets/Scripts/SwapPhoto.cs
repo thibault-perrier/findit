@@ -58,11 +58,11 @@ public class SwapPhoto : MonoBehaviour
         yield return new WaitForSeconds(1);
         while ((PhotonNetwork.CurrentRoom.PlayerCount != PhotoManager.Instance.AllPicture.Count - 1) && iteration < 100)
         {
-            takePhoto.SetActive(false);
+            PanelManager.Instance.UnDisplayPanelTel(PanelManager.panelsNames.TakePicture);
 
             if (Application.platform == RuntimePlatform.Android)
             {
-                clientGame.SetActive(true);
+                PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.VotePanel);
                 if (!hasPassedAndroidCreation)
                 {
                     print("sendbutton active");
@@ -75,8 +75,7 @@ public class SwapPhoto : MonoBehaviour
             else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
             {
                 RoundManager.Instance.isVoting = true;
-                hostGame.SetActive(true);
-                RevealPrompt.SetActive(false);
+                PanelManager.Instance.DisplayPanelPC(PanelManager.panelsNames.VotePanel);
             }
             ChangeRightSceneCoroutine = null;
             iteration++;

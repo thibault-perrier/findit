@@ -35,12 +35,12 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
         //Client
         if (Application.platform == RuntimePlatform.Android)
         {
-            JoinRoomUi.SetActive(true);
+            PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.EnterCode);
         }
         //Host
         else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
-            CreateRoomUi.SetActive(true);
+            PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.CreateRoom);
         }
         startGameBtn.SetActive(false);
     }
