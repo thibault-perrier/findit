@@ -51,16 +51,17 @@ public class VoteClient : MonoBehaviour
     {
         if (!isVoted)
         {
+            idVote = 0;
             foreach (GameObject vote in votes)
             {
                 if (vote.GetComponent<SelectScript>().Selected)
                 {
                     idVote = int.Parse(vote.name);
-                    phViewClient.RPC("AddVoteRpc", RpcTarget.MasterClient,idVote);
-                    isVoted = true;
                     break;
                 }
             }
+            phViewClient.RPC("AddVoteRpc", RpcTarget.MasterClient, idVote);
+            isVoted = true;
         }
         
     }
