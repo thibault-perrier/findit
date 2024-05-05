@@ -1,5 +1,4 @@
 using Photon.Pun;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -30,8 +29,17 @@ public class RoundManager : MonoBehaviour
     public void StartRound()
     {
         roundIndex = 1;
-        print(roundIndex);
         ScoreManager.Instance.InitializeScore();
+
+        foreach (GameObject voteButton in VoteClient.Instance.votes.ToList())
+        {
+            print("destroying one image");
+            Destroy(voteButton);
+        }
+        VoteClient.Instance.votes.Clear();
+        PhotoManager.Instance.AllPicture.Clear();
+        phview.RPC("RPC_Reset", RpcTarget.All);
+
         PhotoManager.Instance.InitializeListScore();
         PanelManager.Instance.DisplayPanelPC(PanelManager.panelsNames.RevealPrompt);
     }
