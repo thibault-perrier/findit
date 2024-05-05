@@ -1,7 +1,6 @@
 using Photon.Pun;
 using System.Collections;
 using System.Linq;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class SwapPhoto : MonoBehaviour

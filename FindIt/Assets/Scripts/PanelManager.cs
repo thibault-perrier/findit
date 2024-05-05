@@ -11,7 +11,7 @@ public class PanelManager : MonoBehaviour
 
     public enum panelsNames
     {
-        CreateRoom, RevealPicture, WaitingScreen, AttribPoints, RevealPrompt, Transition, Classement, Credits, Parameter, AvatarCreation, EnterCode, SelectServ, TakePicture, WritingText, VotePanel
+        CreateRoom, RevealPicture, WaitingScreen, AttribPoints, RevealPrompt, Transition, Classement, Credits, Parameter, AvatarCreation, EnterCode, SelectServ, TakePicture, WritingText, VotePanel, SettingsParameter
     }
     [Serializable]
     public struct panelStruct
@@ -39,6 +39,14 @@ public class PanelManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if(Application.platform == RuntimePlatform.Android)
+            panelsPCDict[panelsNames.Parameter].SetActive(false);
+        else
+            panelsPCDict[panelsNames.Parameter].SetActive(false);
+    }
+
     public void DisplayPanelPC(panelsNames name)
     {
         if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
@@ -61,5 +69,10 @@ public class PanelManager : MonoBehaviour
             }
             panelsTelDict[name].SetActive(true);
         }
+    }
+
+    public void DisplayParameter()
+    {
+        panelsPCDict[panelsNames.Parameter].SetActive(!panelsPCDict[panelsNames.Parameter].activeSelf);
     }
 }
