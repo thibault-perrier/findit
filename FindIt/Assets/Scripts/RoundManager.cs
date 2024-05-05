@@ -23,6 +23,7 @@ public class RoundManager : MonoBehaviour
 
     private void Start()
     {
+        print("transition");
         PanelManager.Instance.DisplayPanelPC(PanelManager.panelsNames.Transition);
     }
 

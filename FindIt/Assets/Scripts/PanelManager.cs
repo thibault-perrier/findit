@@ -39,23 +39,17 @@ public class PanelManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if(Application.platform == RuntimePlatform.Android)
-            panelsPCDict[panelsNames.Parameter].SetActive(false);
-        else
-            panelsPCDict[panelsNames.Parameter].SetActive(false);
-    }
-
     public void DisplayPanelPC(panelsNames name)
     {
         if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
         {
             foreach(var panelObject in panelsPCDict)
             {
-                panelObject.Value.SetActive(false);
+                if(panelObject.Value.GetComponent<AnimationHandler>() != null)
+                    panelObject.Value.GetComponent<AnimationHandler>().StartOut();
             }
-            panelsPCDict[name].SetActive(true);
+            if(panelsPCDict[name].GetComponent<AnimationHandler>() != null)
+                panelsPCDict[name].GetComponent<AnimationHandler>().StartIn();
         }
     }
     
@@ -65,10 +59,24 @@ public class PanelManager : MonoBehaviour
         {
             foreach (var panelObject in panelsTelDict)
             {
-                panelObject.Value.SetActive(false);
+                if(panelObject.Value.GetComponent<AnimationHandler>() != null)
+                    panelObject.Value.GetComponent<AnimationHandler>().StartOut();
             }
-            panelsTelDict[name].SetActive(true);
+            if(panelsTelDict[name].GetComponent<AnimationHandler>() != null)
+                panelsTelDict[name].GetComponent<AnimationHandler>().StartIn();
         }
+    }
+
+    public void UnDisplayPanelTel(panelsNames name)
+    {
+        if(panelsTelDict[name].GetComponent<AnimationHandler>() != null)
+            panelsTelDict[name].GetComponent<AnimationHandler>().StartOut();
+    }
+    
+    public void UnDisplayPanelPC(panelsNames name)
+    {
+        if(panelsPCDict[name].GetComponent<AnimationHandler>() != null)
+            panelsPCDict[name].GetComponent<AnimationHandler>().StartOut();
     }
 
     public void DisplayParameter()

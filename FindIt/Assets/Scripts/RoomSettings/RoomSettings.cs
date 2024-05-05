@@ -37,7 +37,7 @@ public class RoomSettings : MonoBehaviour
     }
     private void InitializeSettings()
     {
-        _settingsPanel.SetActive(false);
+        PanelManager.Instance.UnDisplayPanelPC(PanelManager.panelsNames.SettingsParameter);
         _index = 0;
         _timeByRoundText.text = _timeByRoundPossibilities[_index].ToString();
         _maxRoundInput.value = 3;
@@ -47,7 +47,7 @@ public class RoomSettings : MonoBehaviour
     }
     public void DysplaySettings()
     {
-        _settingsPanel.SetActive(!_settingsPanel.activeSelf);
+        PanelManager.Instance.DisplayPanelPC(PanelManager.panelsNames.SettingsParameter);
     }
     public void ChangeMaxPlayer()
     {
