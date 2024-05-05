@@ -45,9 +45,11 @@ public class PanelManager : MonoBehaviour
         {
             foreach(var panelObject in panelsPCDict)
             {
-                panelObject.Value.GetComponent<AnimationHandler>().StartOut();
+                if(panelObject.Value.GetComponent<AnimationHandler>() != null)
+                    panelObject.Value.GetComponent<AnimationHandler>().StartOut();
             }
-            panelsPCDict[name].GetComponent<AnimationHandler>().StartIn();
+            if(panelsPCDict[name].GetComponent<AnimationHandler>() != null)
+                panelsPCDict[name].GetComponent<AnimationHandler>().StartIn();
         }
     }
     
@@ -57,20 +59,24 @@ public class PanelManager : MonoBehaviour
         {
             foreach (var panelObject in panelsTelDict)
             {
-                panelObject.Value.GetComponent<AnimationHandler>().StartOut();
+                if(panelObject.Value.GetComponent<AnimationHandler>() != null)
+                    panelObject.Value.GetComponent<AnimationHandler>().StartOut();
             }
-            panelsTelDict[name].GetComponent<AnimationHandler>().StartIn();
+            if(panelsTelDict[name].GetComponent<AnimationHandler>() != null)
+                panelsTelDict[name].GetComponent<AnimationHandler>().StartIn();
         }
     }
 
     public void UnDisplayPanelTel(panelsNames name)
     {
-        panelsTelDict[name].GetComponent<AnimationHandler>().StartOut();
+        if(panelsTelDict[name].GetComponent<AnimationHandler>() != null)
+            panelsTelDict[name].GetComponent<AnimationHandler>().StartOut();
     }
     
     public void UnDisplayPanelPC(panelsNames name)
     {
-        panelsPCDict[name].GetComponent<AnimationHandler>().StartOut();
+        if(panelsPCDict[name].GetComponent<AnimationHandler>() != null)
+            panelsPCDict[name].GetComponent<AnimationHandler>().StartOut();
     }
 
     public void DisplayParameter()

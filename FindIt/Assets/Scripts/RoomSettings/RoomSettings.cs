@@ -37,7 +37,7 @@ public class RoomSettings : MonoBehaviour
     }
     private void InitializeSettings()
     {
-        PanelManager.Instance.UnDisplayPanelTel(PanelManager.panelsNames.SettingsParameter);
+        PanelManager.Instance.UnDisplayPanelPC(PanelManager.panelsNames.SettingsParameter);
         _index = 0;
         _timeByRoundText.text = _timeByRoundPossibilities[_index].ToString();
         _maxRoundInput.value = 3;
