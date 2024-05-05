@@ -17,7 +17,8 @@ public class SelectScript : MonoBehaviour
     private void Awake()
     {
         votedImage = GetComponentInChildren<Image>();
-        defaultColor = votedImage.color;
+        if(Application.platform == RuntimePlatform.Android)
+            defaultColor = votedImage.color;
     }
 
     private void OnEnable()

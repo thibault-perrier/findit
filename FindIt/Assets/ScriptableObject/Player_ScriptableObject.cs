@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,4 +11,5 @@ public class Player_ScriptableObject : ScriptableObject
     public GameObject PlayerAvatar;
     public string PlayerName;
     public List<Texture2D> PlayerPicture;
+    public int score;
 }

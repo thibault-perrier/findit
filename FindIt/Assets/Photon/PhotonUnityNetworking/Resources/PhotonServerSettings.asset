@@ -47,6 +47,8 @@ MonoBehaviour:
   - AddVoteRpc
   - RPC_RetakePhoto
   - RPC_Reset
+  - RPC_ResetVote
+  - RPC_TakePicture
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
