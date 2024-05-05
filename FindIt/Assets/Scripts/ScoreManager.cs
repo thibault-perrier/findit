@@ -56,8 +56,13 @@ public class ScoreManager : MonoBehaviour
         for(int i = 0; i < amount; i++)
         {
             GameObject playerPointSpawned = Instantiate(playerPointPrefab, playersParent.transform);
-
-            playerPointSpawned.GetComponent<PlayerPointManager>().SetPlayerPoint(null, Sprite.Create(PhotoManager.Instance.AllPicture[maxIndices[i]], new Rect(0, 0, PhotoManager.Instance.AllPicture[i].width, PhotoManager.Instance.AllPicture[i].height), new Vector2(0.5f, 0.5f)), scoreToAdd);
+            foreach (Texture2D picture in PhotoManager.Instance.AllPicture)
+            {
+                if (picture.name == (maxIndices[i]+2).ToString())
+                {
+                    playerPointSpawned.GetComponent<PlayerPointManager>().SetPlayerPoint(null, Sprite.Create(picture, new Rect(0, 0, picture.width, picture.height), new Vector2(0.5f, 0.5f)), scoreToAdd);
+                }
+            }
         }
     }
 }

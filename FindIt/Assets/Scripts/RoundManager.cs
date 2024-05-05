@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -89,6 +90,14 @@ public class RoundManager : MonoBehaviour
                     maxIndices.Add(i);
                 }
             }
+
+            for(int i = 0; i < maxIndices.Count; i++)
+            {
+                print("photo n°" + maxIndices[i] + " : " + (int.Parse(PhotoManager.Instance.AllPicture[maxIndices[i]].name)-2));
+                maxIndices[i] = int.Parse(PhotoManager.Instance.AllPicture[maxIndices[i]].name)-2;
+                
+            }
+
             int scoreToAdd = maxIndices.Count > 1 ? 50 : 100;
             foreach (int index in maxIndices)
             {
