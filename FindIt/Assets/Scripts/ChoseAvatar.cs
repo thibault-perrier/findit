@@ -70,7 +70,11 @@ public class ChoseAvatar : MonoBehaviour
             default:
                 return;
         }
-        object[] parametre = { currentIndexHat , currentIndexCamera , currentIndexAvatar,PhotonNetwork.LocalPlayer };
+    }
+
+    public void CreateAvatar()
+    {
+        object[] parametre = { currentIndexHat, currentIndexCamera, currentIndexAvatar, PhotonNetwork.LocalPlayer };
         phview.RPC("SendAvatarRpc", RpcTarget.MasterClient, parametre);
     }
 
