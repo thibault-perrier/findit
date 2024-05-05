@@ -21,7 +21,8 @@ public class ScoreManager : MonoBehaviour
 
     public int InitializeScore()
     {
-        for(int i = 0; i < PhotonNetwork.CurrentRoom.PlayerCount-1; i++)
+        scoreList.Clear();
+        for (int i = 0; i < PhotonNetwork.CurrentRoom.PlayerCount-1; i++)
         {
             scoreList.Add(0);
         }

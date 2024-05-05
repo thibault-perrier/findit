@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ public class ClassementManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI pseudoPlayer2;
     [SerializeField] TextMeshProUGUI pseudoPlayer3;
 
-    
+
+    List<int> players = new List<int>();
 
     public static ClassementManager Instance;
 
@@ -32,6 +34,8 @@ public class ClassementManager : MonoBehaviour
 
     public List<int> GetThreeFirst(List<int> list)
     {
+        List<int> listCopy = new List<int>();
+        listCopy = list.ToList();
         List<int> indices = new List<int>();
         List<int> sorted = new List<int>();
         sorted = list.ToList();
@@ -39,9 +43,9 @@ public class ClassementManager : MonoBehaviour
         sorted.Reverse();
         for(int i = 0; i < sorted.Count; i++)
         {
-            print(list[i]);
-            print("sorted : " + list.IndexOf(sorted[i]));
+            print("sorted : " + listCopy.IndexOf(sorted[i]));
             indices.Add(list.IndexOf(sorted[i]));
+            listCopy.Remove(list.IndexOf(sorted[i]));
         }
         
         return indices;
@@ -49,6 +53,11 @@ public class ClassementManager : MonoBehaviour
 
     public void InitializeRank()
     {
+        for(int i = 0; i < PhotonNetwork.CurrentRoom.PlayerCount - 1; i++)
+        {
+            players.Add(i);
+        }
+
         pseudoPlayer1.text = "player n°" + (int)(GetThreeFirst(ScoreManager.Instance.GetScore())[0]+1);
         pseudoPlayer2.text = "player n°" + (int)(GetThreeFirst(ScoreManager.Instance.GetScore())[1]+1);
         pseudoPlayer3.text = "player n°" + (int)(GetThreeFirst(ScoreManager.Instance.GetScore())[2]+1);
