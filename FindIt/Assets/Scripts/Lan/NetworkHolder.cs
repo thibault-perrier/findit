@@ -106,16 +106,12 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     [PunRPC]
     public void changeSceneTakePhotoRpc()
     {
-        takephoto.SetActive(true);
+        print("take photo panel activated");
+        PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.TakePicture);
     }
     [PunRPC]
     public void changeSceneSwapPhotoRpc()
     {
         SwapPhoto.Instance.StartChangeRightScene();
-    }
-
-    private void Update()
-    {
-        
     }
 }

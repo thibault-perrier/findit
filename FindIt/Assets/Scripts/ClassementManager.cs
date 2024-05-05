@@ -49,12 +49,9 @@ public class ClassementManager : MonoBehaviour
 
     public void InitializeRank()
     {
-        print("player " + GetThreeFirst(ScoreManager.Instance.GetScore())[0] + " first") ;
-        pseudoPlayer1.text = "player n°" + GetThreeFirst(ScoreManager.Instance.GetScore())[0]+1;
-        print("player " + GetThreeFirst(ScoreManager.Instance.GetScore())[1] + " second");
-        pseudoPlayer2.text = "player n°" + GetThreeFirst(ScoreManager.Instance.GetScore())[1]+1;
-        print("player " + GetThreeFirst(ScoreManager.Instance.GetScore())[2] + " third");
-        pseudoPlayer3.text = "player n°" + GetThreeFirst(ScoreManager.Instance.GetScore())[2]+1;
+        pseudoPlayer1.text = "player n°" + (int)(GetThreeFirst(ScoreManager.Instance.GetScore())[0]+1);
+        pseudoPlayer2.text = "player n°" + (int)(GetThreeFirst(ScoreManager.Instance.GetScore())[1]+1);
+        pseudoPlayer3.text = "player n°" + (int)(GetThreeFirst(ScoreManager.Instance.GetScore())[2]+1);
 
     }
 }
