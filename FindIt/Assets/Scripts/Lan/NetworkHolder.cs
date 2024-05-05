@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
 {
@@ -18,10 +19,14 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     #endregion
     bool haveStart = false;
     public PhotonView phview;
+    public GameObject player;
+    public GameObject createRoomBtn;
+
     #region create and join room
     bool joined = false;
     void Start()
     {
+        createRoomBtn.SetActive(false);
         PhotonNetwork.ConnectUsingSettings();
         //Client
         if (Application.platform == RuntimePlatform.Android)
@@ -36,11 +41,14 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     }
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(null);
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 8;
+        PhotonNetwork.CreateRoom(null, roomOptions);
         print("create");
     }
     public override void OnConnectedToMaster()
     {
+        createRoomBtn.SetActive(true);
         print("ready");
     }
     public void JoinRandomRoom()
@@ -50,6 +58,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
             PhotonNetwork.JoinRandomRoom();
         }
     }
+
     public override void OnJoinedRoom()
     {
         if(Application.platform == RuntimePlatform.Android)
@@ -59,7 +68,14 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
         }
         joined = true;
         base.OnJoinedRoom();
-        print(PhotonNetwork.CurrentRoom.PlayerCount);
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        GameObject joueur = Instantiate(player);
+        joueur.name = (PhotonNetwork.CurrentRoom.PlayerCount-1).ToString();
+        joueur.GetComponent<Player>().ID = int.Parse(name) - 1;
+        
     }
     #endregion
     #region Error and Disconnect
@@ -81,6 +97,11 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarningFormat("disconnect with reason {0}", cause);
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        print("new player");
     }
     #endregion
 
@@ -106,16 +127,15 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     [PunRPC]
     public void changeSceneTakePhotoRpc()
     {
-        takephoto.SetActive(true);
+        print("take photo panel activated");
+        PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.TakePicture);
     }
     [PunRPC]
     public void changeSceneSwapPhotoRpc()
     {
         SwapPhoto.Instance.StartChangeRightScene();
     }
-
-    private void Update()
-    {
-        
-    }
 }
+
+
+

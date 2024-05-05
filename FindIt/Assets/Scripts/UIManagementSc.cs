@@ -22,12 +22,12 @@ public class UIManagementSc : MonoBehaviour
     [SerializeField] private GameObject NameOfTheServ;
     [SerializeField] private GameObject Avatar;
     [SerializeField] private GameObject PlayerName;
-    [SerializeField] private Player_ScriptableObject PlayerScriptableObjectPrefab;
+    [SerializeField] private Player PlayerScriptableObjectPrefab;
     [SerializeField] float transitionSpeed;
 
 
     // [HideInInspector]
-    public List<Player_ScriptableObject> PlayerList = new List<Player_ScriptableObject>();
+    public List<Player> PlayerList = new List<Player>();
 
     [Header("Audio")]
     [SerializeField] private AudioMixer GeneralMixer;

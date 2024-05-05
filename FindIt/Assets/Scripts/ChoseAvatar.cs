@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using JetBrains.Annotations;
 
 public class ChoseAvatar : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class ChoseAvatar : MonoBehaviour
     public int currentIndexHat;
     public int currentIndexCamera;
     public int currentIndexAvatar;
+    public PhotonView phview;
 
     public static ChoseAvatar Instance;
 
@@ -43,7 +46,6 @@ public class ChoseAvatar : MonoBehaviour
     {
         List<Sprite> sprites;
         Image img;
-        int currentIndex;
 
         switch (character)
         {
@@ -68,6 +70,8 @@ public class ChoseAvatar : MonoBehaviour
             default:
                 return;
         }
+        object[] parametre = { currentIndexHat , currentIndexCamera , currentIndexAvatar,PhotonNetwork.LocalPlayer };
+        phview.RPC("SendAvatarRpc", RpcTarget.MasterClient, parametre);
     }
 
     public void NextCharacter(int characterIndex)
@@ -80,5 +84,13 @@ public class ChoseAvatar : MonoBehaviour
     {
         CharacterToChose character = (CharacterToChose)characterIndex;
         ChooseCharacter(character, Direction.Previous);
+    }
+
+    [PunRPC]
+    private void SendAvatarRpc(int IndexHat,int IndexCamera,int IndexAvatar, int IdPlayer)
+    {
+        GameObject.Find(IdPlayer.ToString()).GetComponent<Player>().hatIndex = IndexHat;
+        GameObject.Find(IdPlayer.ToString()).GetComponent<Player>().cameraIndex= IndexCamera;
+        GameObject.Find(IdPlayer.ToString()).GetComponent<Player>().avatarIndex = IndexAvatar;
     }
 }

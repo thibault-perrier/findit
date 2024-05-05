@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
 public class PhotoManager : MonoBehaviour
 {
@@ -18,6 +19,15 @@ public class PhotoManager : MonoBehaviour
             Instance = this;
     }
 
+    public void InitializeListScore()
+    {
+        listeScore.Clear();
+        for(int i = 0; i < PhotonNetwork.CurrentRoom.PlayerCount-1 ; i++)
+        {
+            listeScore.Add(0);
+        }
+    }
+
     public void AddScoreToAllPicture()
     {
         foreach(int i in listeScore)
@@ -31,6 +41,6 @@ public class PhotoManager : MonoBehaviour
                 Point.Add(i+1,1) ;
             }
         }
-        print(Point[0]);
+        
     }
 }

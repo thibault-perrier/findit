@@ -1,5 +1,7 @@
 using Photon.Pun;
 using System.Collections;
+using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class SwapPhoto : MonoBehaviour
@@ -14,6 +16,8 @@ public class SwapPhoto : MonoBehaviour
     [SerializeField] private GameObject clientGame;
     [SerializeField] private GameObject RevealPrompt;
     [SerializeField] private GameObject sendButton;
+
+    [SerializeField] private PhotonView phview;
 
     public static SwapPhoto Instance;
     public VoteClient VoteClient;
@@ -31,9 +35,9 @@ public class SwapPhoto : MonoBehaviour
 
     private void Update()
     {
-        if (PhotonNetwork.CurrentRoom != null && PhotoManager.Instance.listeScore.Count >= 1 && PhotoManager.Instance.listeScore.Count+1 >= PhotonNetwork.CurrentRoom.PlayerCount)
+        if (PhotonNetwork.CurrentRoom != null && PhotoManager.Instance.listeScore.Sum()+1 >= PhotonNetwork.CurrentRoom.PlayerCount)
         {
-            hasPassedAndroidCreation = false;
+            phview.RPC("RPC_ResetVote", RpcTarget.All);
         }
     }
 
@@ -45,28 +49,51 @@ public class SwapPhoto : MonoBehaviour
 
     private IEnumerator ChangeRightScene()
     {
-        yield return new WaitForSeconds(phoneCamera.maxTime + 1);
-
-        takePhoto.SetActive(false);
-        if (Application.platform == RuntimePlatform.Android)
+        int iteration = 0;
+        yield return new WaitForSeconds(phoneCamera.maxTime);
+        
+        if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
         {
-            clientGame.SetActive(true);
-            if (!hasPassedAndroidCreation)
+            phview.RPC("RPC_TakePicture", RpcTarget.Others);
+        }
+        yield return new WaitForSeconds(1);
+        while ((PhotonNetwork.CurrentRoom.PlayerCount != PhotoManager.Instance.AllPicture.Count - 1) && iteration < 100)
+        {
+            takePhoto.SetActive(false);
+
+            if (Application.platform == RuntimePlatform.Android)
             {
-                print("sendbutton active");
-                sendButton.SetActive(true);
-                VoteClient.CreateVoteButton();
-                hasPassedAndroidCreation=true;
-            }
+                clientGame.SetActive(true);
+                if (!hasPassedAndroidCreation)
+                {
+                    print("sendbutton active");
+                    sendButton.SetActive(true);
+                    VoteClient.CreateVoteButton();
+                    hasPassedAndroidCreation = true;
+                }
 
+            }
+            else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+            {
+                RoundManager.Instance.isVoting = true;
+                hostGame.SetActive(true);
+                RevealPrompt.SetActive(false);
+            }
+            ChangeRightSceneCoroutine = null;
+            iteration++;
         }
-        else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
-        {
-            RoundManager.Instance.isVoting = true;
-            hostGame.SetActive(true);
-            RevealPrompt.SetActive(false);
-        }
-        ChangeRightSceneCoroutine = null;
+        
         yield break;
+    }
+
+    [PunRPC]
+    private void RPC_ResetVote()
+    {
+        hasPassedAndroidCreation = false;
+    }
+    [PunRPC]
+    private void RPC_TakePicture()
+    {
+        PhoneCamera.Instance.TakePhoto();
     }
 }
