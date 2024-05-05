@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int ID;
     public GameObject PlayerAvatar;
     public string PlayerName;
-    public Texture2D PlayerPicture;
-    public bool isInGame;
-    public PhotoManager gameManager;
-    private void Start()
-    {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PhotoManager>();
-    }
+    public int score;
+    public int hatIndex;
+    public int avatarIndex;
+    public int cameraIndex;
 }

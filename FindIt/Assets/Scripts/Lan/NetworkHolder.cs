@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
 {
@@ -18,10 +19,14 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     #endregion
     bool haveStart = false;
     public PhotonView phview;
+    public GameObject player;
+    public GameObject createRoomBtn;
+
     #region create and join room
     bool joined = false;
     void Start()
     {
+        createRoomBtn.SetActive(false);
         PhotonNetwork.ConnectUsingSettings();
         //Client
         if (Application.platform == RuntimePlatform.Android)
@@ -43,6 +48,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     }
     public override void OnConnectedToMaster()
     {
+        createRoomBtn.SetActive(true);
         print("ready");
     }
     public void JoinRandomRoom()
@@ -52,6 +58,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
             PhotonNetwork.JoinRandomRoom();
         }
     }
+
     public override void OnJoinedRoom()
     {
         if(Application.platform == RuntimePlatform.Android)
@@ -61,7 +68,14 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
         }
         joined = true;
         base.OnJoinedRoom();
-        print(PhotonNetwork.CurrentRoom.PlayerCount);
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        GameObject joueur = Instantiate(player);
+        joueur.name = (PhotonNetwork.CurrentRoom.PlayerCount-1).ToString();
+        joueur.GetComponent<Player>().ID = int.Parse(name) - 1;
+        
     }
     #endregion
     #region Error and Disconnect
@@ -122,3 +136,6 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
         SwapPhoto.Instance.StartChangeRightScene();
     }
 }
+
+
+

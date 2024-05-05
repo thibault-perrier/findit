@@ -50,6 +50,7 @@ MonoBehaviour:
   - RPC_ResetVote
   - RPC_TakePicture
   - RPC_StartRound
+  - SendAvatarRpc
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
