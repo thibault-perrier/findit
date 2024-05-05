@@ -49,33 +49,40 @@ public class SwapPhoto : MonoBehaviour
 
     private IEnumerator ChangeRightScene()
     {
+        int iteration = 0;
         yield return new WaitForSeconds(phoneCamera.maxTime);
+        
         if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
         {
             phview.RPC("RPC_TakePicture", RpcTarget.Others);
         }
         yield return new WaitForSeconds(1);
-
-        takePhoto.SetActive(false);
-        if (Application.platform == RuntimePlatform.Android)
+        while ((PhotonNetwork.CurrentRoom.PlayerCount != PhotoManager.Instance.AllPicture.Count - 1) && iteration < 100)
         {
-            clientGame.SetActive(true);
-            if (!hasPassedAndroidCreation)
+            takePhoto.SetActive(false);
+
+            if (Application.platform == RuntimePlatform.Android)
             {
-                print("sendbutton active");
-                sendButton.SetActive(true);
-                VoteClient.CreateVoteButton();
-                hasPassedAndroidCreation=true;
-            }
+                clientGame.SetActive(true);
+                if (!hasPassedAndroidCreation)
+                {
+                    print("sendbutton active");
+                    sendButton.SetActive(true);
+                    VoteClient.CreateVoteButton();
+                    hasPassedAndroidCreation = true;
+                }
 
+            }
+            else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+            {
+                RoundManager.Instance.isVoting = true;
+                hostGame.SetActive(true);
+                RevealPrompt.SetActive(false);
+            }
+            ChangeRightSceneCoroutine = null;
+            iteration++;
         }
-        else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
-        {
-            RoundManager.Instance.isVoting = true;
-            hostGame.SetActive(true);
-            RevealPrompt.SetActive(false);
-        }
-        ChangeRightSceneCoroutine = null;
+        
         yield break;
     }
 

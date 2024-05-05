@@ -36,7 +36,9 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     }
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(null);
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 8;
+        PhotonNetwork.CreateRoom(null, roomOptions);
         print("create");
     }
     public override void OnConnectedToMaster()
@@ -81,6 +83,11 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarningFormat("disconnect with reason {0}", cause);
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        print("new player");
     }
     #endregion
 
