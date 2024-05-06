@@ -38,7 +38,7 @@ public class PromptReader : MonoBehaviour
 
     private static string GetPath(string filename)
     {
-        return Application.dataPath + "/Scripts/" + filename;
+        return Application.dataPath + "/StreamingAssets/" + filename;
     }
     private static string ReadFile(string path)
     {
