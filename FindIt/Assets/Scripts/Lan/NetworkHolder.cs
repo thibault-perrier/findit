@@ -25,7 +25,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     public GameObject player;
     public GameObject createRoomBtn;
     public GameObject startGameBtn;
-
+    public int IdPlayer;
     #region create and join room
     bool joined = false;
     void Start()
@@ -69,6 +69,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     {
         joined = true;
         PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.AvatarCreation);
+        IdPlayer = PhotonNetwork.CurrentRoom.PlayerCount;
         base.OnJoinedRoom();
     }
 

@@ -11,7 +11,7 @@ public class PanelManager : MonoBehaviour
 
     public enum panelsNames
     {
-        CreateRoom, RevealPicture, WaitingScreen, AttribPoints, RevealPrompt, Transition, Classement, Credits, Parameter, AvatarCreation, EnterCode, SelectServ, TakePicture, WritingText, VotePanel, SettingsParameter
+        CreateRoom, RevealPicture, WaitingScreen, AttribPoints, RevealPrompt, Transition, Classement, Credits, ParameterPC,ParametreMobile, AvatarCreation, EnterCode, SelectServ, TakePicture, WritingText, VotePanel, SettingsParameter
     }
     [Serializable]
     public struct panelStruct
@@ -81,6 +81,13 @@ public class PanelManager : MonoBehaviour
 
     public void DisplayParameter()
     {
-        panelsPCDict[panelsNames.Parameter].SetActive(!panelsPCDict[panelsNames.Parameter].activeSelf);
+        if(Application.platform != RuntimePlatform.Android)
+        {
+            panelsPCDict[panelsNames.ParameterPC].SetActive(!panelsPCDict[panelsNames.ParameterPC].activeSelf);
+        }
+        else
+        {
+            panelsPCDict[panelsNames.ParametreMobile].SetActive(!panelsPCDict[panelsNames.ParametreMobile].activeSelf);
+        }
     }
 }
