@@ -20,6 +20,7 @@ public class ChoseAvatar : MonoBehaviour
     public int currentIndexCamera;
     public int currentIndexAvatar;
     public PhotonView phview;
+    public int Idplayer;
 
     public static ChoseAvatar Instance;
 
@@ -29,6 +30,10 @@ public class ChoseAvatar : MonoBehaviour
             Instance = this;
     }
 
+    private void OnEnable()
+    {
+        
+    }
     public enum CharacterToChose
     {
         Hat, 
@@ -74,7 +79,8 @@ public class ChoseAvatar : MonoBehaviour
 
     public void CreateAvatar()
     {
-        object[] parametre = { currentIndexHat, currentIndexCamera, currentIndexAvatar, PhotonNetwork.LocalPlayer };
+        object[] parametre = { currentIndexHat, currentIndexCamera, currentIndexAvatar, Idplayer };
+        print("appel toi con de ta race");
         phview.RPC("SendAvatarRpc", RpcTarget.MasterClient, parametre);
     }
 

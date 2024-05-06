@@ -48,7 +48,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     {
         numberPlayer.gameObject.SetActive(true);
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 8;
+        roomOptions.MaxPlayers = RoomSettings.Instance._maxPlayer;
         PhotonNetwork.CreateRoom(null, roomOptions);
         print("create");
     }
@@ -80,8 +80,8 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
             startGameBtn.SetActive(true);
         }
         GameObject joueur = Instantiate(player);
-        joueur.name = (PhotonNetwork.CurrentRoom.PlayerCount-1).ToString();
-        joueur.GetComponent<Player>().ID = int.Parse(name) - 1;
+        joueur.name = PhotonNetwork.CurrentRoom.PlayerCount.ToString();
+        joueur.GetComponent<Player>().ID = PhotonNetwork.CurrentRoom.PlayerCount - 1;
         
     }
     #endregion

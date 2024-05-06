@@ -8,7 +8,7 @@ public class RoomSettings : MonoBehaviour
     //maxPlayer
     [SerializeField] private Slider _maxPlayerSlider;
     [SerializeField] private TextMeshProUGUI _maxPlayerText;
-    [SerializeField] private int _maxPlayer;
+    [SerializeField] public int _maxPlayer;
     //MaxScore
     [SerializeField] private Slider _maxRoundInput;
     [SerializeField] private TextMeshProUGUI _maxScoreText;
