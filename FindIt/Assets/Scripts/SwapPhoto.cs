@@ -58,10 +58,12 @@ public class SwapPhoto : MonoBehaviour
         yield return new WaitForSeconds(1);
         while ((PhotonNetwork.CurrentRoom.PlayerCount != PhotoManager.Instance.AllPicture.Count - 1) && iteration < 100)
         {
+            print("b");
             PanelManager.Instance.UnDisplayPanelTel(PanelManager.panelsNames.TakePicture);
 
             if (Application.platform == RuntimePlatform.Android)
             {
+                print("a");
                 PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.VotePanel);
                 if (!hasPassedAndroidCreation)
                 {

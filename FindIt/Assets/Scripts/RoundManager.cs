@@ -128,6 +128,7 @@ public class RoundManager : MonoBehaviour
         SwapPhoto.Instance.StartChangeRightScene();
         if (Application.platform == RuntimePlatform.Android)
         {
+            print("ta mere");
             PhoneCamera.Instance.StartCam();
             PhoneCamera.Instance.photoNotTake = false;
             PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.TakePicture);

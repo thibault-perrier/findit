@@ -26,6 +26,7 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     public GameObject createRoomBtn;
     public GameObject startGameBtn;
     public int IdPlayer;
+    public TextMeshProUGUI joueurnbText;
     #region create and join room
     bool joined = false;
     void Start()
@@ -41,15 +42,19 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
         else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
             PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.CreateRoom);
+            numberPlayer.text = "";
+
         }
         startGameBtn.SetActive(false);
+
     }
     public void CreateRoom()
     {
         numberPlayer.gameObject.SetActive(true);
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = RoomSettings.Instance._maxPlayer;
+        roomOptions.MaxPlayers = RoomSettings.Instance._maxPlayer+1;
         PhotonNetwork.CreateRoom(null, roomOptions);
+
         print("create");
     }
     public override void OnConnectedToMaster()
@@ -69,13 +74,18 @@ public class NetworkHolder : MonoBehaviourPunCallbacks,IPunObservable
     {
         joined = true;
         PanelManager.Instance.DisplayPanelTel(PanelManager.panelsNames.AvatarCreation);
-        IdPlayer = PhotonNetwork.CurrentRoom.PlayerCount;
+        IdPlayer = PhotonNetwork.CurrentRoom.PlayerCount-1;
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            joueurnbText.text = "Joueur "+IdPlayer.ToString();
+            joueurnbText.gameObject.SetActive(true);    
+        }
         base.OnJoinedRoom();
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
-        numberPlayer.text = "Nombre de joueur minimum : " + (PhotonNetwork.CurrentRoom.PlayerCount - 1) + " / 3";
+        numberPlayer.text = "Nombre de joueur : " + (PhotonNetwork.CurrentRoom.PlayerCount - 1) + " / " + RoomSettings.Instance._maxPlayer; 
         if((PhotonNetwork.CurrentRoom.PlayerCount - 1) >= 3)
         {
             startGameBtn.SetActive(true);

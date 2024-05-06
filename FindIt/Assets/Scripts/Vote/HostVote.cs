@@ -16,7 +16,7 @@ public class HostVote : MonoBehaviour
     [SerializeField]private int _limite;
     private void OnEnable()
     {
-        _limite = gameManager.AllPicture.Count;
+        _limite = PhotonNetwork.CurrentRoom.PlayerCount - 1;
 
         foreach(Transform voteButtonTransform in voteParent.transform)
         {
