@@ -220,7 +220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' Score maximum'
+  m_text: Manche maximum
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7dff746cfd7510e4b8fb0da2972f705d, type: 2}
   m_sharedMaterial: {fileID: -366328248296285850, guid: 7dff746cfd7510e4b8fb0da2972f705d, type: 2}
@@ -6695,7 +6695,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1694842071}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 20
   m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
