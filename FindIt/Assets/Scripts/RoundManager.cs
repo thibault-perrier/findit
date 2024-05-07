@@ -29,6 +29,7 @@ public class RoundManager : MonoBehaviour
 
     public void StartRound()
     {
+        Player.Instance.SetAvatar();
         roundIndex = 1;
         ScoreManager.Instance.InitializeScore();
 

@@ -7,15 +7,15 @@ using UnityEngine.UI;
 public class RandomAvatar : MonoBehaviour
 {
     [Header("Sprite renderer")]
-    [SerializeField] GameObject _avatarSprite;
-    [SerializeField] GameObject _cameraSprite;
-    [SerializeField] GameObject _hatSprite;
+    public  GameObject _avatarSprite;
+    public  GameObject _cameraSprite;
+    public  GameObject _hatSprite;
 
     [Header("List Sprite")]
-    [SerializeField] List<Sprite> _cameraSprites = new List<Sprite>();
-    [SerializeField] List<Sprite> _avatarSprites = new List<Sprite>();
-    [SerializeField] List<Sprite> _hatSprites = new List<Sprite>();
-
+    public List<Sprite> _cameraSprites = new List<Sprite>();
+    public List<Sprite> _avatarSprites = new List<Sprite>();
+    public List<Sprite> _hatSprites = new List<Sprite>();
+    public CharacterToChose part = new CharacterToChose();
     public enum CharacterToChose
     {
         Hat, Camera, Avatar
@@ -26,7 +26,7 @@ public class RandomAvatar : MonoBehaviour
         RandomiseAvatar();
     }
 
-    private void SetRandomSprite(CharacterToChose character, int index)
+    public void SetRandomSprite(CharacterToChose character, int index)
     {
         GameObject sprite = null;
         List<Sprite> sprites = new List<Sprite>();
@@ -73,8 +73,4 @@ public class RandomAvatar : MonoBehaviour
         SetRandomSprite(CharacterToChose.Avatar, Random.Range(0, _cameraSprites.Count));
         SetRandomSprite(CharacterToChose.Hat, Random.Range(0, _hatSprites.Count));
     }
-
-    
-
-    
 }

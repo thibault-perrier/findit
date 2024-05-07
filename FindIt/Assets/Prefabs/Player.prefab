@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
-  PlayerAvatar: {fileID: 0}
+  PlayerAvatar: {fileID: 5259801270213274639, guid: 60e9840650e01ad47b94883e80cf9a22, type: 3}
   PlayerName: 
-  PlayerPicture: []
   score: 0
   hatIndex: 0
   avatarIndex: 0

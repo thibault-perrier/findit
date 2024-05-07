@@ -13,9 +13,9 @@ public class ChoseAvatar : MonoBehaviour
     [SerializeField] Image _hatSprite;
 
     [Header("List Sprite")]
-    [SerializeField] List<Sprite> _cameraSprites = new List<Sprite>();
-    [SerializeField] List<Sprite> _avatarSprites = new List<Sprite>();
-    [SerializeField] List<Sprite> _hatSprites = new List<Sprite>();
+    public List<Sprite> _cameraSprites = new List<Sprite>();
+    public List<Sprite> _avatarSprites = new List<Sprite>();
+    public List<Sprite> _hatSprites = new List<Sprite>();
     public int currentIndexHat;
     public int currentIndexCamera;
     public int currentIndexAvatar;
@@ -28,11 +28,6 @@ public class ChoseAvatar : MonoBehaviour
     {
         if(Instance == null)
             Instance = this;
-    }
-
-    private void OnEnable()
-    {
-        
     }
     public enum CharacterToChose
     {
@@ -75,12 +70,13 @@ public class ChoseAvatar : MonoBehaviour
             default:
                 return;
         }
+        
     }
 
     public void CreateAvatar()
     {
+        Idplayer = PhotonNetwork.CurrentRoom.PlayerCount;
         object[] parametre = { currentIndexHat, currentIndexCamera, currentIndexAvatar, Idplayer };
-        print("appel toi con de ta race");
         phview.RPC("SendAvatarRpc", RpcTarget.MasterClient, parametre);
     }
 
